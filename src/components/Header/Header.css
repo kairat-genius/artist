@@ -1,0 +1,366 @@
+header {
+    display: flex;
+    max-width: 1300px;
+    padding: 16px 44px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 44px;
+    background: var(--light-gray-transparent);
+    box-sizing: border-box;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    margin: 0 auto;
+    margin-top: 17px;
+    max-height: 85px;
+
+}
+
+
+header a {
+    margin: 0; /* Убирает внешние отступы */
+    padding: 0; /* Убирает внутренние отступы */
+    display: inline-block; /* Позволяет управлять высотой */
+}
+
+header .logo {
+    width: 135px;
+    height: 53px;
+    flex-shrink: 0;
+}
+
+header nav a {
+    color: var(--Gray-1);
+    text-decoration: none;
+}
+
+header nav a:hover, .active {
+    color: var(--Acent) !important;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+
+}
+
+header .number {
+    display: flex;
+    padding: 7px 22px;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    border-radius: 48px;
+    background: var(--Acent);
+
+
+    color: var(--Wite);
+
+}
+
+header span {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+
+
+header label.menu-label {
+
+    display: none;
+    height: 24px;
+    width: 24px;
+}
+
+
+
+@media (max-width: 1100px) {
+    header {
+        padding: 12px 36px;
+    }
+
+    header span {
+        font-size: 18px;
+    }
+
+    header .number {
+        padding: 5px 18px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    header {
+
+        padding: 10px 32px;
+    }
+
+    header span {
+        font-size: 16px;
+    }
+
+    header .number {
+        padding: 5px 16px;
+    }
+
+
+    header nav {
+        gap: 18px;
+
+    }
+}
+
+
+@media (max-width: 900px) {
+    header {
+
+        padding: 10px 25px;
+    }
+
+    header span {
+        font-size: 14px;
+    }
+
+    header .number {
+        padding: 5px 14px;
+    }
+
+
+    header nav {
+        gap: 14px;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+    header {
+
+        padding: 8.566px 23.557px;
+        max-width: 696px;
+        height: 46px;
+        border-radius: 23.56px;
+    }
+
+    header span {
+        font-size: 12px;
+    }
+
+    header .number {
+        padding: 5px 14px;
+    }
+
+
+    header nav {
+        gap: 11.778px;
+    }
+
+    header .logo {
+        width: 72px;
+        height: 28px;
+    }
+
+    header .number {
+        border-radius: 25.698px;
+
+        padding: 3.748px 11.778px;
+        gap: 11.778px;
+    }
+
+}
+
+
+@media (max-width: 630px) {
+    header {
+
+        width: 343px;
+        padding: 0px 16px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header span {
+        font-size: 12px;
+    }
+
+    header .number {
+        padding: 5px 14px;
+    }
+
+
+    header nav {
+        display: none;
+    }
+
+    header .logo {
+        width: 132px;
+        height: 52px;
+    }
+
+    header .number {
+        border-radius: 25.698px;
+
+        padding: 3.748px 11.778px;
+        gap: 11.778px;
+    }
+
+
+
+    header label.menu-label {
+        display: flex;
+        align-items: center;
+
+    }
+
+    header label.menu-label img {
+        height: 17.5px;
+        width: 37px;
+    }
+
+}
+
+
+/* modal */
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0; 
+    height: 100%;
+    z-index: 1000;
+    background: #E1DFDD;
+
+
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+    transform: translateX(100%);
+}
+
+.modal .logo {
+    height: 93px;
+    align-self: stretch;
+}
+
+
+.modal-content {
+
+    display: flex;
+    height: 100%;
+    padding: 20px 32px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.modal .navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    align-self: stretch;
+}
+
+.modal nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 11.778px;
+}
+
+/* Show the modal when visible */
+.modal.show {
+    display: block;
+    transform: translateX(0);
+}
+
+/* Menu items in the modal */
+.modal nav a {
+    display: block;
+    font-size: 24px;
+
+
+    text-decoration: none;
+
+    color: var(--Gray-1, #333);
+
+    /* H/Body/Regular s */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 26px */
+}
+
+
+
+.modal nav a:hover {
+    color: var(--Acent);
+}
+
+/* Phone number styling in the modal */
+.modal .number {
+    display: flex;
+    height: 66px;
+    padding: 0px 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+    align-self: stretch;
+
+    border-radius: 39px;
+    background: var(--Acent);
+}
+
+.modal .number span {
+    color: var(--Wite, #FFF);
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    /* 26px */
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Hide the burger menu label on wider screens */
+@media (min-width: 630px) {
+    .menu-label {
+        display: none;
+    }
+
+    .modal {
+        display: none !important;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(63, 24, 63, 0.56);
+    z-index: 999; 
+  }
+  

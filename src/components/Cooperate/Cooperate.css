@@ -1,0 +1,272 @@
+.cooperate {
+    margin-top: 100px;
+    margin-bottom: 300px;
+}
+
+.cooperate .content {
+    width: 1300px;
+    margin: 0 auto;
+
+    display: flex;
+    max-height: 727px;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    flex-shrink: 0;
+}
+
+.cooperate-descriptons {
+    display: flex;
+    width: 1300px;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+
+.cooperate-descriptons .h2_1 {
+    color: var(--Acent, #FF1979);
+    font-family: Coworking;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    width: 862px;
+    margin: 0 auto;
+}
+
+.cooperate-descriptons p {
+    color: var(--Gray-2, #4F4F4F);
+
+    /* H/Body/Regular s */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 26px */
+    width: 862px;
+    margin: 0 auto;
+}
+
+.cooperate .wrapper {
+    display: flex;
+    width: 1300px;
+    height: 515px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 43px 160px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+
+.cooperate_background {
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.cooperate_img {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: 1;
+}
+
+.cooperate_img2 {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    z-index: 1;
+}
+
+
+
+
+@media (max-width: 744px) {
+    .cooperate {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        background-image: url('../../assets/cooperate/background_cooperate-744.png'), url('../../assets/cooperate/background_cooperate-744_2.png');
+        background-repeat: no-repeat, no-repeat;
+        background-position: left center, right calc(50% - 70px);
+
+    }
+
+    .cooperate .content {
+        max-width: 799px;
+        max-height: 100%;
+        gap: 42.924px;
+
+    }
+
+    .cooperate-descriptons {
+        max-width: 699px;
+        gap: 17.169
+    }
+
+
+    .cooperate-descriptons .h2_1 {
+        max-width: 463px;
+        font-size: 25.754px;
+
+    }
+
+    .cooperate-descriptons p {
+        max-width: 463px;
+        font-size: 14px;
+
+    }
+
+    .cooperate .wrapper {
+        width: 633px;
+        height: 401px;
+        gap: 30px 50px;
+
+    }
+
+    .cooperate_background {
+        display: none;
+    }
+
+    .coopetate_logo_1 {
+        width: 103.633px;
+        height: 71px;
+    }
+
+    .coopetate_logo_2 {
+        width: 127px;
+        height: 27.035px;
+    }
+
+    .coopetate_logo_3 {
+        width: 67px;
+        height: 99px;
+    }
+
+    .coopetate_logo_4 {
+        width: 121px;
+        height: 60.125px;
+    }
+
+    .coopetate_logo_5 {
+        width: 91.206px;
+        height: 75.156px;
+    }
+
+    .coopetate_logo_6 {
+        width: 114.307px;
+        height: 124px;
+    }
+
+    .coopetate_logo_7 {
+        width: 147px;
+        height: 39px;
+    }
+
+    .coopetate_logo_8 {
+        width: 149px;
+        height: 36px;
+    }
+
+    .coopetate_logo_9 {
+        width: 138px;
+        height: 68px;
+    }
+
+}
+
+@media (max-width: 375px) {
+    .cooperate {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        background-image: url('../../assets/cooperate/background_cooperate-375_1.png'), url('../../assets/cooperate/background_cooperate-375_2.png');
+        background-repeat: no-repeat, no-repeat;
+        background-position: left calc(50% - 60px), right calc(50% - 70px);
+
+    }
+
+    .cooperate .content {
+        max-width: 100%;
+        max-height: 100%;
+        gap: 42.924px;
+
+    }
+
+    .cooperate-descriptons {
+        max-width: 375px;
+        padding: 0px 16px;
+        gap: 20px;
+    }
+
+
+    .cooperate-descriptons .h2_1 {
+        max-width: 343px;
+        font-size: 20px;
+        padding-left: 60px;
+
+    }
+
+    .cooperate-descriptons p {
+        max-width: 343px;
+        font-size: 14px;
+
+    }
+
+    .cooperate .wrapper {
+        width: 366px;
+        height: 327px;
+        gap: 24px 14px;
+
+    }
+
+
+    .coopetate_logo_1 {
+        width: 74px;
+        height: 50px;
+    }
+
+    .coopetate_logo_2 {
+        width: 90px;
+        height: 20.027px;
+    }
+
+    .coopetate_logo_3 {
+        width: 48px;
+        height: 71px;
+    }
+
+    .coopetate_logo_4 {
+        width: 87px;
+        height: 43.082px;
+    }
+
+    .coopetate_logo_5 {
+        width: 65px;
+        height: 54.141px;
+    }
+
+    .coopetate_logo_6 {
+        width: 66px;
+        height: 71.597px;
+    }
+
+    .coopetate_logo_7 {
+        width: 105px;
+        height: 28px;
+    }
+
+    .coopetate_logo_8 {
+        width: 107px;
+        height: 26px;
+    }
+
+    .coopetate_logo_9 {
+        width: 99px;
+        height: 49px;
+    }
+
+}

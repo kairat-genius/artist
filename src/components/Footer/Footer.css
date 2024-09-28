@@ -1,0 +1,909 @@
+.footer {
+    background-image: url('../../assets/footer/background.png');
+    height: 900px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+
+
+.footer .content {
+    display: flex;
+    max-width: 867px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 80px;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: 100px;
+    flex-shrink: 0;
+}
+
+
+
+.footer .footer-descriptons {
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.footer .footer-descriptons h2 {
+    color: var(--Acent);
+    font-family: Coworking;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0%;
+    text-transform: uppercase;
+    width: 100%;
+    align-self: stretch;
+}
+
+.footer .footer-descriptons .h2_2 {
+    padding-top: 20px;
+    color: var(--Gray-1);
+    padding-left: 107px;
+}
+
+.footer .footer-descriptons p {
+    color: var(--Gray-2);
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+
+    width: 645px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.footer .contact {
+    display: flex;
+    width: 483px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 80px;
+    flex-shrink: 0;
+}
+
+.footer .contact-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 34px;
+    align-self: stretch;
+}
+
+.footer .label-input {
+
+    align-items: flex-start;
+    gap: 39px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.footer .input-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+
+.footer .label-input label {
+    color: var(--Wite);
+
+    /* H/Body/Regular s */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 26px */
+    align-self: stretch;
+}
+
+.footer .label-input input {
+    display: flex;
+    width: 300px;
+    height: 58px;
+    padding: 11.528px 17.292px;
+    align-items: center;
+    gap: 5.764px;
+    border-radius: 2px;
+    border: 2px solid var(--Gray-4);
+
+    color: var(--Wite);
+    font-family: Montserrat;
+    font-size: 18.733px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 130%;
+
+    background-color: #291C3A;
+}
+
+.footer .label-input input::placeholder {
+    color: var(--Wite);
+    opacity: 1;
+}
+
+.footer .agreements {
+    display: flex;
+    width: 483px;
+    align-items: flex-start;
+    gap: 11.528px;
+}
+
+.footer .agreements input[type="checkbox"] {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #ccc;
+    flex-shrink: 0;
+    background-color: #291C3A;
+}
+
+
+.footer .agreements label {
+    color: var(--Wite);
+
+    width: 436px;
+    flex-shrink: 0;
+    /* H/Body/Regular s */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 26px */
+}
+
+
+.footer .footer-img {
+    position: absolute;
+    width: 584px;
+    height: 774px;
+    left: 500px;
+    top: 180px;
+
+}
+
+.footer .img-744 {
+    display: none;
+}
+
+
+footer {
+    gap: 4px;
+    margin: 0 auto;
+    margin-top: 300px;
+    margin-bottom: 100px;
+    max-width: 1337px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+
+footer .social {
+    display: flex;
+    max-width: 1307px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    gap: 151px;
+    margin: 0;
+
+}
+
+footer .social a {
+    color: var(--Acent);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+}
+
+footer .big_text {
+    max-width: 1337px;
+    color: var(--Acent);
+    font-family: Coworking;
+    font-size: 274.072px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    padding-bottom: 100px;
+    margin: -50px auto 0 auto;
+}
+
+
+@media (max-width: 1350px) {
+    
+  
+    footer {
+        width: 1200px;
+        
+
+    }
+
+    footer .big_text {
+        font-size: 250px;
+    }
+
+    footer .social {
+        gap: 120px;
+    }
+
+
+    .footer .footer-img {
+        left: 400px;
+    }
+
+
+}
+
+@media (max-width: 1250px) {
+    
+    footer {
+        width: 900px; 
+    }
+
+    footer .big_text {
+        font-size: 200px;
+        margin: -20px auto 0 auto;
+    }
+
+    footer .social {
+        gap: 84px;
+    }
+
+    footer .social a {
+        font-size: 18px;
+    }
+
+    .footer .footer-img {
+        left: 400px;
+    }
+}
+
+@media (max-width: 1160px) {
+    
+    footer {
+        width: 900px;
+        
+
+    }
+
+    footer .big_text {
+        font-size: 180px;
+    }
+
+    footer .social {
+        gap: 84px;
+        width: 700px;
+        margin: 0 auto;
+    }
+
+    footer .social a {
+        font-size: 16px;
+    }
+
+
+    .footer .footer-img {
+        width: 500px;
+        height: 600px;
+        top: 350px;
+        left: 400px;
+    
+    }
+
+}
+
+@media (max-width: 1000px) {
+
+    footer {
+        width: 700px;
+    
+    }
+
+    .footer .content {
+        max-width: 700px;
+    }
+
+    footer .big_text {
+        font-size: 150px;
+    }
+
+    footer .social {
+        gap: 50px;
+    }
+
+    footer .social a {
+        font-size: 14px;
+    }
+
+    .footer .content {
+        gap: 80.655px;
+    }
+
+    .footer .contact-content {
+        gap: 23.354px;
+    }
+
+    .footer .label-input label {
+        font-size: 16px;
+    }
+
+    .footer .label-input input {
+        font-size: 14px;
+    }
+
+    .footer .agreements label {
+        font-size: 14.914px;
+        max-width: 325px;
+    }
+
+    .footer .footer-descriptons h2 {
+        font-size: 35.793px;
+    }
+
+    .footer .footer-img {
+        width: 400px;
+        height: 500px;
+        top: 300px;
+        left: 350px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    footer .big_text {
+        font-size: 140px;
+    }
+
+    footer .social {
+        gap: 50px;
+    }
+
+    footer .social a {
+        font-size: 14px;
+    }
+
+    .footer .content {
+        gap: 80.655px;
+    }
+
+    .footer .contact-content {
+        gap: 23.354px;
+    }
+
+    .footer .label-input label {
+        font-size: 16px;
+    }
+
+    .footer .label-input input {
+        font-size: 14px;
+    }
+
+    .footer .agreements label {
+        font-size: 14.914px;
+        max-width: 325px;
+    }
+
+    .footer .footer-descriptons h2 {
+        font-size: 35.793px;
+    }
+
+    .footer .img-744 {
+        position: absolute;
+        right: 0;
+        top: 130px; 
+        display: block;
+    }
+
+    .footer .footer-img {
+        display: none;
+        width: 435px;
+        height: 577px;
+        left: 440px;
+        top: 140px;
+    }
+
+
+
+}
+
+@media (max-width: 744px) {
+
+    .footer {
+        background-image: url('../../assets/footer/background-744.png');
+        height: 670px;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        position: relative; 
+    }
+
+    footer {
+        width: 721px;
+        height: 141px;
+        gap: 2.156px;
+        margin-top: 230px;
+
+    }
+
+    footer .big_text {
+        font-size: 147.723px;
+        margin-top: -70px;
+        width: 700px;
+    }
+
+    footer .social {
+        width: 704px;
+        height: 27px;
+        padding: 9.702px 0px;
+        gap: 81.388px;
+    }
+
+    footer .social a {
+
+        font-size: 10.78px;
+
+    }
+
+    .footer h2 {
+        font-size: 48px;
+    }
+
+    .footer .content {
+        max-width: 647px;
+        /* height: 533px; */
+        gap: 59.655px;
+    }
+
+    .footer .contact {
+        width: 360px;
+        gap: 59.655px;
+    }
+
+    .footer .contact-content {
+        gap: 25.354px;
+    }
+
+    .footer .label-input {
+        width: 224px;
+        height: 151px;
+        gap: 14.914px;
+    }
+
+    .footer .input-contact {
+        gap: 5.966px;
+    }
+
+    .footer .label-input label {
+        font-size: 14.914px;
+    }
+
+    .footer .label-input input {
+        width: 224px;
+        height: 43px;
+        padding: 8.596px 12.894px;
+        gap: 4.298px;
+        font-size: 13.969px;
+    }
+
+    .footer .agreements {
+        max-width: 360px;
+        gap: 8.596px;
+
+    }
+
+    .footer .agreements label {
+        font-size: 14.914px;
+        max-width: 325px;
+    }
+
+    .footer .agreements input[type="checkbox"] {
+        width: 26px;
+        height: 26px;
+    }
+
+    .footer .footer-descriptons h2 {
+        font-size: 35.793px;
+    }
+
+    .footer .footer-descriptons .h2_2 {
+        padding-left: 79.79px;
+    }
+
+    .footer .footer-descriptons p {
+        width: 481px;
+        height: 33px;
+        font-size: 14px;
+    }
+
+    .footer .footer-descriptons {
+        gap: 23.862px;
+    }
+
+}
+
+@media (max-width: 740px) {
+    footer {
+        width: 100%;
+        height: 141px;
+        gap: 2.156px;
+        margin-top: 230px;
+    
+
+    }
+
+    footer .big_text {
+        font-size: 130px;
+        margin: -20px 0 0 0;
+        width: 100%;
+
+    }
+
+    footer .social {
+        width: 100%;
+        height: 27px;
+        padding: 9px 0px;
+        gap: 40px;
+    }
+
+    footer .social a {
+        font-size: 8px;
+    }
+
+    .footer h2 {
+        font-size: 48px;
+    }
+
+    .footer .content {
+        max-width: 600px;
+        /* height: 533px; */
+        gap: 59.655px;
+    }
+
+    .footer .contact {
+        width: 360px;
+        gap: 59.655px;
+    }
+
+    .footer .contact-content {
+        gap: 25.354px;
+    }
+
+    .footer .label-input {
+        width: 224px;
+        height: 151px;
+        gap: 14.914px;
+    }
+
+    .footer .input-contact {
+        gap: 5.966px;
+    }
+
+    .footer .label-input label {
+        font-size: 14.914px;
+    }
+
+    .footer .label-input input {
+        width: 224px;
+        height: 43px;
+        padding: 8.596px 12.894px;
+        gap: 4.298px;
+        font-size: 13.969px;
+    }
+
+    .footer .agreements {
+        max-width: 360px;
+        gap: 8.596px;
+
+    }
+
+    .footer .agreements label {
+        font-size: 12.914px;
+        max-width: 325px;
+    }
+
+    .footer .agreements input[type="checkbox"] {
+        width: 26px;
+        height: 26px;
+    }
+
+    .footer .footer-descriptons h2 {
+        font-size: 30.793px;
+    }
+
+
+    .footer .footer-descriptons p {
+        width: 400px;
+        height: 100%;
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    footer {
+        margin-top: 200px;
+        display: grid;
+        place-items: center;
+   
+    }
+
+    footer .big_text {
+        font-size: 110px;
+        margin: 5px auto 0 auto;
+
+    }
+
+    .footer .content {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    footer {
+        gap: 2.156px;
+        margin-top: 50px;
+        height: 69px;
+        gap: 1.056px;
+        margin-bottom: 50px;
+        width: 100%;
+    }
+
+    footer .big_text {
+        font-size: 70.362px;
+        width: 100%;
+    }
+
+    footer .social {
+        width: 345px;
+        height: 13px;
+        padding: 4.752px 0px;
+        gap: 39.868px;
+    }
+
+    footer .social a {
+        font-size: 6.28px;
+        width: 30px;
+        height: 4px;
+    }
+
+    .footer .content {
+        width: 100%;
+        height: 610px;
+    }
+
+    .footer .contact {
+        gap: 17px;
+        margin-top: 60px;
+        display: flex;            
+    align-items: center; 
+    }
+
+    .footer .contact-content {
+        width: 359.817px;
+        gap: 25.354px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .footer .label-input {
+        width: 288px;
+        gap: 14.914px;
+    }
+
+    .footer .input-contact {
+        gap: 5.966px;
+    }
+
+    .footer .label-input label {
+        font-size: 14.914px;
+
+    }
+
+    .footer .label-input input {
+        width: 288px;
+        height: 43px;
+        padding: 8.596px 12.894px;
+        gap: 4.298px;
+        font-size: 13.969px;
+    }
+
+    .footer .agreements {
+        gap: 8.596px;
+        width: 224px;
+    }
+
+    .footer .agreements label {
+        font-size: 14.914px;
+        width: 189px;
+    }
+
+    .footer .agreements input[type="checkbox"] {
+        width: 26px;
+        height: 26px;
+
+    }
+
+
+    .footer .footer-descriptons h2 {
+        font-size: 20px;
+    }
+
+    .footer .footer-descriptons .h2_1 {
+        padding-left: 60px;
+    }
+
+    .footer .footer-descriptons .h2_2 {
+        padding-left: 100px;
+        padding-top: 10px;
+    }
+
+    .footer .footer-descriptons p {
+        width: 305px;
+        font-size: 14px;
+        height: 60px;
+    }
+
+    .footer .footer-descriptons {
+        width: 100%;
+        padding: 1px 17px 0px 17px;
+        gap: 20px;
+    }
+
+    .footer .img-744 {
+        display: none;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .footer {
+        background-image: url('../../assets/footer/background-375.png');
+        height: 670px;
+        background-position: bottom;
+        background-repeat: no-repeat;
+    }
+
+    footer {
+        gap: 2.156px;
+        margin-top: 50px;
+        height: 69px;
+        gap: 1.056px;
+        margin-bottom: 50px;
+        width: 100%;
+
+    }
+
+    footer .big_text {
+        font-size: 72.362px;
+        width: 100%;
+    }
+
+    footer .social {
+
+        width: 345px;
+        height: 13px;
+        padding: 4.752px 0px;
+        gap: 39.868px;
+
+    }
+
+    footer .social a {
+        font-size: 5.28px;
+        width: 30px;
+        height: 4px;
+    }
+
+    .footer h2 {
+        font-size: 48px;
+    }
+
+
+    .footer .content {
+        width: 100%;
+        height: 610px;
+
+    }
+
+    .footer .contact {
+        gap: 17px;
+        margin-top: 60px;
+    }
+
+    .footer .contact-content {
+        width: 359.817px;
+        gap: 25.354px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .footer .label-input {
+        width: 288px;
+        gap: 14.914px;
+    }
+
+    .footer .input-contact {
+        gap: 5.966px;
+    }
+
+    .footer .label-input label {
+        font-size: 14.914px;
+
+    }
+
+    .footer .label-input input {
+        width: 288px;
+        height: 43px;
+        padding: 8.596px 12.894px;
+        gap: 4.298px;
+        font-size: 13.969px;
+    }
+
+    .footer .agreements {
+        gap: 8.596px;
+        width: 224px;
+    }
+
+    .footer .agreements label {
+        font-size: 14.914px;
+        width: 189px;
+    }
+
+    .footer .agreements input[type="checkbox"] {
+        width: 26px;
+        height: 26px;
+
+    }
+
+    .footer .footer-descriptons h2 {
+        font-size: 20px;
+    }
+
+    .footer .footer-descriptons .h2_1 {
+        padding-left: 60px;
+    }
+
+    .footer .footer-descriptons .h2_2 {
+        padding-left: 100px;
+        padding-top: 10px;
+    }
+
+    .footer .footer-descriptons p {
+        width: 185px;
+        font-size: 14px;
+        height: 33px;
+    }
+
+    .footer .footer-descriptons {
+        width: 100%;
+        padding: 1px 17px 0px 17px;
+        gap: 20px;
+    }
+
+    .footer .img-744 {
+        display: none;
+    }
+}

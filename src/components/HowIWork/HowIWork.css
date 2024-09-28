@@ -1,0 +1,442 @@
+.how-i-work {
+    background-image: url('../../assets/painting/now-i-work/how-i-work_background.png');
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center calc(100% + 96px);
+    margin-top: 200px;
+    background-size: contain;
+}
+
+.cat1,
+.cat3 {
+    margin-bottom: 100px;
+}
+
+.cat2 {
+    margin-bottom: 250px;
+}
+
+
+.title-container {
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.how-i-work .content1,
+.how-i-work .content3 {
+    display: flex;
+    max-width: 1300px;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    margin: 0 auto;
+    height: 950px;
+}
+
+.how-i-work .content2 {
+    display: flex;
+    max-width: 1300px;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    margin: 0 auto;
+    height: 1120px;
+}
+
+
+
+.how-i-work .content_description {
+    display: flex;
+    width: 1300px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.how-i-work .content_description h2 {
+    color: var(--Acent);
+    font-family: Coworking;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0%;
+    /* 0px */
+    text-transform: uppercase;
+    max-width: 862px;
+}
+
+.how-i-work .row-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.how-i-work .row-card.few-items {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+.how-i-work .work-card,
+.work-card-digitall {
+    flex: 1 1 30%;
+    height: 333px;
+    background: var(--Bg-2);
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-position: top left, bottom right;
+    background-size: auto, auto;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.how-i-work .work-card:nth-child(4),
+.how-i-work .work-card:nth-child(5) {
+    flex: 1 1 40%;
+}
+
+
+.how-i-work .card1 {
+    background-image: url('../../assets/painting/now-i-work/1-1.png'), url('../../assets/painting/now-i-work/1-2.png');
+}
+
+.how-i-work .card2 {
+    background-image: url('../../assets/painting/now-i-work/2-1.png'), url('../../assets/painting/now-i-work/2-2.png');
+}
+
+.how-i-work .card3 {
+    background-image: url('../../assets/painting/now-i-work/3-1.png'), url('../../assets/painting/now-i-work/3-2.png');
+}
+
+.how-i-work .card4 {
+    background-image: url('../../assets/painting/now-i-work/4-1.png'), url('../../assets/painting/now-i-work/4-2.png');
+}
+
+.how-i-work .card5 {
+    background-image: url('../../assets/painting/now-i-work/5-1.png'), url('../../assets/painting/now-i-work/5-2.png');
+}
+
+.how-i-work .count {
+    color: var(--Wite, #FFF);
+    font-family: Coworking;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0%;
+    text-transform: uppercase;
+}
+
+.how-i-work .title-card {
+    color: var(--Wite, #FFF);
+
+    /* H/Body/body m bold */
+    font-family: Montserrat;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.how-i-work p {
+    color: var(--bg-3, #E1DFDD);
+
+    /* H/Body/Regular s */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 26px */
+    align-self: stretch;
+}
+
+
+
+.backgroundss1 {
+    position: absolute;
+    right: 0;
+    /* Привязывает элемент к правому краю контейнера */
+    top: -400px;
+
+}
+
+
+.backgroundss2-1 {
+    position: absolute;
+    left: 0;
+    top: -300px;
+}
+
+.backgroundss2-2 {
+    position: absolute;
+    right: 0;
+    bottom: -470px;
+
+}
+
+.backgroundss3 {
+    position: absolute;
+    top: -430px;
+
+    right: 0;
+}
+
+
+@media (max-width: 744px) {
+    .how-i-work {
+        background-image: url('../../assets/painting/now-i-work/how-i-work_background-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: center calc(100% + 0px - 30px);
+        margin-top: 150px;
+        background-size: contain;
+    }
+
+    .title-container {
+        gap: 20px;
+        margin-top: 10px;
+    }
+
+    .cat1,
+    .cat3 {
+        margin-bottom: 100px;
+    }
+
+    .cat2 {
+        background-position: center calc(100% + 0px - 120px);
+        margin-bottom: 100px;
+    }
+
+    .how-i-work .content1,
+    .how-i-work .content3 {
+        height: 100%;
+        width: 696px;
+        gap: 42.765px;
+    }
+
+    .how-i-work .content2 {
+        height: 100%;
+        width: 696px;
+        gap: 42.765px;
+    }
+
+    .how-i-work .content_description {
+        max-width: 691.724px;
+    }
+
+    .how-i-work .content_description h2 {
+        font-size: 25.659px;
+
+    }
+
+    .how-i-work .row-card {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10.691px;
+        justify-content: space-between;
+    }
+
+    .how-i-work .row-card.few-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .how-i-work .work-card,
+    .work-card-digitall {
+        flex: 1 1 30%;
+        height: 222px;
+        background: var(--Bg-2);
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-position: top left, bottom right;
+        background-size: auto, auto;
+        background-repeat: no-repeat, no-repeat;
+    }
+
+    .how-i-work .work-card:nth-child(4),
+    .how-i-work .work-card:nth-child(5) {
+        flex: 1 1 40%;
+        height: 178px;
+    }
+
+
+    .how-i-work .card1 {
+        background-image: url('../../assets/painting/now-i-work/1-1-744.png'), url('../../assets/painting/now-i-work/1-2-744.png');
+    }
+
+    .how-i-work .card2 {
+        background-image: url('../../assets/painting/now-i-work/2-1-744.png'), url('../../assets/painting/now-i-work/2-2-744.png');
+    }
+
+    .how-i-work .card3 {
+        background-image: url('../../assets/painting/now-i-work/3-1-744.png'), url('../../assets/painting/now-i-work/3-2-744.png');
+    }
+
+    .how-i-work .card4 {
+        background-image: url('../../assets/painting/now-i-work/4-1-744.png'), url('../../assets/painting/now-i-work/4-2-744.png');
+    }
+
+    .how-i-work .card5 {
+        background-image: url('../../assets/painting/now-i-work/5-1-744.png'), url('../../assets/painting/now-i-work/5-2-744.png');
+    }
+
+    .how-i-work .count {
+        font-size: 25.659px;
+    }
+
+    .how-i-work .title-card {
+        font-size: 14.968px;
+    }
+
+    .how-i-work p {
+        font-size: 14px;
+
+    }
+
+    .backgroundss1,
+    .backgroundss2-1,
+    .backgroundss2-2,
+    .backgroundss3 {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 375px) {
+    .how-i-work {
+        background-image: url('../../assets/painting/now-i-work/how-i-work_background-375.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: center calc(100% + 0px - 30px);
+        margin-top: 150px;
+        background-size: contain;
+    }
+
+
+    .how-i-work .content1,
+    .how-i-work .content3 {
+        height: 100%;
+        width: 375px;
+        gap: 42.765px;
+    }
+    .cat1,
+    .cat3 {
+        margin-bottom: 100px;
+    }
+
+    .cat2 {
+        background-position: center calc(100% + 0px - 120px);
+        margin-bottom: 100px;
+    }
+
+    .how-i-work .content2 {
+        height: 100%;
+        width: 375px;
+        gap: 42.765px;
+    }
+
+    .how-i-work .content_description {
+        max-width: 375px;
+        padding: 0px 16px;
+    }
+
+    .how-i-work .content_description h2 {
+        font-size: 25.659px;
+
+    }
+
+    .how-i-work .row-card {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10.691px;
+        justify-content: space-between;
+    }
+
+    .how-i-work .row-card.few-items {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+
+    .how-i-work .work-card,
+    .work-card-digitall {
+        flex: 1 100%;
+        height: 139px;
+        background: var(--Bg-2);
+        padding: 16px 25px 25px 25px;
+        margin: 0 15px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+        background-position: top left, bottom right;
+        background-size: auto, auto;
+        background-repeat: no-repeat, no-repeat;
+    }
+
+    .how-i-work .work-card:nth-child(4),
+    .how-i-work .work-card:nth-child(5) {
+        flex: 100%;
+        height: 139px;
+    }
+
+
+    .how-i-work .card1 {
+        background-image: url('../../assets/painting/now-i-work/1-1-375.png'), url('../../assets/painting/now-i-work/1-2-375.png');
+    }
+
+    .how-i-work .card2 {
+        background-image: url('../../assets/painting/now-i-work/2-1-375.png'), url('../../assets/painting/now-i-work/2-2-375.png');
+    }
+
+    .how-i-work .card3 {
+        background-image: url('../../assets/painting/now-i-work/3-1-375.png'), url('../../assets/painting/now-i-work/3-2-375.png');
+    }
+
+    .how-i-work .card4 {
+        background-image: url('../../assets/painting/now-i-work/4-1-375.png'), url('../../assets/painting/now-i-work/4-2-375.png');
+    }
+
+    .how-i-work .card5 {
+        background-image: url('../../assets/painting/now-i-work/5-1-375.png'), url('../../assets/painting/now-i-work/5-2-375.png');
+    }
+
+    .title-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        flex-direction: row;
+        margin: 0;
+        gap: 0;
+    }
+
+    .how-i-work .count {
+        font-size: 15px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-align: left;
+        width: 15px;
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    .how-i-work .title-card {
+        font-size: 15px;
+        text-align: left;
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .how-i-work p {
+        font-size: 14px;
+
+    }
+
+}

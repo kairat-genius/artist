@@ -1,0 +1,305 @@
+.possibilities {
+    background-image: url('../../assets/png/possibilitiesback.png');
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: calc(50% + 5px) calc(100% - 40px);
+    background-size: contain;
+    margin-top: 58px;
+
+}
+
+.possibilities-cat {
+    background-image: url('../../assets/painting/possibilities-painting.png');
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: calc(50% + 20px) calc(100% - 40px);
+    background-size: contain;
+
+}
+
+.possibilities_content {
+    margin: 0 auto;
+    max-width: 1300px;
+    position: relative;
+    height: 1349px;
+
+}
+
+
+.possibilities_content .content {
+    max-width: 1078px;
+    gap: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+
+}
+
+
+.possibilities_content .card-container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    align-self: stretch;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 10;
+}
+
+.possibilities_content .card {
+    display: flex;
+    height: 333px;
+    padding: 40px 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1 0 0;
+    background: var(--Gray-1, #333);
+    box-sizing: border-box;
+    max-width: 346px;
+    flex: 1 1 calc(33.33% - 1.25rem);
+}
+
+.possibilities_content .card h3 {
+    color: var(--Wite, #FFF);
+    font-family: Montserrat;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    color: var(--Wite, #FFF);
+
+
+}
+
+.possibilities_content .card p {
+    color: var(--Wite, #FFF);
+
+    /* H/Body/Regular s */
+    font-family: Montserrat;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    /* 1.625rem */
+
+    align-self: stretch;
+}
+
+
+
+.possibilities_content .content-descriptons {
+    display: flex;
+    max-width: 856px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    margin-left: auto;
+
+
+}
+
+.possibilities_content .content-descriptons h2 {
+    color: var(--Gray-1);
+    font-family: Coworking;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0%;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.possibilities_content .content-descriptons .h2_2 {
+    padding-left: 107px;
+}
+
+.possibilities_content .content-descriptons .h2_2 .h2_3 {
+    color: var(--Acent);
+    padding-top: 20px;
+}
+
+.possibilities_content .content-descriptons p {
+    color: var(--Gray-2);
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+
+    align-self: stretch;
+
+}
+
+
+@media (max-width: 744px) {
+
+    .possibilities {
+        background-image: url('../../assets/png/possidilites-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 30px);
+        background-size: contain;
+        margin-top: 75px;
+
+    }
+
+
+    .possibilities-cat {
+        background-image: url('../../assets/painting/background-cat-possibilities-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 0px) calc(100% - 30px);
+        background-size: contain;
+
+    }
+
+    .possibilities_content {
+        margin: 0 auto;
+        max-width: 700px;
+        position: relative;
+        height: 772px;
+    }
+
+
+    .possibilities_content .content {
+        width: 592px;
+        height: 576px;
+        gap: 43.899px;
+    }
+
+    .possibilities_content .card-container {
+        gap: 10.975px;
+    }
+
+    .possibilities_content .card {
+        height: 183px;
+        padding: 21.95px 17.56px;
+        gap: 8.78px;
+        max-width: 190px;
+    }
+
+    .possibilities_content .card h3 {
+        font-size: 15.365px;
+    }
+
+    .possibilities_content .card p {
+        font-size: 7.682px;
+    }
+
+
+    .possibilities_content .content-descriptons {
+        gap: 17.56px;
+        max-width: 500px;
+    }
+
+    .possibilities_content .content-descriptons h2 {
+        font-size: 30px;
+    }
+
+    .possibilities_content .content-descriptons .h2_2 {
+     
+        color: var(--Acent);
+        padding-left: 30px;
+    }
+
+    .possibilities_content .content-descriptons p {
+        font-size: 14px;
+        max-width: 470px;
+
+    }
+}
+
+
+@media (max-width: 375px) {
+
+    .possibilities,
+    .possibilities-cat {
+        background-image: url('../../assets/painting/background-cat-possibilities-375.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 10px + 80px);
+        background-size: auto; 
+        margin-top: 75px;
+
+    }
+
+    .possibilities_content .content {
+        width: 100%;
+        height: 576px;
+        gap: 43.899px;
+    }
+
+    .possibilities_content .card-container {               
+        flex-direction: column;          
+        align-items: stretch;            
+        gap: 10.975px;                 
+        padding: 0 10px;  
+        box-sizing: border-box;
+                     
+    }
+    
+    .possibilities_content .card {                 
+        padding: 21.95px 17.56px;       
+        gap: 8.78px;                   
+        max-width: 159px;        
+        flex: 1 1 auto;   
+        height: 144px;     
+        border-radius: 4px;         
+    }
+
+    .possibilities_content .card-right {
+        align-self: flex-end;         
+        margin-top: -155px;  
+    }
+    
+    .possibilities_content .card-margin {
+        margin-top: 20px;
+    }
+    
+
+    .possibilities_content .card h3 {
+        font-size: 15.365px;
+    }
+
+    .possibilities_content .card p {
+        font-size: 7.682px;
+    }
+
+
+    .possibilities_content .content-descriptons {
+        max-width: 360px;
+        gap: 10px;
+        margin: 0 auto;
+        
+
+    }
+
+    .possibilities_content .content-descriptons h2 {
+        font-size: 20px;
+    }
+
+    .possibilities_content .content-descriptons .h2_2 {
+        color: var(--Gray-1);
+        padding-left: 100px;
+  
+    }
+    .possibilities_content .content-descriptons .h2_2 .h2_3 {
+        padding-top: 10px;
+        color: var(--Gray-1);
+        
+
+    }
+
+    .possibilities_content .content-descriptons .h2_1 {
+        padding-left: 60px;
+        color: var(--Acent);
+    }
+    .possibilities_content .content-descriptons p {
+        font-size: 14px;
+        max-width: 335px;
+    }
+}

@@ -1,0 +1,319 @@
+.painting-me-section {
+    position: relative;
+    display: flex;
+
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 0 0 0;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center; 
+}
+
+
+.painting-me-section .cattext2, .painting-me-section .cattext3 {
+    order: 2;
+}
+
+.painting-me-section .cats2, .painting-me-section .cats3 {
+    order: 1; 
+}
+
+
+.painting-me-content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding-top: 50px;
+}
+
+
+
+.painting-me-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.painting-me-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 410px;
+    height: 643px;
+    flex-shrink: 0;
+    object-fit: cover;
+    z-index: 3;
+    margin-top: 45px;
+    padding-left: 5px;
+
+
+}
+
+.paintingt-me-section .img {
+    z-index: 2;
+    max-width: 430px;
+    height: 912px;
+}
+
+.painting-me-section .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.painting-me-section .background-1 {
+    position: absolute;
+    top: -100px;
+    left: 130px;
+}
+
+.painting-me-section .background-2 {
+    position: absolute;
+    bottom: -60px;
+    right: 80px;
+}
+
+
+
+.painting-me-text {
+    display: flex;
+    max-width: 753px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+
+.painting-me-text h2{
+    color: var(--Acent);
+    font-family: Coworking;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0%;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.painting-me-text .h2_2{
+    padding-top: 20px;
+    color: var(--Gray-1);
+    padding-left: 170px;
+}
+
+.painting-me-text p{
+    color: var(--Gray-2);
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    width: 577px;
+}
+
+.painting-background-1 {
+    position: absolute;
+    bottom: -400px;
+    /* Оставляем это значение, если нужно */
+    left: -310px;
+    /* Сдвигаем элемент влево на 100px */
+    z-index: -1;
+    /* Если нужно, оставляем это значение */
+}
+
+.painting-background-2 {
+    position: absolute;
+    bottom: -260px;
+    /* Оставляем это значение, если нужно */
+    left: -310px;
+    /* Сдвигаем элемент влево на 100px */
+    z-index: -1;
+    /* Если нужно, оставляем это значение */
+}
+
+.painting-background-3 {
+    position: absolute;
+    bottom: -300px;
+    /* Оставляем это значение, если нужно */
+    left: -310px;
+    /* Сдвигаем элемент влево на 100px */
+    z-index: -1;
+    /* Если нужно, оставляем это значение */
+}
+
+.painting-me-section .img744 {
+    display: none;
+}
+
+
+@media (max-width: 744px) {
+
+    .painting-me-section {
+        padding: 0;
+        padding-bottom: 100px;
+    }
+
+    .painting-me-content {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        padding-top: 0;
+    }
+
+    .painting-me-image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .painting-me-video {
+        position: absolute;
+        top: 0;
+        left: 80px;
+        flex-shrink: 0;
+        object-fit: none;
+        margin-top: 60px;
+        width: 178px;
+        height: 288px;
+    }
+
+    .painting-me-image .img744 {
+        z-index: 2;
+        display: block;
+
+    }
+
+    .painting-me-section .background,
+    .painting-me-image .img {
+        display: none;
+    }
+
+
+    .painting-me-text {
+        display: flex;
+        padding-top: 60px;
+        max-width: 375px;
+        padding: 0px 16px;
+        gap: 20px;
+        flex-shrink: 0;
+    }
+
+    .painting-me-text h2{
+        font-size: 30px;
+    }
+
+    .painting-me-text .h2_2{
+        padding-top: 10px;
+        padding-left: 60px;
+    }
+
+    .painting-me-text p{
+        font-size: 14px;
+        max-width: 343px;
+    }
+
+    .painting-background-1,
+    .painting-background-2,
+    .painting-background-3 {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 375px) {
+
+    .painting-me-section {
+        padding: 0;
+        flex-direction: column;
+        margin-top: 100px;
+    }
+
+    .painting-me-content {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        padding-top: 0;
+    }
+
+    .painting-me-image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .painting-me-video {
+        position: absolute;
+        top: 0;
+        left: 80px;
+        flex-shrink: 0;
+        object-fit: none;
+        margin-top: 60px;
+        width: 178px;
+        height: 288px;
+    }
+
+    .painting-me-image .img744 {
+        z-index: 2;
+        display: block;
+
+    }
+
+    .painting-me-section .background,
+    .painting-me-image .img {
+        display: none;
+    }
+
+
+    .painting-me-text {
+        display: flex;
+        padding-top: 60px;
+        max-width: 375px;
+        padding: 0px 16px;
+        gap: 20px;
+        flex-shrink: 0;
+    }
+
+    .painting-me-text h2{
+        font-size: 20px;
+    }
+    .painting-me-text .h2_1{
+        padding-left: 60px;
+    }
+
+    .painting-me-text .h2_2{
+        padding-top: 10px;
+        padding-left: 100px;
+    }
+
+    .painting-me-text p{
+        font-size: 14px;
+        max-width: 343px;
+    }
+
+    .painting-me-section .cattext2, .painting-me-section .cattext3 {
+        order: 1;
+    }
+    
+    .painting-me-section .cats2, .painting-me-section .cats3 {
+        order: 2; 
+    }
+
+}
