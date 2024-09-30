@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Reviews.css";
 
 import background1 from "../../assets/reviews/background_reviews_1.png";
@@ -19,27 +19,10 @@ const Reviews = () => {
   const [pagination, setPagination] = useState({ next: null, previous: null });
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Запрос данных при загрузке компонента и изменении страницы
-  useEffect(() => {
-    getReviews(setData, setPagination, currentPage);
-  }, [currentPage]);
-
-  // Обработчик нажатий на стрелки
-  const handlePrevious = () => {
-    const previousPage = getPageNumberFromUrl(pagination.previous);
-    if (previousPage) {
-      setCurrentPage(parseInt(previousPage));
-    }
-  };
-
-  const handleNext = () => {
-    const nextPage = getPageNumberFromUrl(pagination.next);
-    if (nextPage) {
-      setCurrentPage(parseInt(nextPage));
-    }
-  };
+  const wrapperRef = useRef(null);
 
   const [headerText, setHeaderText] = useState("говорят Обо мне");
+
 
   const updateHeaderText = () => {
     if (window.innerWidth <= 375) {
@@ -62,6 +45,73 @@ const Reviews = () => {
     };
   }, []);
 
+
+
+  // Запрос данных при загрузке компонента и изменении страницы
+  useEffect(() => {
+    getReviews(setData, setPagination, currentPage);
+  }, [currentPage]);
+
+  // Центрирование элемента
+  const centerScroll = () => {
+    const wrapper = wrapperRef.current;
+    const items = wrapper.querySelectorAll("li");
+
+    if (items.length > 0) {
+      const centerItem = items[Math.floor(items.length / 2)];
+      const scrollPosition =
+        centerItem.offsetLeft -
+        wrapper.clientWidth / 2 +
+        centerItem.clientWidth / 2;
+      wrapper.scrollLeft = scrollPosition;
+    }
+  };
+
+  useEffect(() => {
+    centerScroll();
+  }, [data]);
+
+  // Обработчик для нажатий на стрелки
+  const handlePrevious = () => {
+    const previousPage = getPageNumberFromUrl(pagination.previous);
+    if (previousPage) {
+      setCurrentPage(parseInt(previousPage));
+    }
+  };
+
+  const handleNext = () => {
+    const nextPage = getPageNumberFromUrl(pagination.next);
+    if (nextPage) {
+      setCurrentPage(parseInt(nextPage));
+    }
+  };
+
+  // Обработка событий скроллинга
+  const handleScroll = () => {
+    const wrapper = wrapperRef.current;
+
+    // Если дошли до конца списка, загружаем следующие отзывы
+    if (
+      wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth &&
+      pagination.next
+    ) {
+      handleNext();
+    }
+
+    // Если дошли до начала списка, загружаем предыдущие отзывы
+    if (wrapper.scrollLeft === 0 && pagination.previous) {
+      handlePrevious();
+    }
+  };
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    wrapper.addEventListener("scroll", handleScroll);
+
+    return () => {
+      wrapper.removeEventListener("scroll", handleScroll);
+    };
+  }, [pagination]);
 
   return (
     <section className="reviews" id="reviews">
@@ -97,7 +147,9 @@ const Reviews = () => {
                 viewBox="0 0 70 70"
                 fill="none"
                 onClick={handlePrevious}
-                style={{ cursor: pagination.previous ? "pointer" : "not-allowed" }}
+                style={{
+                  cursor: pagination.previous ? "pointer" : "not-allowed",
+                }}
               >
                 <rect
                   x="70"
@@ -120,8 +172,9 @@ const Reviews = () => {
                 viewBox="0 0 70 70"
                 fill="none"
                 onClick={handleNext}
-                style={{ cursor: pagination.next ? "pointer" : "not-allowed" }}
-              
+                style={{
+                  cursor: pagination.next ? "pointer" : "not-allowed",
+                }}
               >
                 <rect
                   x="70"
@@ -138,7 +191,7 @@ const Reviews = () => {
                 />
               </svg>
             </div>
-            <ul className="wrapper">
+            <ul className="wrapper" ref={wrapperRef}>
               {data.map((review, index) => (
                 <li
                   key={index}

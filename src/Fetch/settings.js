@@ -1,16 +1,17 @@
 
 
-const API_DOMAIN = 'https://tati-b-n.ru';
+// const API_DOMAIN = 'https://tati-b-n.ru';
 const API_PREFIX = '/api/v1/';
-const CONCATE = API_DOMAIN + API_PREFIX;
+// const CONCATE = API_DOMAIN + API_PREFIX;
 
-// const CONCATE = API_PREFIX;
+const CONCATE = API_PREFIX;
 // API METHODS URLS
 
 
 // Галерея
 export const PAINTINGS = CONCATE + 'list/paintings/';
 export const PAINTINGS_DETAIL = (id) => CONCATE + `detail/painting/${id}/`;
+
 
 // video
 export const VIDEOS_LIST_GET = CONCATE + 'list/videos/';
