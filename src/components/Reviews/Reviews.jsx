@@ -6,29 +6,63 @@ import background2 from "../../assets/reviews/background_reviews_2.png";
 import background1_744 from "../../assets/reviews/background_reviews_1-744.png";
 import background2_744 from "../../assets/reviews/background_reviews_2-744.png";
 
+import { getReviews } from "../../api/Reviews/getReviews";
+
+const getPageNumberFromUrl = (url) => {
+  if (!url) return null;
+  const urlParams = new URLSearchParams(new URL(url).search);
+  return urlParams.get("page");
+};
+
 const Reviews = () => {
+  const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({ next: null, previous: null });
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Запрос данных при загрузке компонента и изменении страницы
+  useEffect(() => {
+    getReviews(setData, setPagination, currentPage);
+  }, [currentPage]);
+
+  // Обработчик нажатий на стрелки
+  const handlePrevious = () => {
+    const previousPage = getPageNumberFromUrl(pagination.previous);
+    if (previousPage) {
+      setCurrentPage(parseInt(previousPage));
+    }
+  };
+
+  const handleNext = () => {
+    const nextPage = getPageNumberFromUrl(pagination.next);
+    if (nextPage) {
+      setCurrentPage(parseInt(nextPage));
+    }
+  };
+
   const [headerText, setHeaderText] = useState("говорят Обо мне");
 
   const updateHeaderText = () => {
     if (window.innerWidth <= 375) {
-      setHeaderText("говорят Обо\n мне"); 
+      setHeaderText("говорят Обо\n мне");
     } else {
       setHeaderText("говорят Обо мне");
     }
   };
 
   useEffect(() => {
-    updateHeaderText(); 
+    updateHeaderText();
 
     const handleResize = () => {
-      updateHeaderText(); 
+      updateHeaderText();
     };
 
-    window.addEventListener("resize", handleResize); 
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize); 
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+
   return (
     <section className="reviews" id="reviews">
       <div className="reviews_content">
@@ -43,9 +77,14 @@ const Reviews = () => {
           <div className="reviews-descriptons">
             <div>
               <h2 className="h2_1">Клиенты</h2>
-              <h2 className="h2_2">{headerText.split("\n").map((line, index) => (
-                <h2 className="h2_3" key={index}>{line}<br/></h2>
-              ))}</h2>
+              <h2 className="h2_2">
+                {headerText.split("\n").map((line, index) => (
+                  <h2 className="h2_3" key={index}>
+                    {line}
+                    <br />
+                  </h2>
+                ))}
+              </h2>
             </div>
           </div>
 
@@ -57,6 +96,8 @@ const Reviews = () => {
                 height="70"
                 viewBox="0 0 70 70"
                 fill="none"
+                onClick={handlePrevious}
+                style={{ cursor: pagination.previous ? "pointer" : "not-allowed" }}
               >
                 <rect
                   x="70"
@@ -78,6 +119,9 @@ const Reviews = () => {
                 height="70"
                 viewBox="0 0 70 70"
                 fill="none"
+                onClick={handleNext}
+                style={{ cursor: pagination.next ? "pointer" : "not-allowed" }}
+              
               >
                 <rect
                   x="70"
@@ -95,48 +139,27 @@ const Reviews = () => {
               </svg>
             </div>
             <ul className="wrapper">
-              <li className="item_1">
-                <img src={`http://placehold.it/263x351`} />
-                <div className="card">
-                  <p>
-                    Все просто супер! Созвонились, все обсудили, Татьяна
-                    оперативно прислала макет. После согласования назначили
-                    день, все сделано быстро и качественно! Я в восторге! Не
-                    могу налюбоваться картиной!!! Спасибо!!! Она просто бомба
-                    !!!
-                  </p>
-                  <span>Юлия</span>
-                </div>
-              </li>
-              <li className="item_2 item-center">
-                <img src={`http://placehold.it/357x477`} />
-                <div className="card">
-                  <p>
-                    Договорились о работе, выполнили все быстро! Очень
-                    понравилась итоговая работа, благодаря росписи стен, в
-                    помещении стало очень уютно! По цвету все идеально подошло в
-                    цвет логотипа, качество понравилось! Важно, что мы в студии
-                    смогли параллельно работать, так как краска без запаха!
-                    Рекомендую!
-                  </p>
-                  <span>Юлия</span>
-                </div>
-              </li>
-              <li className="item_3">
-                <img src={`http://placehold.it/263x351`} />
-
-                <div className="card">
-                  <p>
-                    Экскурсия очень понравилась, раньше вроде видели все это,
-                    ходили мимо, оценивали на уровне - «да это довольно
-                    красиво». Сейчас посмотрели под новым углом, осознанно,
-                    знаешь куда смотреть и на что обращать внимание
-                    уже в самостоятельных прогулках по городу, а главное историю
-                    каждого этого дома с Томских открыток!
-                  </p>
-                  <span>Юлия</span>
-                </div>
-              </li>
+              {data.map((review, index) => (
+                <li
+                  key={index}
+                  className={
+                    index % 3 === 0
+                      ? "item_1"
+                      : index % 3 === 1
+                      ? "item_2 item-center"
+                      : "item_3"
+                  }
+                >
+                  <img
+                    src={review.img}
+                    alt={`Review by ${review.customerName}`}
+                  />
+                  <div className="card">
+                    <p>{review.text}</p>
+                    <span>{review.customerName}</span>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

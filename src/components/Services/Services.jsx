@@ -75,7 +75,7 @@ const Services = () => {
                   <path
                     d="M0 14.5H34M34 14.5L24.5 1M34 14.5L24.5 27"
                     stroke="#FF1979"
-                    stroke-width="3"
+                    strokeWidth="3"
                   />
                 </svg>
               </a>
@@ -103,7 +103,7 @@ const Services = () => {
                   <path
                     d="M0 14.5H34M34 14.5L24.5 1M34 14.5L24.5 27"
                     stroke="#FF1979"
-                    stroke-width="3"
+                    strokeWidth="3"
                   />
                 </svg>
               </a>
@@ -130,7 +130,7 @@ const Services = () => {
                   <path
                     d="M0 14.5H34M34 14.5L24.5 1M34 14.5L24.5 27"
                     stroke="#FF1979"
-                    stroke-width="3"
+                    strokeWidth="3"
                   />
                 </svg>
               </a >

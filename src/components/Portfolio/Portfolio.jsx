@@ -1,55 +1,69 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./Portfolio.css";
 import left from "../../assets/png/left.png";
 import right from "../../assets/png/right.png";
 import Button from "../button/button";
-
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
 import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
 
-const Portfolio = ({ home }) => {
-  const [data, setData] = useState([]); 
-  const [dataDetail, setDataDetail] = useState(null); 
+const Portfolio = ({ home, Category }) => {
+  const [data, setData] = useState([]);
+  const [countPages, setCountPages] = useState(0);
+  const [dataDetail, setDataDetail] = useState(null);
   const masonryRef = useRef(null);
-  const [isScrolling, setIsScrolling] = useState(true); 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0); 
+  const [isScrolling, setIsScrolling] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const observer = useRef(null);
+  const [loading, setLoading] = useState(false); 
+
+
+  const fetchPaintings = async (page) => {
+    if (loading) return; // Если запрос уже выполняется, выходим
+
+    setLoading(true); // Устанавливаем флаг загрузки
+    try {
+      await getPaintings(setData, setCountPages, Category, page);
+    } catch (error) {
+      console.error("Error fetching paintings:", error);
+    } finally {
+      setLoading(false); // Сбрасываем флаг загрузки
+    }
+  };
+
 
   useEffect(() => {
-    getPaintings(setData);
-  }, []);
+    fetchPaintings(currentPage);
+  }, [Category, currentPage]);
 
-  let scrollSpeed = 1.5;
+  let scrollSpeed = 1.5; 
 
   useEffect(() => {
     const masonryContainer = masonryRef.current;
 
     if (!masonryContainer) return;
 
-    let scrollDirection = 1;
     let animationFrameId;
 
     const autoScroll = () => {
-      if (!isScrolling) return;
+      if (!isScrolling || !masonryContainer) return;
 
       if (
         masonryContainer.scrollLeft >=
         masonryContainer.scrollWidth - masonryContainer.clientWidth
       ) {
-        scrollDirection = -1;
-      } else if (masonryContainer.scrollLeft <= 0) {
-        scrollDirection = 1; 
+        masonryContainer.scrollLeft = 0; 
+      } else {
+        masonryContainer.scrollLeft += scrollSpeed;
       }
 
-      masonryContainer.scrollLeft += scrollDirection * scrollSpeed;
-
-      animationFrameId = requestAnimationFrame(autoScroll); 
+      animationFrameId = requestAnimationFrame(autoScroll);
     };
 
-    autoScroll(); 
+    autoScroll();
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isScrolling]);
-
+  }, [isScrolling, data]); 
 
   const openModal = (paintingId) => {
     getPaintingDetail((detail) => {
@@ -68,8 +82,8 @@ const Portfolio = ({ home }) => {
   const closeModal = () => {
     setDataDetail(null);
     setIsScrolling(true);
-    document.body.classList.remove("no-scroll"); 
-    setCurrentImageIndex(0); 
+    document.body.classList.remove("no-scroll");
+    setCurrentImageIndex(0);
   };
 
   const showNextImage = () => {
@@ -77,9 +91,9 @@ const Portfolio = ({ home }) => {
 
     setCurrentImageIndex((prevIndex) => {
       if (prevIndex === dataDetail.galleryImages.length - 1) {
-        return 0; // Вернуться к первому изображению
+        return 0;
       }
-      return prevIndex + 1; // Перейти к следующему изображению
+      return prevIndex + 1;
     });
   };
 
@@ -88,11 +102,42 @@ const Portfolio = ({ home }) => {
 
     setCurrentImageIndex((prevIndex) => {
       if (prevIndex === 0) {
-        return dataDetail.galleryImages.length - 1; 
+        return dataDetail.galleryImages.length - 1;
       }
-      return prevIndex - 1; 
+      return prevIndex - 1;
     });
   };
+
+  const lastPaintingElementRef = useCallback(
+    (node) => {
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !loading) {
+            if (currentPage < countPages) {
+              setCurrentPage((prevPage) => prevPage + 1);
+            } else {
+              setCurrentPage(1); 
+            }
+          }
+        },
+        {
+          rootMargin: "100px",
+        }
+      );
+
+      if (node) observer.current.observe(node);
+    },
+    [countPages, currentPage, loading] 
+  );
+
+  useEffect(() => {
+    if (data.length > 100) {
+      setData((prevData) => prevData.slice(40));
+    }
+  }, [data]);
+
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
       <div className="portfolio_content">
@@ -117,10 +162,12 @@ const Portfolio = ({ home }) => {
                     i % 2 === 0 ? "even-item" : ""
                   }`}
                   key={item.id}
-                  onClick={() => openModal(item.id)} 
+                  onClick={() => openModal(item.id)}
                   style={{ cursor: "pointer" }}
+                  ref={i === data.length - 1 ? lastPaintingElementRef : null} 
                 >
                   <img src={item.mainImage} alt={item.title} />
+                  
                 </li>
               ))}
             </ul>
@@ -169,6 +216,31 @@ const Portfolio = ({ home }) => {
                 alt="right arrow"
                 onClick={showNextImage}
               />
+              <div className="image-indicators">
+                {dataDetail.galleryImages.length > 4 ? (
+                  <>
+                    <span className="dot small" />
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className={`dot ${
+                          currentImageIndex === i + 1 ? "active" : ""
+                        }`}
+                      />
+                    ))}
+                    <span className="dot small" />
+                  </>
+                ) : (
+                  dataDetail.galleryImages.map((_, index) => (
+                    <span
+                      key={index}
+                      className={`dot ${
+                        currentImageIndex === index ? "active" : ""
+                      }`}
+                    />
+                  ))
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -574,145 +574,37 @@
     margin-bottom: 10px;
   }
 
-
-  .portfolio-modal {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(225, 223, 221, 0.8);
-    /* Прозрачный фон */
-  }
-
-  .portfolio-modal-content {
-    position: relative;
-    z-index: 101;
-    display: inline-flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-shrink: 0;
-
-    height: 743px;
-    width: 1078px;
-
-  }
-
-  .portfolio-close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  .portfolio-item {
-    cursor: pointer;
-  }
-
-  .no-scroll {
-    overflow: hidden;
-  }
-
-  .portfolio-content-text {
-    display: flex;
-    width: 494px;
-    padding: 40px;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    background: var(--Gray-1, #333);
-    height: 588px;
-
-  }
-
-  .portfolio-content-text-div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 40px;
-    align-self: stretch;
-  }
-
-  .portfolio-content-text-div h3 {
-    color: var(--Acent, #FF1979);
-    font-family: Montserrat;
-    font-size: 28px;
-    font-style: italic;
-    font-weight: 500;
-    line-height: normal;
-    align-self: stretch;
-  }
-
-  .portfolip-text-p {
-    display: flex;
-    width: 348px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
-  .portfolip-text-p p {
-    color: var(--Wite, #FFF);
-
-    /* H/Body/Regular s */
-    font-family: Montserrat;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    /* 26px */
-    align-self: stretch;
-  }
-
-  .portfolio-content-text-div-description {
-    display: flex;
-    width: 348px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
-  }
+}
 
 
-  /* img  */
+.image-indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 8px;
+  position: absolute;
+  bottom: 10px; /* Расположение от нижнего края */
+  left: 50%; /* Выравнивание по горизонтали */
+  transform: translateX(-50%);
+}
 
-  .portfolio-modal-image-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    /* Добавьте это свойство */
-  }
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ff007a;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
 
-  .portfolio-main-image {
-    flex-shrink: 0;
-  }
+.dot.active {
+  opacity: 1;
+}
 
-  .portfolio-left-arrow,
-  .portfolio-right-arrow {
-    cursor: pointer;
-    width: 74px;
-    height: 74px;
-    position: absolute;
-    /* Добавьте это свойство */
-    top: 50%;
-    /* Центрирование по вертикали */
-    transform: translateY(-50%);
-    /* Подъем на половину высоты стрелки */
-  }
 
-  .portfolio-left-arrow {
-    left: 10px;
-    /* Расположите стрелку слева */
-  }
-
-  .portfolio-right-arrow {
-    right: 10px;
-    /* Расположите стрелку справа */
-  }
-
+.dot.small {
+  width: 6px; /* Размер маленькой точки */
+  height: 6px; /* Размер маленькой точки */
+  opacity: 0.5; /* Уменьшаем непрозрачность для малых точек */
 }
