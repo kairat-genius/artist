@@ -3,6 +3,8 @@ import "./Portfolio.css";
 import left from "../../assets/png/left.png";
 import right from "../../assets/png/right.png";
 import Button from "../button/button";
+import close from "../../assets/portfolio/close-modal.png"; 
+import closemobile from "../../assets/portfolio/close-mobile.png";
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
 import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
 
@@ -176,11 +178,14 @@ const Portfolio = ({ home, Category }) => {
       </div>
 
       {dataDetail && (
+        
         <div className="portfolio-modal" onClick={closeModal}>
+          <img src={close} className="close-modall" onClick={closeModal}/>
           <div
             className="portfolio-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
+              <img src={closemobile} className="close-modile" onClick={closeModal}/>
             <div className="portfolio-content-text">
               <div className="portfolio-content-text-div">
                 <h3>{dataDetail.title}</h3>
@@ -194,7 +199,7 @@ const Portfolio = ({ home, Category }) => {
                   </p>
                 </div>
               </div>
-              <Button />
+              <Button onClick={closeModal}/>
             </div>
 
             {/* Галерея изображений */}

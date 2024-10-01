@@ -1,10 +1,8 @@
-
-
-// const API_DOMAIN = 'https://tati-b-n.ru';
+const API_DOMAIN = 'https://tati-b-n.ru';
 const API_PREFIX = '/api/v1/';
-// const CONCATE = API_DOMAIN + API_PREFIX;
+const CONCATE = API_DOMAIN + API_PREFIX;
 
-const CONCATE = API_PREFIX;
+// const CONCATE = API_PREFIX;
 // API METHODS URLS
 
 

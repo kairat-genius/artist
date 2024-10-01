@@ -1,9 +1,9 @@
 import React from "react";
 import "./button.css";
 
-const Button = () => {
+const Button = ({onClick}) => {
   return (
-            <button className="button">
+            <a href="#contact" className="button" onClick={onClick}>
             ОФОРМИТЬ ЗАКАЗ{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@ const Button = () => {
                 fill="white"
               />
             </svg>
-          </button>
+          </a>
   );
 };
 
