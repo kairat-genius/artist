@@ -134,8 +134,273 @@
 
 }
 
+@media (max-width: 1850px) {
+    .possibilities {
+        background-image: url('../../assets/png/possibilitiesback.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 80px);
+        background-size: contain;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+}
 
-@media (max-width: 744px) {
+@media (max-width: 1750px) {
+    .possibilities {
+        background-image: url('../../assets/png/possibilitiesback.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 120px);
+        background-size: contain;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+}
+
+
+@media (max-width: 1650px) {
+    .possibilities {
+        background-image: url('../../assets/png/possibilitiesback.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 120px);
+        background-size: contain;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+}
+
+
+@media (max-width: 1450px) {
+    .possibilities {
+        background-image: url('../../assets/png/possibilitiesback.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 250px);
+        background-size: contain;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+}
+
+
+
+
+@media (max-width: 1300px) {
+    .possibilities {
+        background-image: url('../../assets/png/possibilitiesback.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 300px);
+        background-size: contain;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+}
+
+@media (max-width: 1300px) {
+    .possibilities {
+        background-image: url('../../assets/png/possidilites-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 80px);
+        background-size: contain;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+}
+
+@media (max-width: 1300px) {
+    .possibilities {
+        background-image: url('../../assets/png/possidilites-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 10px);
+        background-size: contain;
+        max-height: 1200px;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+}
+
+@media (max-width: 1150px) {
+    .possibilities {
+        background-image: url('../../assets/png/possidilites-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 80px);
+        background-size: contain;
+        max-height: 1100px;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+
+
+    .possibilities_content .card-container {
+        gap: 1rem;
+    }
+    
+    .possibilities_content .card {
+        height: 300px;
+        padding: 36px 24px;
+        gap: 16px;
+    }
+    
+    .possibilities_content .card h3 {
+        font-size: 24px;
+    }
+    
+    .possibilities_content .card p {
+        font-size: 16px;
+    }
+    
+    .possibilities_content .content-descriptons {
+        max-width: 800px;
+        gap: 32px;
+    }
+    
+    .possibilities_content .content-descriptons h2 {
+        font-size: 38px;
+    }
+    
+    .possibilities_content .content-descriptons .h2_2 {
+        padding-left: 107px;
+    }
+    
+    .possibilities_content .content-descriptons .h2_2 .h2_3 {
+        padding-top: 20px;
+    }
+    
+    .possibilities_content .content-descriptons p {
+        font-size: 18px;
+    }
+    
+}
+
+@media (max-width: 950px) {
+    .possibilities {
+        background-image: url('../../assets/png/possidilites-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 10px);
+        background-size: contain;
+        max-height: 1000px;
+    
+    }
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-size: contain;
+    
+    }
+
+    .possibilities_content .card {
+        height: 260px;
+        padding: 36px 24px;
+        gap: 16px;
+        max-width: 250px;
+    }
+    
+    .possibilities_content .card h3 {
+        font-size: 18px;
+    }
+    
+    .possibilities_content .card p {
+        font-size: 12px;
+    }
+    
+    .possibilities_content .content-descriptons {
+        max-width: 700px;
+        gap: 32px;
+    }
+    
+    .possibilities_content .content-descriptons h2 {
+        font-size: 30px;
+    }
+    
+    .possibilities_content .content-descriptons .h2_2 {
+        padding-left: 107px;
+    }
+    
+    .possibilities_content .content-descriptons .h2_2 .h2_3 {
+        padding-top: 20px;
+    }
+    
+    .possibilities_content .content-descriptons p {
+        font-size: 16px;
+    }
+    
+}
+
+@media (max-width: 800px) {
 
     .possibilities {
         background-image: url('../../assets/png/possidilites-744.png');
@@ -158,9 +423,7 @@
     }
 
     .possibilities_content {
-        margin: 0 auto;
         max-width: 700px;
-        position: relative;
         height: 772px;
     }
 
@@ -213,8 +476,85 @@
     }
 }
 
+@media (max-width: 700px) {
 
-@media (max-width: 375px) {
+    .possibilities {
+        background-image: url('../../assets/png/possidilites-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 100px);
+        background-size: contain;
+    
+
+    }
+
+
+    .possibilities-cat {
+        background-image: url('../../assets/painting/background-cat-possibilities-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 0px) calc(100% - 30px);
+        background-size: contain;
+
+    }
+
+}
+
+
+@media (max-width: 630px) {
+
+    .possibilities,
+    .possibilities-cat {
+        background-image: url('../../assets/services/background_services-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 80px);
+        background-size: auto; 
+        margin-top: 75px;
+
+    }
+
+    .possibilities_content {
+ 
+        height: 700px;
+    }
+
+  
+    .possibilities_content .card {
+        height: 163px;
+        padding: 18.95px 16.56px;
+        gap: 8.78px;
+        max-width: 160px;
+        flex: 1 1 calc(50% - 1.25rem);
+    }
+
+    .possibilities_content .card h3 {
+        font-size: 12.365px;
+    }
+
+    .possibilities_content .card p {
+        font-size: 7.682px;
+    }
+
+
+    .possibilities_content .content-descriptons {
+        gap: 17.56px;
+        max-width: 400px;
+    }
+
+    .possibilities_content .content-descriptons h2 {
+        font-size: 20px;
+    }
+
+    .possibilities_content .content-descriptons .h2_2 {
+     
+        color: var(--Acent);
+        padding-left: 30px;
+    }
+}
+
+
+@media (max-width: 430px) {
 
     .possibilities,
     .possibilities-cat {
@@ -227,16 +567,9 @@
 
     }
 
-    .possibilities_content .content {
-        width: 100%;
-        height: 576px;
-        gap: 43.899px;
-    }
-
     .possibilities_content .card-container {               
         flex-direction: column;          
-        align-items: stretch;            
-        gap: 10.975px;                 
+        align-items: stretch;                            
         padding: 0 10px;  
         box-sizing: border-box;
                      

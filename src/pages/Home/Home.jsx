@@ -10,14 +10,14 @@ import Cooperate from "../../components/Cooperate/Cooperate";
 
 const Home = () => {
   return (
-    <div style={{ maxWidth: "1920px", margin: "0 auto" }}>
+    <div style={{ maxWidth: "1920px", margin: "0 auto",   position: "relative" }}>
       <CreativeWorkshop />
       <About />
-      <Possibilities home={true} />
-      <Services />
+   <Possibilities home={true} />
+         <Services />
       <Portfolio home={true} />
-      <Reviews />
-      <Cooperate />
+       <Reviews />
+       <Cooperate />
     </div>
   );
 };

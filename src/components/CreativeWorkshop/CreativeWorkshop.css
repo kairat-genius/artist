@@ -81,14 +81,90 @@
     margin-top: 30px;
 }
 
-@media (max-width: 744px) {
+@media (max-width: 1400px) {
 
     .creative_workshop {
-        background-image: url('../../assets/svg/creative_workshop-744.svg');
+        width: 100%;
+        max-height: 784px;
+        fill: #291C3A;
+        background-image: url('../../assets/svg/creative_workshop.svg');
         background-repeat: no-repeat;
+    }
+    
+    .workshop {
+        padding-top: 150px;
+    }
+    
+    .creative_workshop .content {
+        width: 600px;
+        gap: 80px;
+        margin-left: 10px;
+    }
+    
+    .creative_workshop .content_description {
+        gap: 60px;
+    }
+    
+    .creative_workshop .content_description .title {
+        gap: 24px;
+    }
+    
+    .creative {
+        font-size: 28px;
+    }
+    
+    .creative_workshop h1 {
+        font-size: 100px;
+    
+    }
+    
+    .creative_workshop p {
+        max-width: 521px;
+        font-size: 18px;
+    }
+    
+    .creative_workshop img {
+        max-width: 50%; 
+    }
+
+    .creative_workshop img {
+        width: 400px;
         height: 500px;
     }
 
+}
+
+@media (max-width: 1000px) {
+
+    
+    .creative_workshop .content_description .title {
+        gap: 36px;
+    }
+    
+    .creative {
+        font-size: 28px;
+    }
+    
+    .creative_workshop h1 {
+        font-size: 90px;
+    
+    }
+    
+    .creative_workshop p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 888px) {
+
+    .creative_workshop {
+        width: 100%;
+        max-height: 500px;
+        fill: #291C3A;
+        background-image: url('../../assets/svg/creative_workshop.svg');
+        background-repeat: no-repeat;
+    }
+    
     .workshop {
         max-width: 694px;
         padding-top: 120px;
@@ -97,6 +173,7 @@
     .creative_workshop .content {
         gap: 42.12px;
         max-width: 384px;
+        margin-left: 0;
     }
 
     .creative_workshop .content_description {
@@ -132,17 +209,76 @@
 
 }
 
-@media (max-width: 375px) {
+@media (max-width: 744px) {
 
     .creative_workshop {
-        background-image: url('../../assets/svg/creative_workshop-375.svg');
+        background-image: url('../../assets/svg/creative_workshop-744.svg');
         background-repeat: no-repeat;
-        height: 742px
+        height: 500px;
     }
 
+}
+
+@media (max-width: 700px) {
+
+    .creative_workshop {
+        background-image: url('../../assets/svg/creative_workshop-744.svg');
+        background-repeat: no-repeat;
+        height: 500px;
+    }
+
+     
     .workshop {
         max-width: 694px;
         padding-top: 120px;
+    }
+
+    .creative_workshop .content {
+        gap: 42.12px;
+        max-width: 384px;
+        margin-left: 10px;
+    }
+
+    .creative_workshop .content_description {
+        gap: 42.12px;
+    }
+    .creative_workshop .content_description .title {
+        max-width: 393px;
+        height: 86px;
+        gap: 8.424px;
+    }
+    .creative {
+        font-size: 18px;
+
+    }
+    .creative_workshop h1 {
+        font-size: 68px;
+
+    }
+
+    .creative_workshop img {
+        width: 240px;
+        height: 300px;
+        flex-shrink: 0;
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+}
+
+@media (max-width: 580px) {
+
+    .creative_workshop {
+        background-image: url('../../assets/svg/creative_workshop.svg');
+        background-repeat: no-repeat;
+        height: 640px;
+        max-height: 100%;
+    }
+
+
+    .workshop {
+        max-width: 694px;
+        padding-top: 80px;
         display: block;
         position: relative;
     }
@@ -150,12 +286,16 @@
     .creative_workshop .content {
         max-width: 384px;
         align-items: center;
+        margin-left: 0;
+        margin: 0 auto;
+        width: 100%;
+ 
     }
 
     .creative_workshop .content_description {
         gap: 20px;
         align-items: center;
-        margin-bottom: 410px;
+        margin-bottom: 300px;
     }
     .creative_workshop .content_description .title {
         max-width: 393px;
@@ -177,6 +317,39 @@
         max-width: 274px;
     }
 
+
+    .creative_workshop img {
+        margin-left: 0; 
+        position: absolute;
+        top: 250px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        margin-top: 0;
+    }
+
+}
+
+@media (max-width: 375px) {
+
+    .creative_workshop {
+        background-image: url('../../assets/svg/creative_workshop-375.svg');
+        background-repeat: no-repeat;
+        height: 742px
+    }
+
+    .workshop {
+        max-width: 375px;
+        padding-top: 120px;
+    }
+
+    .creative_workshop .content {
+        max-width: 375px;
+      
+    }
+
+    .creative_workshop .content_description {
+        margin-bottom: 410px;
+    }
 
     .creative_workshop img {
         margin-left: 0; 

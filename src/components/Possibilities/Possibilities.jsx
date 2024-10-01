@@ -6,7 +6,7 @@ const Possibilities = ({home}) => {
   const [headerText, setHeaderText] = useState("останетесь довольны");
 
   const updateHeaderText = () => {
-    if (window.innerWidth <= 375) {
+    if (window.innerWidth <= 430) {
       setHeaderText("останетесь\n довольны"); 
     } else {
       setHeaderText("останетесь довольны");
