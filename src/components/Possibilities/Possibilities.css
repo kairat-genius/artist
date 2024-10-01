@@ -429,8 +429,8 @@
 
 
     .possibilities_content .content {
-        width: 592px;
-        height: 576px;
+        max-width: 592px;
+        max-height: 576px;
         gap: 43.899px;
     }
 
@@ -540,6 +540,7 @@
     .possibilities_content .content-descriptons {
         gap: 17.56px;
         max-width: 400px;
+        margin-left: 0;
     }
 
     .possibilities_content .content-descriptons h2 {

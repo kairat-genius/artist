@@ -229,6 +229,20 @@ footer .big_text {
 }
 
 
+.error-text {
+    color: red;
+    font-size: 16px;
+    font-family: Inter;
+    line-height: normal;
+  }
+
+  .success-text {
+    color: green;
+    font-size: 16px;
+    font-family: Inter;
+    line-height: normal;
+  }
+
 @media (max-width: 1350px) {
     
   
@@ -473,8 +487,9 @@ footer .big_text {
     }
 
     .footer .contact {
-        width: 360px;
+        max-width: 600px;
         gap: 59.655px;
+        width: 100%;
     }
 
     .footer .contact-content {
@@ -483,7 +498,7 @@ footer .big_text {
 
     .footer .label-input {
         width: 224px;
-        height: 151px;
+        height: 100%;
         gap: 14.914px;
     }
 

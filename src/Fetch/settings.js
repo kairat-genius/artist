@@ -18,3 +18,7 @@ export const VIDEOS_LIST_GET = CONCATE + 'list/videos/';
 
 // отзывы
 export const REVIEWS_LIST_GET = CONCATE + 'list/reviews/';
+
+
+// contact
+export const CONTACT_POST = CONCATE + 'create/application/';
