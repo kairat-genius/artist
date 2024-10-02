@@ -75,17 +75,22 @@ const Reviews = () => {
 
   // Обработчик для нажатий на стрелки
   const handlePrevious = () => {
+    if (!isFetching && pagination.previous) {
     const previousPage = getPageNumberFromUrl(pagination.previous);
     if (previousPage) {
       setCurrentPage(parseInt(previousPage));
     }
+  }
+
   };
 
   const handleNext = () => {
+    if (!isFetching && pagination.next) {
     const nextPage = getPageNumberFromUrl(pagination.next);
     if (nextPage) {
       setCurrentPage(parseInt(nextPage));
     }
+  }
   };
 
   // Обработка событий скроллинга
