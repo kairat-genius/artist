@@ -168,10 +168,10 @@ const Footer = () => {
             <a href="https://wa.me/+79381630733">Вотсап</a>
           </li>
           <li>
-            <a>+79381630733</a>
+            <a>+7 938 163 07 33</a>
           </li>
         </ul>
-        <span className="big_text">TATI.B.N</span>
+        <span className="big_text">TATI.B.N.</span>
       </footer>
     </section>
   );

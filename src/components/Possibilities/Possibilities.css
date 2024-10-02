@@ -153,7 +153,7 @@
     
     }
 }
-
+/* 
 @media (max-width: 1750px) {
     .possibilities {
         background-image: url('../../assets/png/possibilitiesback.png');
@@ -173,7 +173,7 @@
     
     }
 }
-
+*/
 
 @media (max-width: 1650px) {
     .possibilities {
@@ -216,7 +216,7 @@
     }
 }
 
-
+/* 
 
 
 @media (max-width: 1300px) {
@@ -553,26 +553,118 @@
         padding-left: 30px;
     }
 }
+ */
+
+ @media (max-width: 1200px) {
+
+    .possibilities {
+        background-image: url('../../assets/png/possidilites-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 5px) calc(100% - 30px);
+        background-size: contain;
+        width: 744px;
+        margin: 0 auto;
+        margin-top: 75px;
+
+    }
 
 
-@media (max-width: 430px) {
+    .possibilities-cat {
+        background-image: url('../../assets/painting/background-cat-possibilities-744.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 0px) calc(100% - 30px);
+        background-size: contain;
+
+    }
+
+    .possibilities_content {
+        max-width: 700px;
+        height: 772px;
+    }
+
+
+    .possibilities_content .content {
+        max-width: 592px;
+        max-height: 576px;
+        gap: 43.899px;
+    }
+
+    .possibilities_content .card-container {
+        gap: 10.975px;
+    }
+
+    .possibilities_content .card {
+        height: 183px;
+        padding: 21.95px 17.56px;
+        gap: 8.78px;
+        max-width: 190px;
+    }
+
+    .possibilities_content .card h3 {
+        font-size: 15.365px;
+    }
+
+    .possibilities_content .card p {
+        font-size: 7.682px;
+    }
+
+
+    .possibilities_content .content-descriptons {
+        gap: 17.56px;
+        max-width: 500px;
+    }
+
+    .possibilities_content .content-descriptons h2 {
+        font-size: 30px;
+    }
+
+    .possibilities_content .content-descriptons .h2_2 {
+     
+        color: var(--Acent);
+        padding-left: 30px;
+    }
+
+    .possibilities_content .content-descriptons p {
+        font-size: 14px;
+        max-width: 470px;
+
+    }
+}
+
+@media (max-width: 744px) {
 
     .possibilities,
     .possibilities-cat {
         background-image: url('../../assets/painting/background-cat-possibilities-375.png');
         position: relative;
         background-repeat: no-repeat;
-        background-position: calc(50% + 5px) calc(100% - 10px + 80px);
+        background-position: calc(50% + 5px) calc(100% - 110px);
         background-size: auto; 
         margin-top: 75px;
+        height: 950px;
+        max-width: 375px;
+        margin: 0 auto;
+        margin-top: 50px;
 
+    }
+
+    .possibilities_content {
+        height: 950px;
+        width: 375px;
+    }
+
+    .possibilities .content {
+        gap: 60px;
     }
 
     .possibilities_content .card-container {               
         flex-direction: column;          
         align-items: stretch;                            
-        padding: 0 10px;  
+        padding: 0 20px;  
         box-sizing: border-box;
+        gap: 11px;
                      
     }
     
@@ -585,16 +677,16 @@
         border-radius: 4px;         
     }
 
+    .possibilities_content .card-margin{
+        margin-top: 10px;
+    }
+
     .possibilities_content .card-right {
         align-self: flex-end;         
         margin-top: -155px;  
     }
     
-    .possibilities_content .card-margin {
-        margin-top: 20px;
-    }
-    
-
+   
     .possibilities_content .card h3 {
         font-size: 15.365px;
     }

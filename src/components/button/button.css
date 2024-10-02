@@ -18,7 +18,7 @@
 }
 
 
-@media (max-width: 744px) {
+@media (max-width: 1200px) {
     .button {
         padding: 8px 14px;
         font-size: 12px;
@@ -37,14 +37,14 @@
 
 
 
-@media (max-width: 375px) {
+@media (max-width: 744px) {
     .button {
         width: 340px;
         height: 66px;
         padding: 0px 30px;
         gap: 20px;
         font-size: 20px;
-        margin: 0 auto;
+
         border-radius: 39px;
 
     }

@@ -25,7 +25,7 @@ const Reviews = () => {
 
 
   const updateHeaderText = () => {
-    if (window.innerWidth <= 650) {
+    if (window.innerWidth <= 744) {
       setHeaderText("говорят Обо\n мне");
     } else {
       setHeaderText("говорят Обо мне");
