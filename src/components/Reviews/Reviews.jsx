@@ -74,6 +74,7 @@ const Reviews = () => {
 
   // Обработчик для нажатий на стрелки
   const handlePrevious = () => {
+    if (isFetching) return;
       const previousPage = getPageNumberFromUrl(pagination.previous);
       if (previousPage) {
         setCurrentPage(parseInt(previousPage));
@@ -82,6 +83,7 @@ const Reviews = () => {
   };
 
   const handleNext = () => {
+    if (isFetching) return;
       const nextPage = getPageNumberFromUrl(pagination.next);
       if (nextPage) {
         setCurrentPage(parseInt(nextPage));
@@ -92,21 +94,22 @@ const Reviews = () => {
   // Обработка событий скроллинга
   const handleScroll = debounce(() => {
     const wrapper = wrapperRef.current;
+    if (isFetching) return;
 
     // Если дошли до конца списка, загружаем следующие отзывы
     if (
       wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth &&
-      pagination.next &&
-      !isFetching
+      pagination.next
     ) {
       handleNext();
     }
 
     // Если дошли до начала списка, загружаем предыдущие отзывы
-    if (wrapper.scrollLeft === 0 && pagination.previous && !isFetching) {
+    if (wrapper.scrollLeft === 0 && pagination.previous) {
       handlePrevious();
     }
   }, 10);
+
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
