@@ -90,7 +90,7 @@ const Reviews = () => {
   };
 
   // Обработка событий скроллинга
-  const handleScroll = debounce(() => {
+  const handleScroll = () => {
     const wrapper = wrapperRef.current;
 
     // Если дошли до конца списка, загружаем следующие отзывы
@@ -106,7 +106,7 @@ const Reviews = () => {
     if (wrapper.scrollLeft === 0 && pagination.previous && !isFetching) {
       handlePrevious();
     }
-  }, 300);
+  };
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
