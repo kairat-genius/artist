@@ -5,7 +5,7 @@ import background1 from "../../assets/reviews/background_reviews_1.png";
 import background2 from "../../assets/reviews/background_reviews_2.png";
 import background1_744 from "../../assets/reviews/background_reviews_1-744.png";
 import background2_744 from "../../assets/reviews/background_reviews_2-744.png";
-
+import debounce from "lodash.debounce";
 import { getReviews } from "../../api/Reviews/getReviews";
 
 const getPageNumberFromUrl = (url) => {
@@ -22,7 +22,6 @@ const Reviews = () => {
   const wrapperRef = useRef(null);
 
   const [headerText, setHeaderText] = useState("говорят Обо мне");
-
 
   const updateHeaderText = () => {
     if (window.innerWidth <= 744) {
@@ -45,13 +44,13 @@ const Reviews = () => {
     };
   }, []);
 
-
-
-  // Запрос данных при загрузке компонента и изменении страницы
   useEffect(() => {
-    setIsFetching(true);
-    getReviews(setData, setPagination, currentPage)
-    .finally(() => setIsFetching(false));
+    if (!isFetching) {
+      setIsFetching(true);
+      getReviews(setData, setPagination, currentPage).finally(() => {
+        setIsFetching(false); 
+      });
+    }
   }, [currentPage]);
 
   // Центрирование элемента
@@ -75,41 +74,39 @@ const Reviews = () => {
 
   // Обработчик для нажатий на стрелки
   const handlePrevious = () => {
-    if (!isFetching && pagination.previous) {
-    const previousPage = getPageNumberFromUrl(pagination.previous);
-    if (previousPage) {
-      setCurrentPage(parseInt(previousPage));
-    }
-  }
-
+      const previousPage = getPageNumberFromUrl(pagination.previous);
+      if (previousPage) {
+        setCurrentPage(parseInt(previousPage));
+      }
+    
   };
 
   const handleNext = () => {
-    if (!isFetching && pagination.next) {
-    const nextPage = getPageNumberFromUrl(pagination.next);
-    if (nextPage) {
-      setCurrentPage(parseInt(nextPage));
-    }
-  }
+      const nextPage = getPageNumberFromUrl(pagination.next);
+      if (nextPage) {
+        setCurrentPage(parseInt(nextPage));
+      }
+    
   };
 
   // Обработка событий скроллинга
-  const handleScroll = () => {
+  const handleScroll = debounce(() => {
     const wrapper = wrapperRef.current;
 
     // Если дошли до конца списка, загружаем следующие отзывы
     if (
       wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth &&
-      pagination.next
+      pagination.next &&
+      !isFetching
     ) {
       handleNext();
     }
 
     // Если дошли до начала списка, загружаем предыдущие отзывы
-    if (wrapper.scrollLeft === 0 && pagination.previous) {
+    if (wrapper.scrollLeft === 0 && pagination.previous && !isFetching) {
       handlePrevious();
     }
-  };
+  }, 300);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -118,7 +115,7 @@ const Reviews = () => {
     return () => {
       wrapper.removeEventListener("scroll", handleScroll);
     };
-  }, [pagination]);
+  }, [pagination, isFetching]);
 
   return (
     <section className="reviews" id="reviews">
