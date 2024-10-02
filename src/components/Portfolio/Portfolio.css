@@ -1339,11 +1339,11 @@
 
   .portfolio-content-text .button {
     all: unset;
-    width: 100%;
-    height: 66px;
-    padding: 0px 20px;
+    width: 260px;
+    height: 40px;
+    margin: 0 auto;
     gap: 20px;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 39px;
     display: flex;
     justify-content: center;
@@ -1361,8 +1361,8 @@
   }
 
   .portfolio-content-text .button svg {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
   }
 
 
