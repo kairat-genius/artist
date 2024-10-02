@@ -1102,6 +1102,9 @@ height: 37px
         display: flex;
         justify-content: space-between;
         align-items: center;
+        scroll-behavior: smooth;
+
+        -webkit-overflow-scrolling: touch;
     }
 
     .reviews .item_1, .reviews .item_3 {
