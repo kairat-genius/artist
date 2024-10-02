@@ -185,12 +185,14 @@
 }
 
 
-@media (max-width: 744px) {
+@media (max-width: 1200px) {
     .how-i-work {
         background-image: url('../../assets/painting/now-i-work/how-i-work_background-744.png');
         position: relative;
         background-repeat: no-repeat;
         background-position: center calc(100% + 0px - 30px);
+        width: 744px;
+        margin: 0 auto;
         margin-top: 150px;
         background-size: contain;
     }
@@ -308,16 +310,20 @@
 }
 
 
-@media (max-width: 375px) {
+@media (max-width: 744px) {
     .how-i-work {
         background-image: url('../../assets/painting/now-i-work/how-i-work_background-375.png');
         position: relative;
         background-repeat: no-repeat;
-        background-position: center calc(100% + 0px - 30px);
+        background-position: center calc(100% + 0px + 10px);
+        width: 375px; 
+        margin: 0 auto;
         margin-top: 150px;
         background-size: contain;
     }
-
+    .backgroundss1, .backgroundss2-1, .backgroundss2-2, .backgroundss3 {
+        display: none;
+    }
 
     .how-i-work .content1,
     .how-i-work .content3 {

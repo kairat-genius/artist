@@ -858,9 +858,9 @@
 
 
   .portfolio-cat {
-    background-image: url('../../assets/portfolio/background-744.svg');
+    background-image: url('../../assets/portfolio/background-744-cat.svg');
     background-repeat: no-repeat;
-    margin: -90px auto 0;
+    margin: -100px auto 0;
     width: 744px;
   }
 
@@ -869,10 +869,14 @@
     padding-top: 20px;
   }
 
+  .portfolio-cat .content {
+    padding-top: 100px;
+  }
+
   .portfolio-cat .portfolio_content {
     padding-top: 0;
-    margin-top: 230px;
-    width: 375px;
+    margin-top: 0;
+    width: 744px;
   }
 
 
@@ -1108,8 +1112,9 @@
 
   .portfolio-cat .portfolio_content {
     padding-top: 0;
-    margin-top: 230px;
+    margin-top: 100px;
     width: 375px;
+    
   }
 
 

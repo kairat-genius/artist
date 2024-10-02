@@ -81,12 +81,13 @@
     top: 50px;
 }
 
-@media (max-width: 744px) {
+@media (max-width: 1200px) {
 
     .painting {
-        width: 100%;
+        width: 744px;
         height: 500px;
         background-image: url('../../../assets/painting/background-cat.svg');
+        margin:  0 auto;
     }
     .painting-content {
         padding-top: 130px;
@@ -135,12 +136,13 @@
 
 }
 
-@media (max-width: 375px) {
+@media (max-width: 744px) {
 
     .painting {
-        width: 100%;
+        width: 375px;
         height: 742px;
         background-image: url('../../../assets/painting/1-background-wall-painting-375.svg');
+        margin: 0 auto;
     
     }
     .painting-content {
@@ -157,6 +159,9 @@
         gap: 30.121px;
         margin-left: 0;
         gap: 420px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     
     }
 

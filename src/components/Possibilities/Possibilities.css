@@ -189,7 +189,19 @@
         background-image: url('../../assets/painting/possibilities-painting.png');
         position: relative;
         background-repeat: no-repeat;
-        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-position: calc(50% + 20px) calc(100% - 50px);
+        background-size: contain;
+    
+    }
+}
+
+@media (max-width: 1550px) {
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 66px);
         background-size: contain;
     
     }
@@ -210,11 +222,44 @@
         background-image: url('../../assets/painting/possibilities-painting.png');
         position: relative;
         background-repeat: no-repeat;
-        background-position: calc(50% + 20px) calc(100% - 40px);
+        background-position: calc(50% + 20px) calc(100% - 74px);
         background-size: contain;
     
     }
 }
+
+@media (max-width: 1400px) {
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 80px);
+        background-size: contain;
+    
+    }
+}
+
+
+@media (max-width: 1350px) {
+    
+    .possibilities-cat {
+        background-image: url('../../assets/painting/possibilities-painting.png');
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 20px) calc(100% - 84px);
+        background-size: contain;
+    
+    }
+
+    .possibilities-cat .possibilities_content {
+        margin: 0 auto;
+        max-width: 1300px;
+        position: relative;
+        height: 1250px;
+      }
+}
+
 
 /* 
 
@@ -576,7 +621,13 @@
         background-repeat: no-repeat;
         background-position: calc(50% + 0px) calc(100% - 30px);
         background-size: contain;
+        width: 744px;
+        margin: 0 auto;
 
+    }
+
+    .possibilities-cat .possibilities_content {
+        height: 772px;
     }
 
     .possibilities_content {

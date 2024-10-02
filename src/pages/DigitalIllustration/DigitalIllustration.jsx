@@ -16,7 +16,7 @@ const DigitalIllustration = () => {
         classBackgound="img2"
         classTitle="title-cat"
       />
-      <AboutPainting cat={3} Category="digital_illustration"/>
+     <AboutPainting cat={3} Category="digital_illustration"/>
       <Possibilities home={false} />
       <Portfolio home={false} Category="digital_illustration"/>
       <HowIWork cat={3} />

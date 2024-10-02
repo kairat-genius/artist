@@ -144,16 +144,20 @@ export const DigitalIllustrationCard = () => {
   return (
     <ul className="row-card">
       <li className="work-card-digitall card1">
-        <span className="count">1</span>
-        <div className="title-card">Идея и концепт</div>
+        <div className="title-container">
+          <span className="count">1</span>
+          <div className="title-card">Идея и концепт</div>
+        </div>
         <p>
           Определить цель иллюстрации. Техническое задание. Сделать наброски
           концептов, которые помогут визуализировать идею
         </p>
       </li>
       <li className="work-card-digitall card2">
-        <span className="count">2</span>
-        <div className="title-card">Перенос идеи на цифровую платформу</div>
+        <div className="title-container">
+          <span className="count">2</span>
+          <div className="title-card">Перенос идеи на цифровую платформу</div>
+        </div>
         <p>
           Выбераю программу для работы (Photoshop, Illustrator, CorelDRAW,
           Procreate и т.д.). Создаю документ с подходящими размерами и
@@ -161,24 +165,30 @@ export const DigitalIllustrationCard = () => {
         </p>
       </li>
       <li className="work-card-digitall card3">
-        <span className="count">3</span>
-        <div className="title-card">Сбор референсов</div>
+        <div className="title-container">
+          <span className="count">3</span>
+          <div className="title-card">Сбор референсов</div>
+        </div>
         <p>
           Найти примеры, которые помогут лучше понять, что ожидается. Это могут
           быть фотографии, другие картины или отдельные элементы
         </p>
       </li>
       <li className="work-card-digitall card4">
-        <span className="count">4</span>
-        <div className="title-card">Эскиз (скетч)</div>
+        <div className="title-container">
+          <span className="count">4</span>
+          <div className="title-card">Эскиз (скетч)</div>
+        </div>
         <p>
           Сделать набросок на цифровом холсте. Это поможет определить композицию
           и основные элементы
         </p>
       </li>
       <li className="work-card-digitall card5">
-        <span className="count">5</span>
-        <div className="title-card">Обработка и корректировки</div>
+        <div className="title-container">
+          <span className="count">5</span>
+          <div className="title-card">Обработка и корректировки</div>
+        </div>
         <p>
           Просматриваем иллюстрацию на предмет баланса цвета, контраста и
           гармонии. Вносим необходимые корректировки в оттенки, интенсивность и
@@ -186,8 +196,10 @@ export const DigitalIllustrationCard = () => {
         </p>
       </li>
       <li className="work-card-digitall card2">
-        <span className="count">6</span>
-        <div className="title-card">Финальная проверка и экспорт</div>
+        <div className="title-container">
+          <span className="count">6</span>
+          <div className="title-card">Финальная проверка и экспорт</div>
+        </div>
         <p>
           Проверяем иллюстрацию в разных разрешениях для оценки качества.
           Экспортируем конечную работу в нужных форматах (JPEG, PNG, PDF и т.д.)
