@@ -92,7 +92,7 @@ const Reviews = () => {
   };
 
   // Обработка событий скроллинга
-  const handleScroll = debounce(() => {
+  const handleScroll = () => {
     const wrapper = wrapperRef.current;
     if (isFetching) return;
 
@@ -108,7 +108,7 @@ const Reviews = () => {
     if (wrapper.scrollLeft === 0 && pagination.previous) {
       handlePrevious();
     }
-  }, 100);
+  };
 
 
   useEffect(() => {
