@@ -135,36 +135,67 @@
     opacity: 1;
 }
 
+/* начало чекбокса */
+
 .footer .agreements {
     display: flex;
-    width: 483px;
     align-items: flex-start;
     gap: 11.528px;
 }
 
 .footer .agreements input[type="checkbox"] {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+}
+
+.footer .agreements label {
+    position: relative;
+    padding-left: 50px; 
+    cursor: pointer;
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 130%;
+}
+
+.footer .agreements label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 35px;
     height: 35px;
     border: 2px solid #ccc;
-    flex-shrink: 0;
     background-color: #291C3A;
+    
 }
 
+.footer .agreements input[type="checkbox"]:checked + label::before {
 
-.footer .agreements label {
-    color: var(--Wite);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
 
-    width: 436px;
+.footer .agreements input[type="checkbox"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    font-size: 24px;
+    width: 23.771px;
+    height: 17.536px;
+    background-image: url('../../assets/footer/checkbox.svg'); 
+    background-size: contain; 
+    background-repeat: no-repeat; 
     flex-shrink: 0;
-    /* H/Body/Regular s */
-    font-family: Montserrat;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%;
-    /* 26px */
 }
 
+/* конец чекбокса */
 
 .footer .footer-img {
     position: absolute;

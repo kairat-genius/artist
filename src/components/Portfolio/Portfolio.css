@@ -254,12 +254,18 @@
 
 .portfolio-left-arrow {
   left: 10px;
-  /* Расположите стрелку слева */
 }
 
 .portfolio-right-arrow {
   right: 10px;
-  /* Расположите стрелку справа */
+}
+
+.portfolio-content-text > :first-child {
+  flex-grow: 1;
+}
+
+.portfolio-content-text > :last-child {
+  align-self: center;
 }
 
 @media (max-width: 1800px) {
