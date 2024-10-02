@@ -18,7 +18,7 @@ const Reviews = () => {
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({ next: null, previous: null });
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [isFetching, setIsFetching] = useState(false);
   const wrapperRef = useRef(null);
 
   const [headerText, setHeaderText] = useState("говорят Обо мне");
@@ -49,7 +49,9 @@ const Reviews = () => {
 
   // Запрос данных при загрузке компонента и изменении страницы
   useEffect(() => {
-    getReviews(setData, setPagination, currentPage);
+    setIsFetching(true);
+    getReviews(setData, setPagination, currentPage)
+    .finally(() => setIsFetching(false));
   }, [currentPage]);
 
   // Центрирование элемента
