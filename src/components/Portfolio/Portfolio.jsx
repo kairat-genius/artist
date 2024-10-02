@@ -76,7 +76,8 @@ const Portfolio = ({ home, Category }) => {
 
       setDataDetail({ ...detail, galleryImages });
       setIsScrolling(false); 
-      document.body.classList.add("no-scroll");
+      document.body.classList.add(".no-scroll");
+      document.body.style.overflow = 'hidden'; 
       setCurrentImageIndex(0);
     }, paintingId);
   };
@@ -84,7 +85,8 @@ const Portfolio = ({ home, Category }) => {
   const closeModal = () => {
     setDataDetail(null);
     setIsScrolling(true);
-    document.body.classList.remove("no-scroll");
+    document.body.classList.remove(".no-scroll");
+    document.body.style.overflow = '';
     setCurrentImageIndex(0);
   };
 
@@ -135,8 +137,8 @@ const Portfolio = ({ home, Category }) => {
   );
 
   useEffect(() => {
-    if (data.length > 100) {
-      setData((prevData) => prevData.slice(40));
+    if (data.length > 50) {
+      setData((prevData) => prevData.slice(20));
     }
   }, [data]);
 

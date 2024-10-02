@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Footer.css";
 import img from "../../assets/footer/footer.png";
 import img_744 from "../../assets/footer/footer-744.png";
@@ -78,6 +78,27 @@ const Footer = () => {
       });
   };
 
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+      }, 5000);
+
+      return () => clearTimeout(timer); 
+    }
+  }, [successMessage]);
+
+  useEffect(() => {
+    if (rateLimitError) {
+      const timer = setTimeout(() => {
+        setRateLimitError("");
+      }, 5000); 
+
+      return () => clearTimeout(timer); 
+    }
+  }, [rateLimitError]);
+
   return (
     <section className="footer" id="to-order">
       <div className="footer_content">
@@ -132,6 +153,8 @@ const Footer = () => {
                   Я принимаю условия пользовательского соглашения
                 </label>
               </div>
+              {successMessage && <p className="success-text">{successMessage}</p>}
+              {rateLimitError && <p className="error-text">{rateLimitError}</p>}
             </div>
 
             <button className="button" type="submit" id="contact">
@@ -150,8 +173,6 @@ const Footer = () => {
               </svg>
             </button>
           </form>
-          {successMessage && <p className="success-text">{successMessage}</p>}
-          {rateLimitError && <p className="error-text">{rateLimitError}</p>}
 
           <img className="footer-img" src={img} />
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import burger_menu from "../../assets/png/burger_menu.png";
 import "./Header.css";
@@ -7,7 +7,7 @@ const Header = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const location = useLocation();
 
-  // Function to toggle the modal visibility
+  // Функция для переключения видимости модального окна
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
@@ -15,6 +15,18 @@ const Header = () => {
   const isActive = (hash) => {
     return location.hash === hash;
   };
+
+  useEffect(() => {
+    if (modalVisible) {
+      document.body.style.overflow = "hidden"; 
+    } else {
+      document.body.style.overflow = "auto"; 
+    }
+    
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [modalVisible]);
 
   return (
     <>

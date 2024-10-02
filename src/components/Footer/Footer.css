@@ -141,6 +141,7 @@
     display: flex;
     align-items: flex-start;
     gap: 11.528px;
+    width: 483px;
 }
 
 .footer .agreements input[type="checkbox"] {
@@ -170,7 +171,7 @@
     height: 35px;
     border: 2px solid #ccc;
     background-color: #291C3A;
-    
+
 }
 
 .footer .agreements input[type="checkbox"]:checked + label::before {
@@ -193,6 +194,7 @@
     background-size: contain; 
     background-repeat: no-repeat; 
     flex-shrink: 0;
+
 }
 
 /* конец чекбокса */
@@ -1059,22 +1061,6 @@ footer .big_text {
         font-size: 13.969px;
     }
 
-    .footer .agreements {
-        gap: 8.596px;
-        width: 224px;
-    }
-
-    .footer .agreements label {
-        font-size: 14.914px;
-        width: 189px;
-    }
-
-    .footer .agreements input[type="checkbox"] {
-        width: 26px;
-        height: 26px;
-
-    }
-
     .footer .footer-descriptons h2 {
         font-size: 20px;
     }
@@ -1103,4 +1089,76 @@ footer .big_text {
     .footer .img-744, .footer-img {
         display: none;
     }
+
+    /* начало чекбокса */
+
+.footer .agreements {
+    display: flex;
+    align-items: flex-start;
+    gap: 11.528px;
+    width: 224px;
+}
+
+.footer .agreements input[type="checkbox"] {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+}
+
+.footer .agreements label {
+    padding-left: 35px; 
+    font-size: 14.914px;
+}
+
+.footer .agreements label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26.099px;
+    height: 26.099px;
+    border: 2px solid #ccc;
+    background-color: #291C3A;
+
+}
+
+.footer .agreements input[type="checkbox"]:checked + label::before {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.footer .agreements input[type="checkbox"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 7px;
+    width: 17.726px;
+    height: 13.077px;
+    background-image: url('../../assets/footer/checkbox.svg'); 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    flex-shrink: 0;
+
+}
+
+/* конец чекбокса */
+
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    font-family: Inter;
+    line-height: normal;
+}
+
+.success-text {
+    color: green;
+    font-size: 12px;
+    font-family: Inter;
+    line-height: normal;
+}
 }
