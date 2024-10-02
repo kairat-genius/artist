@@ -91,34 +91,44 @@ const Reviews = () => {
     
   };
 
-  // Обработка событий скроллинга
-  const handleScroll = debounce(() => {
-    const wrapper = wrapperRef.current;
-    if (isFetching) return;
-
-    // Если дошли до конца списка, загружаем следующие отзывы
-    if (
-      wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth &&
-      pagination.next
-    ) {
-      handleNext();
-    }
-
-    // Если дошли до начала списка, загружаем предыдущие отзывы
-    if (wrapper.scrollLeft === 0 && pagination.previous) {
-      handlePrevious();
-    }
-  }, 10);
-
-
   useEffect(() => {
     const wrapper = wrapperRef.current;
-    wrapper.addEventListener("scroll", handleScroll);
-
-    return () => {
-      wrapper.removeEventListener("scroll", handleScroll);
+    const lastItem = wrapper ? wrapper.lastElementChild : null;
+    const firstItem = wrapper ? wrapper.firstElementChild : null;
+  
+    const observerCallbackRight = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && pagination.next && !isFetching) {
+          handleNext(); 
+        }
+      });
     };
-  }, [pagination, isFetching]);
+  
+    const observerCallbackLeft = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && pagination.previous && !isFetching) {
+          handlePrevious();
+        }
+      });
+    };
+  
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0
+    };
+  
+    const observerRight = new IntersectionObserver(observerCallbackRight, observerOptions);
+    const observerLeft = new IntersectionObserver(observerCallbackLeft, observerOptions);
+  
+    if (lastItem) observerRight.observe(lastItem);
+    if (firstItem) observerLeft.observe(firstItem);
+  
+    return () => {
+      if (lastItem) observerRight.unobserve(lastItem);
+      if (firstItem) observerLeft.unobserve(firstItem);
+    };
+  }, [data, pagination, isFetching]);
 
   return (
     <section className="reviews" id="reviews">
