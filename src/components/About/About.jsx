@@ -48,7 +48,7 @@ const About = () => {
               loop={false} // We will handle the loop manually
               playsInline
               onEnded={handleVideoEnd}
-              controls
+             
             />
           )}
           <img src={img} alt="About Me Image" className="img" />

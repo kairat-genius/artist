@@ -104,7 +104,6 @@ const AboutPainting = ({ cat, Category }) => {
               loop={false}
               playsInline
               onEnded={handleVideoEnd}
-              controls
             />
           )}
           <img src={img} alt="About Me Image" className="img" />

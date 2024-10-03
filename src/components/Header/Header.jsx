@@ -18,11 +18,11 @@ const Header = () => {
 
   useEffect(() => {
     if (modalVisible) {
-      document.body.style.overflow = "hidden"; 
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     }
-    
+
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -71,7 +71,12 @@ const Header = () => {
             </a>
           </nav>
           <div className="number">
-            <span>+7 938 163 07 33</span>
+            <a
+              href="tel:+79381630733"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <span>+7 938 163 07 33</span>
+            </a>
           </div>
 
           <label htmlFor="menu" className="menu-label" onClick={toggleModal}>
@@ -129,7 +134,12 @@ const Header = () => {
             </nav>
           </div>
           <div className="number">
-            <span>+7 938 163 07 33</span>
+            <a
+              href="tel:+79381630733"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <span>+7 938 163 07 33</span>
+            </a>
           </div>
         </div>
       </div>

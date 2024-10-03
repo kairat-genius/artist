@@ -11,8 +11,6 @@ const Footer = () => {
   const [phoneError, setPhoneError] = useState("");
   const [nameError, setNameError] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [checkboxError, setCheckboxError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [rateLimitError, setRateLimitError] = useState("");
 
@@ -30,21 +28,8 @@ const Footer = () => {
     }
   };
 
-  const handleCheckboxChange = (e) => {
-    setCheckboxChecked(e.target.checked);
-
-    if (e.target.checked) {
-      setCheckboxError("");
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!checkboxChecked) {
-      setCheckboxError("Необходимо принять условия соглашения");
-      return;
-    }
 
     if (!validatePhone(phone)) {
       setPhoneError("Некорректный формат номера. Пример: +79381630733");
@@ -59,7 +44,6 @@ const Footer = () => {
 
     setPhoneError("");
     setNameError("");
-    setCheckboxError("");
 
     postContactRequest({ phone, name })
       .then(() => {
@@ -67,7 +51,6 @@ const Footer = () => {
         setSuccessMessage("Спасибо! Мы свяжемся с вами в ближайшее время.");
         setPhone("");
         setName("");
-        setCheckboxChecked(false);
       })
       .catch((error) => {
         if (error.response && error.response.status === 429) {
@@ -78,14 +61,13 @@ const Footer = () => {
       });
   };
 
-
   useEffect(() => {
     if (successMessage) {
       const timer = setTimeout(() => {
         setSuccessMessage("");
       }, 5000);
 
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
   }, [successMessage]);
 
@@ -93,9 +75,9 @@ const Footer = () => {
     if (rateLimitError) {
       const timer = setTimeout(() => {
         setRateLimitError("");
-      }, 5000); 
+      }, 5000);
 
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
   }, [rateLimitError]);
 
@@ -141,19 +123,10 @@ const Footer = () => {
                   {nameError && <p className="error-text">{nameError}</p>}
                 </div>
               </div>
-              {checkboxError && <p className="error-text">{checkboxError}</p>}
-              <div className="agreements">
-                <input
-                  id="checkbox"
-                  type="checkbox"
-                  checked={checkboxChecked}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="checkbox">
-                  Я принимаю условия пользовательского соглашения
-                </label>
-              </div>
-              {successMessage && <p className="success-text">{successMessage}</p>}
+
+              {successMessage && (
+                <p className="success-text">{successMessage}</p>
+              )}
               {rateLimitError && <p className="error-text">{rateLimitError}</p>}
             </div>
 
@@ -189,7 +162,9 @@ const Footer = () => {
             <a href="https://wa.me/+79381630733">Вотсап</a>
           </li>
           <li>
-            <a>+7 938 163 07 33</a>
+            <a href="tel:+79381630733">
+              <span>+7 938 163 07 33</span>
+            </a>
           </li>
         </ul>
         <span className="big_text">TATI.B.N.</span>
