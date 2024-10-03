@@ -3,7 +3,7 @@ import "./button.css";
 
 const Button = ({onClick}) => {
   return (
-            <a href="#contact" className="button" onClick={onClick}>
+            <a href="#to-order" className="button" onClick={onClick}>
             ОФОРМИТЬ ЗАКАЗ{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
