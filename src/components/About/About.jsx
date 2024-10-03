@@ -7,7 +7,7 @@ import background3 from "../../assets/png/background_about3.png";
 import background_744 from "../../assets/png/about_744.png";
 import banner_744 from "../../assets/painting/about/img-744-cat.png";
 import { getVideos } from "../../api/Videos/getVideos";
-import ReactPlayer from 'react-player';
+
 const About = () => {
   const [videos, setVideos] = useState([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
