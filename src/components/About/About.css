@@ -283,12 +283,12 @@
 
     .about-me-video {
         position: absolute;
-        left: 80px;
-        width: 178px;
-        height: 288px;
-        margin-top: 60px;
-        max-width: 310px;
+        left: 103px;
+        width: 168px;
+        height: 268px;
+        margin-top: 54px;
         top: 0;
+        padding-left: 0;
     }
 
     .img-banner-744 {
@@ -426,12 +426,12 @@
 
     .about-me-video {
         position: absolute;
-        left: 80px;
-        width: 178px;
-        height: 288px;
+        left: 103px;
+        width: 168px;
+        height: 267px;
         margin-top: 60px;
-        max-width: 310px;
-        top: 0;
+        top: -6px;
+        padding-left: 0;
     }
 
     .img-banner-744 {

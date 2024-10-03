@@ -5,7 +5,7 @@ import background1 from "../../assets/png/background_about.png";
 import background2 from "../../assets/png/background_about2.png";
 import background3 from "../../assets/png/background_about3.png";
 import background_744 from "../../assets/png/about_744.png";
-import banner_744 from "../../assets/png/banner_about-744.png";
+import banner_744 from "../../assets/painting/about/img-744-cat.png";
 import { getVideos } from "../../api/Videos/getVideos";
 
 const About = () => {
@@ -48,7 +48,6 @@ const About = () => {
               loop={false} // We will handle the loop manually
               playsInline
               onEnded={handleVideoEnd}
-             
             />
           )}
           <img src={img} alt="About Me Image" className="img" />

@@ -81,6 +81,77 @@
     top: 50px;
 }
 
+@media (max-width: 1750px) {
+    .painting .img1 {
+        flex-shrink: 0;
+        position: absolute;
+        right: 0;
+        top: 200px;
+        width: 900px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .painting .img1 {
+        flex-shrink: 0;
+        position: absolute;
+        right: 0;
+        top: 200px;
+        width: 800px;
+    }
+    .painting .img2 {
+        width: 900px;
+        top: 70px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .painting .img2 {
+        width: 800px;
+        top: 150px;
+    }
+}
+
+
+@media (max-width: 1350px) {
+    .painting .img1 {
+        flex-shrink: 0;
+        position: absolute;
+        right: 0;
+        top: 230px;
+        width: 750px;
+    }
+
+    .painting .img {
+        width: 800px;
+        top: 140px;
+    }
+
+    .painting .img2 {
+        width: 750px;
+        top: 190px;
+    }
+
+    .painting .title-cat {
+        font-size: 80px !important;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .painting .img1 {
+        flex-shrink: 0;
+        position: absolute;
+        right: 0;
+        top: 260px;
+        width: 700px;
+    }
+
+   
+}
+
+
+
 @media (max-width: 1200px) {
 
     .painting {
@@ -112,10 +183,11 @@
         font-size: 60px !important;
         line-height: 100% !important;
         margin-top: 30px;
+        margin-left: 0;
     }
     
     .painting .img1 {
-        top: 90px;
+        top: 130px;
         width: 386px;
         height: 411.52px;
     }  

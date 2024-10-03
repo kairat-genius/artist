@@ -184,12 +184,13 @@
     .painting-me-video {
         position: absolute;
         top: 0;
-        left: 80px;
+        left: 103px;
         flex-shrink: 0;
         object-fit: none;
-        margin-top: 60px;
-        width: 178px;
-        height: 288px;
+        margin-top: 56px;
+        width: 168px;
+        height: 264px;
+        padding-left: 0;
     }
 
     .painting-me-image .img744 {
@@ -266,12 +267,13 @@
     .painting-me-video {
         position: absolute;
         top: 0;
-        left: 80px;
+        left: 98px;
         flex-shrink: 0;
         object-fit: none;
-        margin-top: 60px;
-        width: 178px;
-        height: 288px;
+        margin-top: 53px;
+        width: 175px;
+        height: 270px;
+      
     }
 
     .painting-me-image .img744 {
