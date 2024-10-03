@@ -71,7 +71,7 @@ const Header = () => {
             </a>
           </nav>
           <div className="number">
-            <span>+7(926)542 86 59</span>
+            <span>+7 938 163 07 33</span>
           </div>
 
           <label htmlFor="menu" className="menu-label" onClick={toggleModal}>
@@ -129,7 +129,7 @@ const Header = () => {
             </nav>
           </div>
           <div className="number">
-            <span>+7(926)542 86 59</span>
+            <span>+7 938 163 07 33</span>
           </div>
         </div>
       </div>
