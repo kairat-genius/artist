@@ -94,29 +94,20 @@ const Reviews = () => {
   // Обработка событий скроллинга
   const handleScroll = debounce(() => {
     const wrapper = wrapperRef.current;
-    if (isFetching) return; //
-  
-    let isNextLoading = false;
-    let lastScrollPosition = wrapper.scrollLeft;
-  
-    const scrollOffset = 10; 
+    if (isFetching) return;
+
+    // Если дошли до конца списка, загружаем следующие отзывы
     if (
-      wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - scrollOffset &&
-      pagination.next &&
-      !isNextLoading
+      wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth &&
+      pagination.next
     ) {
-      isNextLoading = true; 
-      handleNext().finally(() => {
-        isNextLoading = false; 
-      });
+      handleNext();
     }
-  
+
     // Если дошли до начала списка, загружаем предыдущие отзывы
     if (wrapper.scrollLeft === 0 && pagination.previous) {
       handlePrevious();
     }
-  
-    lastScrollPosition = wrapper.scrollLeft;
   }, 100);
 
 

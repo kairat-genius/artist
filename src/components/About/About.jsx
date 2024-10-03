@@ -26,6 +26,8 @@ const About = () => {
     });
   };
 
+  
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.load();
@@ -50,12 +52,12 @@ const About = () => {
               onEnded={handleVideoEnd}
             />
           )}
-          <img src={img} alt="About Me Image" className="img" />
-          <img src={banner_744} alt="About Me Image" className="img-banner-744" />
+          <img src={img} alt="About Me Image" className="img" loading="lazy"/>
+          <img src={banner_744} alt="About Me Image" className="img-banner-744" loading="lazy"/>
 
           <div className="background">
-            <img src={background1} alt="Background 1" className="background-1" />
-            <img src={background2} alt="Background 2" className="background-2" />
+            <img src={background1} alt="Background 1" className="background-1" loading="lazy"/>
+            <img src={background2} alt="Background 2" className="background-2" loading="lazy"/>
           </div>
         </div>
       </div>

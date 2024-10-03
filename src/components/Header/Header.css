@@ -78,65 +78,6 @@ header label.menu-label {
 }
 
 
-/* 
-@media (max-width: 1100px) {
-    header {
-        padding: 12px 36px;
-    }
-
-    header span {
-        font-size: 18px;
-    }
-
-    header .number {
-        padding: 5px 18px;
-    }
-}
-
-
-@media (max-width: 1000px) {
-    header {
-
-        padding: 10px 32px;
-    }
-
-    header span {
-        font-size: 16px;
-    }
-
-    header .number {
-        padding: 5px 16px;
-    }
-
-
-    header nav {
-        gap: 18px;
-
-    }
-}
-
-
-@media (max-width: 900px) {
-    header {
-
-        padding: 10px 25px;
-    }
-
-    header span {
-        font-size: 14px;
-    }
-
-    header .number {
-        padding: 5px 14px;
-    }
-
-
-    header nav {
-        gap: 14px;
-    }
-
-} */
-
 
 @media (max-width: 1200px) {
     header {

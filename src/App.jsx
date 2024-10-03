@@ -5,7 +5,7 @@ import {
   Routes,
   createBrowserRouter,
 } from "react-router-dom";
-
+import 'normalize.css';
 
 import { useURL } from "../src/hooks/useURL";
 const Home = lazy(() => import("./pages/Home/Home"));

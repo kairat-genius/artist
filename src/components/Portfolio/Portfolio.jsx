@@ -138,7 +138,7 @@ const Portfolio = ({ home, Category }) => {
 
   useEffect(() => {
     if (data.length > 50) {
-      setData((prevData) => prevData.slice(20));
+      setData((prevData) => prevData.slice(30));
     }
   }, [data]);
 
