@@ -6,6 +6,14 @@
     padding: 40px 0;
 }
 
+.about-me-video::-webkit-media-controls {
+    display: none !important; 
+  }
+  
+  .about-me-video {
+    pointer-events: none; 
+  }
+
 .about-me-content {
     display: flex;
     gap: 30px;
