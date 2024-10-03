@@ -21,6 +21,7 @@ const Reviews = () => {
   const [isFetching, setIsFetching] = useState(false);
   const wrapperRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 744);
+  const [centeredIndex, setCenteredIndex] = useState(0); // Track the centered index
 
   const [headerText, setHeaderText] = useState("говорят Обо мне");
 
@@ -50,10 +51,8 @@ const Reviews = () => {
     const fetchReviews = async () => {
       setIsFetching(true);
       if (isMobile) {
-   
-       await getMobileReviews(setData);
+        await getMobileReviews(setData);
       } else {
-  
         await getReviews(setData, setPagination, currentPage);
       }
       setIsFetching(false);
@@ -66,18 +65,24 @@ const Reviews = () => {
     const items = wrapper.querySelectorAll("li");
 
     if (items.length > 0) {
-      const centerItem = items[Math.floor(items.length / 2)];
-      const scrollPosition =
-        centerItem.offsetLeft -
-        wrapper.clientWidth / 2 +
-        centerItem.clientWidth / 2;
-      wrapper.scrollLeft = scrollPosition;
+      const wrapperWidth = wrapper.clientWidth;
+      const itemWidth = items[0].clientWidth;
+      const centerIndex = Math.round(wrapper.scrollLeft / itemWidth);
+
+      if (centerIndex !== centeredIndex) {
+        setCenteredIndex(centerIndex);
+      }
     }
   };
 
   useEffect(() => {
-    if (!isMobile) centerScroll();
-  }, [data, isMobile]);
+    const wrapper = wrapperRef.current;
+    wrapper.addEventListener("scroll", centerScroll);
+
+    return () => {
+      wrapper.removeEventListener("scroll", centerScroll);
+    };
+  }, []);
 
   const handlePrevious = () => {
     if (isFetching) return;
@@ -94,31 +99,6 @@ const Reviews = () => {
       setCurrentPage(parseInt(nextPage));
     }
   };
-
-  const handleScroll = () => {
-    const wrapper = wrapperRef.current;
-    if (isFetching || isMobile) return; 
-
-    if (
-      wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth &&
-      pagination.next
-    ) {
-      handleNext();
-    }
-
-    if (wrapper.scrollLeft === 0 && pagination.previous) {
-      handlePrevious();
-    }
-  };
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    wrapper.addEventListener("scroll", handleScroll);
-
-    return () => {
-      wrapper.removeEventListener("scroll", handleScroll);
-    };
-  }, [pagination, isFetching, isMobile]);
 
   return (
     <section className="reviews" id="reviews">
@@ -201,27 +181,37 @@ const Reviews = () => {
               </div>
             )}
             <ul className="wrapper" ref={wrapperRef}>
-              {data.map((review, index) => (
-                <li
-                  key={index}
-                  className={
-                    index % 3 === 0
-                      ? "item_1"
-                      : index % 3 === 1
-                      ? "item_2 item-center"
-                      : "item_3"
-                  }
-                >
-                  <img
-                    src={review.img}
-                    alt={`Review by ${review.customerName}`}
-                  />
-                  <div className="card">
-                    <p>{review.text}</p>
-                    <span>{review.customerName}</span>
-                  </div>
-                </li>
-              ))}
+            {Array.isArray(data) && data.length > 0 ? (
+                data.map((review, index) => {
+                  // Calculate the centered index for desktop view
+                  const desktopCenteredIndex = Math.floor(data.length / 2);
+                  const isDesktopCentered = !isMobile && index === desktopCenteredIndex;
+
+                  return (
+                  <li
+                    key={index}
+                    className={
+                      isDesktopCentered || (isMobile && index === centeredIndex)
+                        ? "item_2 item-center" // Centered item class
+                        : index % 3 === 0
+                        ? "item_1"
+                        : "item_3"
+                    }
+                  >
+                    <img
+                      src={review.img}
+                      alt={`Review by ${review.customerName}`}
+                    />
+                    <div className="card">
+                      <p>{review.text}</p>
+                      <span>{review.customerName}</span>
+                    </div>
+                  </li>
+                );
+              })
+            ) : (
+              <li className="no-reviews">Нет отзывов</li>
+            )}
             </ul>
           </div>
         </div>

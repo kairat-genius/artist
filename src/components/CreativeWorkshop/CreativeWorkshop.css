@@ -80,133 +80,22 @@
     margin-top: 30px;
 }
 
-/* @media (max-width: 1400px) {
-
-    .creative_workshop {
-        width: 100%;
-        max-height: 784px;
-        fill: #291C3A;
-        background-image: url('../../assets/svg/creative_workshop.svg');
-        background-repeat: no-repeat;
-    }
-    
+@media (max-width: 1350px) {
     .workshop {
-        padding-top: 150px;
+        max-width: 1100px;
     }
     
     .creative_workshop .content {
-        width: 600px;
-        gap: 80px;
-        margin-left: 10px;
+        max-width: 600px;
     }
     
-    .creative_workshop .content_description {
-        gap: 60px;
-    }
-    
-    .creative_workshop .content_description .title {
-        gap: 24px;
-    }
-    
-    .creative {
-        font-size: 28px;
-    }
     
     .creative_workshop h1 {
-        font-size: 100px;
-    
+        font-size: 130px;
     }
     
-    .creative_workshop p {
-        max-width: 521px;
-        font-size: 18px;
-    }
-    
-    .creative_workshop img {
-        max-width: 50%; 
-    }
-
-    .creative_workshop img {
-        width: 400px;
-        height: 500px;
-    }
-
 }
 
-@media (max-width: 1000px) {
-
-    
-    .creative_workshop .content_description .title {
-        gap: 36px;
-    }
-    
-    .creative {
-        font-size: 28px;
-    }
-    
-    .creative_workshop h1 {
-        font-size: 90px;
-    
-    }
-    
-    .creative_workshop p {
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 888px) {
-
-    .creative_workshop {
-        width: 100%;
-        max-height: 500px;
-        fill: #291C3A;
-        background-image: url('../../assets/svg/creative_workshop.svg');
-        background-repeat: no-repeat;
-    }
-    
-    .workshop {
-        max-width: 694px;
-        padding-top: 120px;
-    }
-
-    .creative_workshop .content {
-        gap: 42.12px;
-        max-width: 384px;
-        margin-left: 0;
-    }
-
-    .creative_workshop .content_description {
-        gap: 42.12px;
-    }
-    .creative_workshop .content_description .title {
-        max-width: 393px;
-        height: 86px;
-        gap: 8.424px;
-    }
-    .creative {
-        font-size: 18px;
-
-    }
-    .creative_workshop h1 {
-        font-size: 80px;
-        margin: -20px 0 0 0;
-
-    }
-    .creative_workshop p {
-        font-size: 12px;
-        max-width: 274px;
-    }
-
-
-    .creative_workshop img {
-        width: 292px;
-        height: 366px;
-        flex-shrink: 0;
-        margin-left: 20px;
-        margin-top: 0;
-    }
-
-} */
 
 @media (max-width: 1200px) {
 
