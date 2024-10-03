@@ -37,11 +37,13 @@ const Header = () => {
     }
   }, [location]);
 
+  // Функция для обработки клика по ссылке
   const handleLinkClick = () => {
     if (modalVisible) {
-      toggleModal(); 
+      toggleModal(); // Закрываем меню
     }
   };
+
   return (
     <>
       {!modalVisible && (
@@ -50,45 +52,27 @@ const Header = () => {
             <img className="logo" src="/logo.png" alt="Logo" />
           </a>
           <nav>
-            <a href="/#about" className={isActive("#about") ? "active" : ""}>
+            <a href="/#about" onClick={handleLinkClick} className={isActive("#about") ? "active" : ""}>
               <span>Обо мне</span>
             </a>
-            <a
-              href="/#services" 
-              className={isActive("#services") ? "active" : ""}
-            >
+            <a href="/#services" onClick={handleLinkClick} className={isActive("#services") ? "active" : ""}>
               <span>Услуги</span>
             </a>
-            <a
-              href="/#cooperate" 
-              className={isActive("#cooperate") ? "active" : ""}
-            >
+            <a href="/#cooperate" onClick={handleLinkClick} className={isActive("#cooperate") ? "active" : ""}>
               <span>Клиенты</span>
             </a>
-            <a
-              href="/#reviews"
-              className={isActive("#reviews") ? "active" : ""}
-            >
+            <a href="/#reviews" onClick={handleLinkClick} className={isActive("#reviews") ? "active" : ""}>
               <span>Отзывы</span>
             </a>
-            <a
-              href="/#gallery" 
-              className={isActive("#gallery") ? "active" : ""}
-            >
+            <a href="/#gallery" onClick={handleLinkClick} className={isActive("#gallery") ? "active" : ""}>
               <span>Галерея</span>
             </a>
-            <a
-              href="/#to-order"
-              className={isActive("#to-order") ? "active" : ""}
-            >
+            <a href="/#to-order" onClick={handleLinkClick} className={isActive("#to-order") ? "active" : ""}>
               <span>Заказать</span>
             </a>
           </nav>
           <div className="number">
-            <a
-              href="tel:+79381630733"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+            <a href="tel:+79381630733" style={{ textDecoration: "none", color: "inherit" }}>
               <span>+7 938 163 07 33</span>
             </a>
           </div>
@@ -112,46 +96,28 @@ const Header = () => {
               <img className="logo" src="/modal_logo.png" alt="Logo" />
             </a>
             <nav>
-              <a href="/#about" onClick={handleLinkClick}  className={isActive("#about") ? "active" : ""}>
+              <a href="/#about" onClick={handleLinkClick} className={isActive("#about") ? "active" : ""}>
                 Обо мне
               </a>
-              <a
-                href="/#services" onClick={handleLinkClick}
-                className={isActive("#services") ? "active" : ""}
-              >
+              <a href="/#services" onClick={handleLinkClick} className={isActive("#services") ? "active" : ""}>
                 Услуги
               </a>
-              <a
-                href="/#cooperate" onClick={handleLinkClick}
-                className={isActive("#cooperate") ? "active" : ""}
-              >
+              <a href="/#cooperate" onClick={handleLinkClick} className={isActive("#cooperate") ? "active" : ""}>
                 Клиенты
               </a>
-              <a
-                href="/#reviews" onClick={handleLinkClick}
-                className={isActive("#reviews") ? "active" : ""}
-              >
+              <a href="/#reviews" onClick={handleLinkClick} className={isActive("#reviews") ? "active" : ""}>
                 Отзывы
               </a>
-              <a 
-                href="/#gallery" onClick={handleLinkClick}
-                className={isActive("#gallery") ? "active" : ""}
-              >
+              <a href="/#gallery" onClick={handleLinkClick} className={isActive("#gallery") ? "active" : ""}>
                 Галерея
               </a>
-              <a
-                href="/#to-order" onClick={handleLinkClick}
-                className={isActive("#to-order") ? "active" : ""}
-              >
+              <a href="/#to-order" onClick={handleLinkClick} className={isActive("#to-order") ? "active" : ""}>
                 Заказать
               </a>
             </nav>
           </div>
           <div className="number">
-            <a
-              href="tel:+79381630733" 
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+            <a href="tel:+79381630733" style={{ textDecoration: "none", color: "inherit" }}>
               <span>+7 938 163 07 33</span>
             </a>
           </div>
