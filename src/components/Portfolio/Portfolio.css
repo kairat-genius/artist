@@ -260,11 +260,11 @@
   right: 10px;
 }
 
-.portfolio-content-text > :first-child {
+.portfolio-content-text> :first-child {
   flex-grow: 1;
 }
 
-.portfolio-content-text > :last-child {
+.portfolio-content-text> :last-child {
   align-self: center;
 }
 
@@ -406,7 +406,7 @@
     font-size: 29.127px;
   }
 
-  .portfolio_content .portfolio-descriptons .h2_2{
+  .portfolio_content .portfolio-descriptons .h2_2 {
     padding-left: 64px;
   }
 
@@ -592,12 +592,12 @@
 
   .close-modile {
     position: absolute;
-    top: 0; 
+    top: 0;
     right: 0;
-    cursor: pointer; 
-    transition: background-color 0.3s, transform 0.3s; 
- display: block;
-    
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: block;
+
   }
 
   .close-modall {
@@ -632,7 +632,7 @@
     padding-top: 0;
     margin-top: 100px;
     width: 375px;
-    
+
   }
 
 
@@ -646,7 +646,7 @@
     font-size: 20px;
   }
 
-  .portfolio_content .portfolio-descriptons .h2_2{
+  .portfolio_content .portfolio-descriptons .h2_2 {
     padding-left: 100px;
   }
 
@@ -677,6 +677,16 @@
 
   .portfolio_content .even-item {
     margin-bottom: 10px;
+  }
+
+  .close-modile {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: block;
+
   }
 
 }
@@ -730,10 +740,10 @@
 
 @supports (-webkit-appearance: 744px) {
   .button {
-      width: 343px !important;
-      height: 60px !important;
-      padding: 0px 20px;
-      gap: 10px !important;
-      font-size: 16px !important;
+    width: 343px !important;
+    height: 60px !important;
+    padding: 0px 20px;
+    gap: 10px !important;
+    font-size: 16px !important;
   }
 }

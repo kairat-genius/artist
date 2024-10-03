@@ -39,7 +39,7 @@ const Portfolio = ({ home, Category }) => {
   }, [Category, currentPage]);
 
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const scrollSpeed = isIOS ? 4 : 1.5;
+  const scrollSpeed = isIOS ? 2.5 : 1.5;
 
   useEffect(() => {
     const masonryContainer = masonryRef.current;
