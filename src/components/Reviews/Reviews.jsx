@@ -5,8 +5,8 @@ import background1 from "../../assets/reviews/background_reviews_1.png";
 import background2 from "../../assets/reviews/background_reviews_2.png";
 import background1_744 from "../../assets/reviews/background_reviews_1-744.png";
 import background2_744 from "../../assets/reviews/background_reviews_2-744.png";
-import debounce from "lodash.debounce";
 import { getReviews } from "../../api/Reviews/getReviews";
+import { getMobileReviews } from "../../api/Reviews/getMobileReviews";
 
 const getPageNumberFromUrl = (url) => {
   if (!url) return null;
@@ -20,6 +20,7 @@ const Reviews = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
   const wrapperRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 744);
 
   const [headerText, setHeaderText] = useState("говорят Обо мне");
 
@@ -35,6 +36,7 @@ const Reviews = () => {
     updateHeaderText();
 
     const handleResize = () => {
+      setIsMobile(window.innerWidth <= 744);
       updateHeaderText();
     };
 
@@ -45,15 +47,20 @@ const Reviews = () => {
   }, []);
 
   useEffect(() => {
-    if (!isFetching) {
+    const fetchReviews = async () => {
       setIsFetching(true);
-      getReviews(setData, setPagination, currentPage).finally(() => {
-        setIsFetching(false); 
-      });
-    }
-  }, [currentPage]);
+      if (isMobile) {
+   
+       await getMobileReviews(setData);
+      } else {
+  
+        await getReviews(setData, setPagination, currentPage);
+      }
+      setIsFetching(false);
+    };
+    fetchReviews();
+  }, [currentPage, isMobile]);
 
-  // Центрирование элемента
   const centerScroll = () => {
     const wrapper = wrapperRef.current;
     const items = wrapper.querySelectorAll("li");
@@ -69,34 +76,29 @@ const Reviews = () => {
   };
 
   useEffect(() => {
-    centerScroll();
-  }, [data]);
+    if (!isMobile) centerScroll();
+  }, [data, isMobile]);
 
-  // Обработчик для нажатий на стрелки
   const handlePrevious = () => {
     if (isFetching) return;
-      const previousPage = getPageNumberFromUrl(pagination.previous);
-      if (previousPage) {
-        setCurrentPage(parseInt(previousPage));
-      }
-    
+    const previousPage = getPageNumberFromUrl(pagination.previous);
+    if (previousPage) {
+      setCurrentPage(parseInt(previousPage));
+    }
   };
 
   const handleNext = () => {
     if (isFetching) return;
-      const nextPage = getPageNumberFromUrl(pagination.next);
-      if (nextPage) {
-        setCurrentPage(parseInt(nextPage));
-      }
-    
+    const nextPage = getPageNumberFromUrl(pagination.next);
+    if (nextPage) {
+      setCurrentPage(parseInt(nextPage));
+    }
   };
 
-  // Обработка событий скроллинга
-  const handleScroll = debounce(() => {
+  const handleScroll = () => {
     const wrapper = wrapperRef.current;
-    if (isFetching) return;
+    if (isFetching || isMobile) return; 
 
-    // Если дошли до конца списка, загружаем следующие отзывы
     if (
       wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth &&
       pagination.next
@@ -104,12 +106,10 @@ const Reviews = () => {
       handleNext();
     }
 
-    // Если дошли до начала списка, загружаем предыдущие отзывы
     if (wrapper.scrollLeft === 0 && pagination.previous) {
       handlePrevious();
     }
-  }, 100);
-
+  };
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -118,7 +118,7 @@ const Reviews = () => {
     return () => {
       wrapper.removeEventListener("scroll", handleScroll);
     };
-  }, [pagination, isFetching]);
+  }, [pagination, isFetching, isMobile]);
 
   return (
     <section className="reviews" id="reviews">
@@ -146,58 +146,60 @@ const Reviews = () => {
           </div>
 
           <div className="masonry-wrapper">
-            <div className="arrow">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="70"
-                height="70"
-                viewBox="0 0 70 70"
-                fill="none"
-                onClick={handlePrevious}
-                style={{
-                  cursor: pagination.previous ? "pointer" : "not-allowed",
-                }}
-              >
-                <rect
-                  x="70"
-                  y="70"
+            {!isMobile && (
+              <div className="arrow">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
                   width="70"
                   height="70"
-                  rx="35"
-                  transform="rotate(-180 70 70)"
-                  fill="#333333"
-                />
-                <path
-                  d="M10.2929 34.2929C9.90237 34.6834 9.90237 35.3166 10.2929 35.7071L16.6569 42.0711C17.0474 42.4616 17.6805 42.4616 18.0711 42.0711C18.4616 41.6805 18.4616 41.0474 18.0711 40.6569L12.4142 35L18.0711 29.3431C18.4616 28.9526 18.4616 28.3195 18.0711 27.9289C17.6805 27.5384 17.0474 27.5384 16.6569 27.9289L10.2929 34.2929ZM58 34L11 34V36L58 36V34Z"
-                  fill="white"
-                />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="70"
-                height="70"
-                viewBox="0 0 70 70"
-                fill="none"
-                onClick={handleNext}
-                style={{
-                  cursor: pagination.next ? "pointer" : "not-allowed",
-                }}
-              >
-                <rect
-                  x="70"
-                  y="70"
+                  viewBox="0 0 70 70"
+                  fill="none"
+                  onClick={handlePrevious}
+                  style={{
+                    cursor: pagination.previous ? "pointer" : "not-allowed",
+                  }}
+                >
+                  <rect
+                    x="70"
+                    y="70"
+                    width="70"
+                    height="70"
+                    rx="35"
+                    transform="rotate(-180 70 70)"
+                    fill="#333333"
+                  />
+                  <path
+                    d="M10.2929 34.2929C9.90237 34.6834 9.90237 35.3166 10.2929 35.7071L16.6569 42.0711C17.0474 42.4616 17.6805 42.4616 18.0711 42.0711C18.4616 41.6805 18.4616 41.0474 18.0711 40.6569L12.4142 35L18.0711 29.3431C18.4616 28.9526 18.4616 28.3195 18.0711 27.9289C17.6805 27.5384 17.0474 27.5384 16.6569 27.9289L10.2929 34.2929ZM58 34L11 34V36L58 36V34Z"
+                    fill="white"
+                  />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
                   width="70"
                   height="70"
-                  rx="35"
-                  transform="rotate(-180 70 70)"
-                  fill="#333333"
-                />
-                <path
-                  d="M59.7071 35.7071C60.0976 35.3166 60.0976 34.6834 59.7071 34.2929L53.3431 27.9289C52.9526 27.5384 52.3195 27.5384 51.9289 27.9289C51.5384 28.3195 51.5384 28.9526 51.9289 29.3431L57.5858 35L51.9289 40.6569C51.5384 41.0474 51.5384 41.6805 51.9289 42.0711C52.3195 42.4616 52.9526 42.4616 53.3431 42.0711L59.7071 35.7071ZM12 36H59V34H12V36Z"
-                  fill="white"
-                />
-              </svg>
-            </div>
+                  viewBox="0 0 70 70"
+                  fill="none"
+                  onClick={handleNext}
+                  style={{
+                    cursor: pagination.next ? "pointer" : "not-allowed",
+                  }}
+                >
+                  <rect
+                    x="70"
+                    y="70"
+                    width="70"
+                    height="70"
+                    rx="35"
+                    transform="rotate(-180 70 70)"
+                    fill="#333333"
+                  />
+                  <path
+                    d="M59.7071 35.7071C60.0976 35.3166 60.0976 34.6834 59.7071 34.2929L53.3431 27.9289C52.9526 27.5384 52.3195 27.5384 51.9289 27.9289C51.5384 28.3195 51.5384 28.9526 51.9289 29.3431L57.5858 35L51.9289 40.6569C51.5384 41.0474 51.5384 41.6805 51.9289 42.0711C52.3195 42.4616 52.9526 42.4616 53.3431 42.0711L59.7071 35.7071ZM12 36H59V34H12V36Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+            )}
             <ul className="wrapper" ref={wrapperRef}>
               {data.map((review, index) => (
                 <li

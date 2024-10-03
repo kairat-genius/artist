@@ -16,6 +16,7 @@ export const VIDEOS_LIST_GET = CONCATE + 'list/videos/';
 
 // отзывы
 export const REVIEWS_LIST_GET = CONCATE + 'desktop/list/reviews/';
+export const REVIEWS_LIST_MOBILE_GET = CONCATE + 'mobile/list/reviews/';
 
 
 // contact
