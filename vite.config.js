@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
-import { viteReactNativeWeb } from 'vite-plugin-react-native-web';
+import viteReactNativeWeb from 'vite-plugin-react-native-web';
 
 // https://vitejs.dev/config/
 export default defineConfig({
