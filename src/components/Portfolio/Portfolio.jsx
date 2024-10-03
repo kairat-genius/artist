@@ -138,8 +138,8 @@ const Portfolio = ({ home, Category }) => {
   );
 
   useEffect(() => {
-    if (data.length > 50) {
-      setData((prevData) => prevData.slice(25));
+    if (data.length > 49) {
+      setData((prevData) => prevData.slice(0, 15));
     }
   }, [data]);
 
@@ -199,7 +199,7 @@ const Portfolio = ({ home, Category }) => {
           </div>
 
           <div className="masonry-wrapper">
-            <ul className="masonry" ref={masonryRef}>
+            <ul className="masonry" ref={masonryRef} style={{ overflow: "hidden" }} onWheel={(e) => e.preventDefault()}>
               {data.map((item, i) => (
                 <li
                   className={`item ${i % 4 === 0 ? "item-1" : ""} ${

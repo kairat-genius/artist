@@ -63,24 +63,70 @@ const Reviews = () => {
   const centerScroll = () => {
     const wrapper = wrapperRef.current;
     const items = wrapper.querySelectorAll("li");
+    const wrapperWidth = wrapper.clientWidth;
+  
+    items.forEach((item) => {
+      const { left, right } = item.getBoundingClientRect();
+  
+      // Проверка, что элемент полностью виден
+      if (left >= 0 && right <= wrapperWidth) {
+        const index = Array.from(items).indexOf(item);
+        if (index !== centeredIndex) {
+          setCenteredIndex(index); // Устанавливаем индекс полностью видимой карточки
+        }
+      }
+    });
+  };
 
-    if (items.length > 0) {
-      const wrapperWidth = wrapper.clientWidth;
-      const itemWidth = items[0].clientWidth;
-      const centerIndex = Math.round(wrapper.scrollLeft / itemWidth);
-
-      if (centerIndex !== centeredIndex) {
-        setCenteredIndex(centerIndex);
+  useEffect(() => {
+    if (data.length > 0 && wrapperRef.current) {
+      const wrapper = wrapperRef.current;
+      const items = wrapper.querySelectorAll("li");
+      if (items.length > 0) {
+        const middleIndex = Math.floor(items.length / 2);
+        const middleItem = items[middleIndex];
+        const wrapperWidth = wrapper.clientWidth;
+        const itemWidth = middleItem.clientWidth;
+        const scrollPosition = middleItem.offsetLeft - (wrapperWidth - itemWidth) / 2;
+        wrapper.scrollLeft = scrollPosition; 
       }
     }
-  };
+  }, [data]);
+  
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
     wrapper.addEventListener("scroll", centerScroll);
+    
+    const handleScroll = () => {
+      const wrapper = wrapperRef.current;
+    
+      // Когда скроллим вправо (до конца списка)
+      if (wrapper.scrollLeft + wrapper.clientWidth >= wrapper.scrollWidth - 10) {
+        setData((prevData) => [...prevData, ...prevData]); // Добавляем данные в конец списка
+      }
+    
+      // Когда скроллим влево (в начало списка)
+      if (wrapper.scrollLeft <= 10) {
+        const previousScrollWidth = wrapper.scrollWidth;
+    
+        setData((prevData) => {
+          const reversedData = [...prevData].reverse(); // Переворачиваем данные
+          return [...reversedData, ...prevData]; // Добавляем перевернутые данные в начало
+        });
+    
+        // Вычисляем новое положение скролла, чтобы не было "прыжков"
+        setTimeout(() => {
+          const newScrollWidth = wrapper.scrollWidth;
+          const scrollDifference = newScrollWidth - previousScrollWidth;
+          wrapper.scrollLeft += scrollDifference; // Корректируем scrollLeft
+        }, 0);
+      }
+    };
+    wrapper.addEventListener("scroll", handleScroll);
 
     return () => {
-      wrapper.removeEventListener("scroll", centerScroll);
+      wrapper.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -207,11 +253,10 @@ const Reviews = () => {
                       <span>{review.customerName}</span>
                     </div>
                   </li>
-                );
-              })
-            ) : (
-              <li className="no-reviews">Нет отзывов</li>
-            )}
+                )})
+              ) : (
+                <li className="no-reviews">Нет отзывов</li>
+              )}
             </ul>
           </div>
         </div>
