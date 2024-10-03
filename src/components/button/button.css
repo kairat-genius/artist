@@ -17,6 +17,22 @@
     border: none;
 }
 
+@supports (-webkit-appearance: none) {
+    .button {
+        width: 343px;
+        height: 60px;
+        padding: 0px 20px;
+        gap: 10px;
+        font-size: 18px;
+    }
+
+    .button svg {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+
 
 @media (max-width: 1200px) {
     .button {
@@ -37,6 +53,7 @@
 
 
 
+
 @media (max-width: 744px) {
     .button {
         width: 340px;
@@ -54,14 +71,4 @@
         height: 50px;
     }
 
-}
-
-@supports (-webkit-appearance: 744px) {
-    .button {
-        width: 343px;
-        height: 60px;
-        padding: 0px 20px;
-        gap: 20px;
-        font-size: 18px;
-    }
 }

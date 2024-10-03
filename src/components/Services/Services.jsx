@@ -12,7 +12,7 @@ const Services = () => {
   const [headerText, setHeaderText] = useState("Креативный подход");
 
   const updateHeaderText = () => {
-    if (window.innerWidth <= 600) {
+    if (window.innerWidth <= 744) {
       setHeaderText("Креативный\n подход"); 
     } else {
       setHeaderText("Креативный подход");

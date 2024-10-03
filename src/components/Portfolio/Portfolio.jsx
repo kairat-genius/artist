@@ -38,7 +38,8 @@ const Portfolio = ({ home, Category }) => {
     fetchPaintings(currentPage);
   }, [Category, currentPage]);
 
-  let scrollSpeed = 1.5; 
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const scrollSpeed = isIOS ? 4 : 1.5;
 
   useEffect(() => {
     const masonryContainer = masonryRef.current;
