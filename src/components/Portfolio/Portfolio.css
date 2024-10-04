@@ -73,19 +73,23 @@
 .portfolio_content .masonry-wrapper {
   width: 100%;
   margin: 0 auto;
+  
 }
 
 .portfolio_content .masonry {
-  column-count: 6;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* Колонки */
+  gap: 300px; /* Добавляем отступ между элементами */
   height: 994px;
   overflow-y: auto;
   margin: 0 auto;
-  column-gap: 160px;
+
 }
 
 .portfolio_content .masonry::-webkit-scrollbar {
   display: none;
 }
+
 
 
 .portfolio_content .masonry {
@@ -108,11 +112,6 @@
 .portfolio_content .item-1 {
   margin-top: 150px;
 }
-
-.portfolio_content .even-item {
-  margin-bottom: 26px;
-}
-
 
 
 .masonry-wrapper {
@@ -416,24 +415,15 @@
     font-size: 14px;
   }
 
-  .portfolio_content .masonry {
-    column-count: 4;
-    height: 560px;
-    column-gap: 60px;
-
-  }
 
   .portfolio_content .item img {
     width: 188px;
     height: 235px;
+    padding: 5px;
   }
 
   .portfolio_content .item-1 {
     margin-top: 70px;
-  }
-
-  .portfolio_content .even-item {
-    margin-bottom: 10px;
   }
 }
 
@@ -659,12 +649,9 @@
     font-size: 14px;
   }
 
-  .portfolio_content .masonry {
-    column-count: 2;
-    height: 560px;
-    column-gap: 30px;
-
-  }
+   .portfolio_content .item {
+    padding: 10px;
+   }
 
   .portfolio_content .item img {
     width: 188px;
@@ -675,9 +662,7 @@
     margin-top: 70px;
   }
 
-  .portfolio_content .even-item {
-    margin-bottom: 10px;
-  }
+ 
 
   .close-modile {
     position: absolute;

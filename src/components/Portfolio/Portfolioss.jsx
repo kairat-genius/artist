@@ -1,72 +1,74 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Portfolio.css";
 import left from "../../assets/png/left.png";
 import right from "../../assets/png/right.png";
 import Button from "../button/button";
-import close from "../../assets/portfolio/close-modal.png"; 
+import close from "../../assets/portfolio/close-modal.png";
 import closemobile from "../../assets/portfolio/close-mobile.png";
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
 import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
+import { VariableSizeGrid as Grid } from "react-window";
 
 const Portfolio = ({ home, Category }) => {
   const [data, setData] = useState([]);
-  const [countPages, setCountPages] = useState(0);
   const [dataDetail, setDataDetail] = useState(null);
-  const masonryRef = useRef(null);
-  const [isScrolling, setIsScrolling] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const observer = useRef(null);
-  const [loading, setLoading] = useState(false); 
+  const [isScrolling, setIsScrolling] = useState(true);
+  const gridRef = useRef(null);
 
+  const [loading, setLoading] = useState(false);
 
-  const fetchPaintings = async (page) => {
-    if (loading) return; // Если запрос уже выполняется, выходим
+  const fetchPaintings = async () => {
+    if (loading) return;
 
-    setLoading(true); // Устанавливаем флаг загрузки
+    setLoading(true);
     try {
-      await getPaintings(setData, setCountPages, Category, page);
+      await getPaintings(setData, Category);
     } catch (error) {
       console.error("Error fetching paintings:", error);
     } finally {
-      setLoading(false); // Сбрасываем флаг загрузки
+      setLoading(false);
     }
   };
 
-
   useEffect(() => {
-    fetchPaintings(currentPage);
-  }, [Category, currentPage]);
+    fetchPaintings();
+  }, [Category]);
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // Определяем, является ли устройство iOS для настройки скорости скролла
+  const isIOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   const scrollSpeed = isIOS ? 2.5 : 1.5;
 
+  // Функция для автоскролла
   useEffect(() => {
-    const masonryContainer = masonryRef.current;
+    const grid = gridRef.current;
 
-    if (!masonryContainer) return;
+    if (!grid || !isScrolling) return;
 
-    let animationFrameId;
+    let scrollLeft = 0;
+    let requestId = null;
 
-    const autoScroll = () => {
-      if (!isScrolling || !masonryContainer) return;
+    const scrollGrid = () => {
+      scrollLeft += scrollSpeed;
 
-      if (
-        masonryContainer.scrollLeft >=
-        masonryContainer.scrollWidth - masonryContainer.clientWidth
-      ) {
-        masonryContainer.scrollLeft = 0; 
-      } else {
-        masonryContainer.scrollLeft += scrollSpeed;
+      if (scrollLeft >= grid._outerRef.scrollWidth - grid._outerRef.clientWidth) {
+        scrollLeft = 0; // Возврат в начало
       }
 
-      animationFrameId = requestAnimationFrame(autoScroll);
+      grid.scrollTo({
+        scrollLeft,
+      });
+
+      requestId = requestAnimationFrame(scrollGrid);
+      
     };
 
-    autoScroll();
+    requestId = requestAnimationFrame(scrollGrid);
 
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isScrolling, data]); 
+    // Остановка при размонтировании компонента
+    return () => cancelAnimationFrame(requestId);
+  }, [scrollSpeed, isScrolling, data]);
 
   const openModal = (paintingId) => {
     getPaintingDetail((detail) => {
@@ -76,18 +78,19 @@ const Portfolio = ({ home, Category }) => {
       ];
 
       setDataDetail({ ...detail, galleryImages });
-      setIsScrolling(false); 
-      document.body.classList.add(".no-scroll");
-      document.body.style.overflow = 'hidden'; 
+
+      document.body.classList.add("no-scroll");
+      document.body.style.overflow = "hidden";
+      setIsScrolling(false);
       setCurrentImageIndex(0);
     }, paintingId);
   };
 
   const closeModal = () => {
     setDataDetail(null);
+    document.body.classList.remove("no-scroll");
+    document.body.style.overflow = "";
     setIsScrolling(true);
-    document.body.classList.remove(".no-scroll");
-    document.body.style.overflow = '';
     setCurrentImageIndex(0);
   };
 
@@ -113,40 +116,74 @@ const Portfolio = ({ home, Category }) => {
     });
   };
 
-  const lastPaintingElementRef = useCallback(
-    (node) => {
-      if (observer.current) observer.current.disconnect();
+  const GridItem = ({ columnIndex, rowIndex, style }) => {
+    const index = rowIndex * 2 + columnIndex;
+    if (index >= data.length) return null;
 
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && !loading) {
-            if (currentPage < countPages) {
-              setCurrentPage((prevPage) => prevPage + 1);
-            } else {
-              setCurrentPage(1); 
-            }
-          }
-        },
-        {
-          rootMargin: "100px",
-        }
-      );
+    const item = data[index];
 
-      if (node) observer.current.observe(node);
-    },
-    [countPages, currentPage, loading] 
-  );
+    return (
+      <li
+        className={`item ${index % 2 === 0 ? "item-1" : ""}`}
+        onClick={() => openModal(item.id)}
+        style={{
+          ...style,
+          cursor: "pointer",
+          backgroundColor: "transparent",
+          pointerEvents: "auto",
+        }}
+      >
+        <img src={item.mainImage} alt={item.title} />
+      </li>
+    );
+  };
+
+
+  const getResponsiveGridSettings = () => {
+    const width = window.innerWidth;
+  
+    if (width <= 744) {
+      return {
+        columnWidth: () => 198,
+        rowHeight: () => 245,
+        height: 560,
+        width: 375,
+      };
+    }
+  
+    if (width <= 1200) {
+      return {
+        columnWidth: () => 188,
+        rowHeight: () => 235,
+        height: 560,
+        width: 744, 
+      };
+    }
+  
+    return {
+      columnWidth: () => 330,
+      rowHeight: () => 407,
+      height: 994,
+      width: 1920, 
+    };
+  };
+
+  const [gridSettings, setGridSettings] = useState(getResponsiveGridSettings());
+
+  
 
   useEffect(() => {
-    if (data.length > 49) {
-      setData((prevData) => prevData.slice(0, 15));
-    }
-  }, [data]);
+    const handleResize = () => {
+      setGridSettings(getResponsiveGridSettings());
+    };
 
- 
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-  // перевод дней
-
+  // Функция для склонений
   const getDeclension = (number, singular, pluralFew, pluralMany) => {
     const lastDigit = number % 10;
     const lastTwoDigits = number % 100;
@@ -166,7 +203,6 @@ const Portfolio = ({ home, Category }) => {
     return pluralMany;
   };
 
-  // Функция для определения правильного склонения в зависимости от единицы времени
   const getTimeUnit = (value, unit) => {
     switch (unit) {
       case "days":
@@ -201,35 +237,38 @@ const Portfolio = ({ home, Category }) => {
           </div>
 
           <div className="masonry-wrapper">
-            <ul className="masonry" ref={masonryRef} style={{ overflow: "hidden" }} onWheel={(e) => e.preventDefault()}>
-              {data.map((item, i) => (
-                <li
-                  className={`item ${i % 4 === 0 ? "item-1" : ""} ${
-                    i % 2 === 0 ? "even-item" : ""
-                  }`}
-                  key={item.id}
-                  onClick={() => openModal(item.id)}
-                  style={{ cursor: "pointer" }}
-                  ref={i === data.length - 1 ? lastPaintingElementRef : null} 
-                >
-                  <img src={item.mainImage} alt={item.title} />
-                  
-                </li>
-              ))}
+            <ul className="masonry" onWheel={(e) => e.preventDefault()}>
+              <Grid
+                ref={gridRef}
+                height={gridSettings.height}
+                columnCount={Math.ceil(data.length / 2)}
+                columnWidth={gridSettings.columnWidth}
+                rowCount={2}
+                rowHeight={gridSettings.rowHeight}
+                width={gridSettings.width}
+          
+          
+                style={{ overflow: "hidden" }}
+              >
+                {GridItem}
+              </Grid>
             </ul>
           </div>
         </div>
       </div>
 
       {dataDetail && (
-        
         <div className="portfolio-modal" onClick={closeModal}>
-          <img src={close} className="close-modall" onClick={closeModal}/>
+          <img src={close} className="close-modall" onClick={closeModal} />
           <div
             className="portfolio-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
-              <img src={closemobile} className="close-modile" onClick={closeModal}/>
+            <img
+              src={closemobile}
+              className="close-modile"
+              onClick={closeModal}
+            />
             <div className="portfolio-content-text">
               <div className="portfolio-content-text-div">
                 <h3>{dataDetail.title}</h3>
@@ -239,15 +278,14 @@ const Portfolio = ({ home, Category }) => {
                     Площадь: {dataDetail.area} {dataDetail.areaUnit}
                   </p>
                   <p>
-                  Срок: {dataDetail.dueDate}{" "}
-                  {getTimeUnit(dataDetail.dueDate, dataDetail.dueDateUnit)}
+                    Срок: {dataDetail.dueDate}{" "}
+                    {getTimeUnit(dataDetail.dueDate, dataDetail.dueDateUnit)}
                   </p>
                 </div>
               </div>
-              <Button onClick={closeModal}/>
+              <Button onClick={closeModal} />
             </div>
 
-            {/* Галерея изображений */}
             <div className="portfolio-modal-image-container">
               <img
                 className="portfolio-left-arrow"
