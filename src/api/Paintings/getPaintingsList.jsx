@@ -3,8 +3,8 @@ import { PAINTINGS } from "../../Fetch/settings";
 
 export const getPaintings = (setData, Category) => {
   const url = Category
-    ? `${PAINTINGS}?category=${Category}&page_size=1000`
-    : `${PAINTINGS}?page_size=1000`;
+    ? `${PAINTINGS}?category=${Category}`
+    : PAINTINGS;
 
   console.log(`Fetching paintings from URL: ${url}`);
 
