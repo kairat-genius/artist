@@ -11,10 +11,7 @@ export const getPaintings = (setData, Category) => {
   return axios
     .get(url)
     .then((response) => {
-      console.log("Fetched paintings:", response.data.results);
-
-      setData((prevData) => [...prevData, ...response.data.results]);
-      console.log("Total pages available:", response.data.count_pages);
+      setData(response.data);
     })
     .catch((error) => {
       console.error("Error fetching paintings:", error.response || error.message);
