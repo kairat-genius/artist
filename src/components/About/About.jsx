@@ -17,7 +17,6 @@ const About = () => {
     getVideos(setVideos);
   }, []);
 
-  // Function to handle video end and switch to the next one
   const handleVideoEnd = () => {
     setCurrentVideoIndex((prevIndex) => {
       const nextIndex = (prevIndex + 1) % videos.length;
@@ -39,7 +38,6 @@ const About = () => {
     <section className="about-me-section" id="about">
       <div className="about-me-content">
         <div className="about-me-image">
-          {/* Check if videos are loaded and display the first video */}
           {videos.length > 0 && (
             <video
               className="about-me-video"
@@ -48,7 +46,7 @@ const About = () => {
               autoPlay
               muted
               controls={false}
-              loop={false} // We will handle the loop manually
+              loop={videos.length === 1} 
               playsInline
               onEnded={handleVideoEnd}
               
@@ -72,7 +70,7 @@ const About = () => {
         <p>
           Всю свою жизнь я увлекаюсь творчеством в разных направлениях. Занимала первые
           места во всероссийских и международных конкурсах, для меня важен как процесс, так и
-          конечный результат. Каждый мой новый заказ это целая история, которую я проживаю и
+          конечный результат. Каждый мой заказ это целая история, которую я проживаю и
           воплощаю в реальность.
         </p>
       </div>

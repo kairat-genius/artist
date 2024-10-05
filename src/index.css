@@ -33,12 +33,12 @@ body{
 }
 
 h1, h3 {
-  font-size: inherit; /* Устанавливаем размер шрифта по умолчанию */
-  font-weight: normal; /* Сбрасываем жирность текста */
-  color: inherit; /* Устанавливаем цвет текста по умолчанию */
-  margin: 0; /* Убираем отступы */
-  padding: 0; /* Убираем внутренние отступы */
-  line-height: normal; /* Сбрасываем высоту строки */
+  font-size: inherit; 
+  font-weight: normal;
+  color: inherit;
+  margin: 0;
+  padding: 0; 
+  line-height: normal;
 }
 
 p {

@@ -27,6 +27,7 @@ const AboutPainting = ({ cat, Category }) => {
 
   useEffect(() => {
     if (videoRef.current) {
+      videoRef.current.muted = true; 
       videoRef.current.load();
       videoRef.current.play();
     }
@@ -53,7 +54,7 @@ const AboutPainting = ({ cat, Category }) => {
         </div>
         {cat === 1 ? (
           <p>
-            Я вместе со своей командой, занимаемся росписью стен, превращая
+            Я вместе со своей командой занимаюсь росписью стен, превращая
             обычные поверхности в настоящие произведения искусства. Вместо
             обычных обоев и стандартных декоров, роспись стен позволяет создать
             неповторимый интерьер, который отражает настроение помещений.
@@ -87,7 +88,7 @@ const AboutPainting = ({ cat, Category }) => {
             цифровые произведения могут стать украшением вашего сайта, блога,
             социальных сетей, баннеров и плакатов. <br />
             <br />
-            Вы так же можете заказать цифровой портрет по фотографии с печатью
+            Вы также можете заказать цифровой портрет по фотографии с печатью
             на холсте любых размеров.
           </p>
         ) : null}
@@ -101,7 +102,7 @@ const AboutPainting = ({ cat, Category }) => {
               src={videos[currentVideoIndex].file}
               autoPlay
               muted
-              loop={false}
+              loop={videos.length === 1} 
               playsInline
               onEnded={handleVideoEnd}
             />

@@ -28,15 +28,19 @@ const Header = () => {
     };
   }, [modalVisible]);
 
+
+
   useEffect(() => {
     if (location.hash) {
       const element = document.querySelector(location.hash);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          const y = element.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 300); 
       }
     }
   }, [location]);
-
   // Функция для обработки клика по ссылке
   const handleLinkClick = () => {
     if (modalVisible) {

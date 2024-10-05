@@ -17,7 +17,7 @@ const DigitalIllustration = () => {
         classTitle="title-cat"
       />
      <AboutPainting cat={3} Category="digital_illustration"/>
-      <Possibilities home={false} />
+      <Possibilities home={false} cat={4}/>
       <Portfolio home={false} Category="digital_illustration"/>
       <HowIWork cat={3} />
     </div>

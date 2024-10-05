@@ -12,7 +12,7 @@ const OilPainting = () => {
     <div style={{ maxWidth: "1920px", margin: "0 auto" }}>
       <Painting title="Картина маслом" backgound={img1} classBackgound="img1" />
       <AboutPainting cat={2} Category="oil_painting" />
-      <Possibilities home={false} />
+      <Possibilities home={false} cat={3}/>
       <Portfolio home={false} Category="oil_painting" />
       <HowIWork cat={2} />
     </div>

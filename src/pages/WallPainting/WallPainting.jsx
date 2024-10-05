@@ -12,7 +12,7 @@ const WallPainting = () => {
     <div style={{ maxWidth: "1920px", margin: "0 auto" }}>
       <Painting title="Роспись стен" backgound={img} classBackgound="img" />
       <AboutPainting cat={1} Category="wall_painting"/>
-      <Possibilities home={false} />
+      <Possibilities home={false} cat={2}/>
       <Portfolio home={false} Category="wall_painting" />
       <HowIWork cat={1} />
     </div>

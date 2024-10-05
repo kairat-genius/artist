@@ -397,11 +397,13 @@
     .possibilities_content .card-right {
         align-self: flex-end;         
         margin-top: -155px;  
+        width: 159px;
     }
     
    
     .possibilities_content .card h3 {
         font-size: 15.365px;
+        word-break: break-word;
     }
 
     .possibilities_content .card p {

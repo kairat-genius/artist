@@ -73,15 +73,11 @@
 .portfolio_content .masonry-wrapper {
   width: 100%;
   margin: 0 auto;
-  
+
 }
 
 .portfolio_content .masonry {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Колонки */
-  gap: 300px; /* Добавляем отступ между элементами */
   height: 994px;
-  overflow-y: auto;
   margin: 0 auto;
 
 }
@@ -89,6 +85,16 @@
 .portfolio_content .masonry::-webkit-scrollbar {
   display: none;
 }
+
+.portfolio_content .masonry-list {
+  cursor: grab;
+}
+
+
+.portfolio_content .masonry-list::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 
@@ -267,100 +273,6 @@
   align-self: center;
 }
 
-@media (max-width: 1800px) {
-
-  .portfolio_content .masonry {
-    column-count: 6;
-    height: 994px;
-    overflow-y: auto;
-    margin: 0 auto;
-    column-gap: 240px;
-  }
-
-}
-
-@media (max-width: 1750px) {
-
-  .portfolio_content .masonry {
-    column-count: 6;
-    column-gap: 300px;
-  }
-}
-
-@media (max-width: 1750px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 0px;
-  }
-}
-
-
-@media (max-width: 1650px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 50px;
-  }
-}
-
-@media (max-width: 1620px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 100px;
-  }
-}
-
-@media (max-width: 1560px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 150px;
-  }
-}
-
-@media (max-width: 1530px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 200px;
-  }
-}
-
-@media (max-width: 1500px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 220px;
-  }
-}
-
-
-@media (max-width: 1450px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 280px;
-  }
-}
-
-
-@media (max-width: 1400px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 300px;
-  }
-}
-
-@media (max-width: 1380px) {
-
-  .portfolio_content .masonry {
-    column-count: 5;
-    column-gap: 330px;
-  }
-}
 
 @media (max-width: 1200px) {
   .portfolio {
@@ -384,6 +296,11 @@
     gap: 60px;
     padding-top: 20px;
   }
+
+  .portfolio_content .masonry {
+    height: 560px;
+  }
+
 
   .portfolio-cat .content {
     padding-top: 100px;
@@ -613,6 +530,10 @@
     width: 375px;
   }
 
+  .portfolio_content .masonry {
+    height: 560px;
+  }
+
   .portfolio_content .content {
     gap: 60px;
     padding-top: 20px;
@@ -649,9 +570,9 @@
     font-size: 14px;
   }
 
-   .portfolio_content .item {
+  .portfolio_content .item {
     padding: 10px;
-   }
+  }
 
   .portfolio_content .item img {
     width: 188px;
@@ -662,7 +583,7 @@
     margin-top: 70px;
   }
 
- 
+
 
   .close-modile {
     position: absolute;

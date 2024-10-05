@@ -112,7 +112,7 @@ const Services = () => {
               <a href="/digital-illustration" className="card-content">
                 <img src={img3} className="services-card-img" />
                 <div className="services-card-text">
-                  <h3>Графический дизайн</h3>
+                  <h3>Цифровая иллюстрация</h3>
                   <p>
                   В цифровой эпохе я также нашла свою нишу – создаю яркие и современные цифровые иллюстрации
                   </p>

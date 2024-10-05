@@ -82,10 +82,10 @@ const Footer = () => {
   }, [rateLimitError]);
 
   return (
-    <section className="footer" id="to-order">
+    <section className="footer">
       <div className="footer_content">
         <img className="img-744" src={img_744} />
-        <div className="content">
+        <div className="content"  id="to-order">
           <div className="footer-descriptons">
             <div>
               <h2 className="h2_1">Давайте обсудим</h2>

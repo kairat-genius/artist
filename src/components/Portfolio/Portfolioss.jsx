@@ -15,7 +15,6 @@ const Portfolio = ({ home, Category }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isScrolling, setIsScrolling] = useState(true);
   const gridRef = useRef(null);
-
   const [loading, setLoading] = useState(false);
 
   const fetchPaintings = async () => {
@@ -35,12 +34,9 @@ const Portfolio = ({ home, Category }) => {
     fetchPaintings();
   }, [Category]);
 
-  // Определяем, является ли устройство iOS для настройки скорости скролла
-  const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const scrollSpeed = isIOS ? 2.5 : 1.5;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const scrollSpeed = isIOS ? 2.0 : 1.5;
 
-  // Функция для автоскролла
   useEffect(() => {
     const grid = gridRef.current;
 
@@ -53,22 +49,19 @@ const Portfolio = ({ home, Category }) => {
       scrollLeft += scrollSpeed;
 
       if (scrollLeft >= grid._outerRef.scrollWidth - grid._outerRef.clientWidth) {
-        scrollLeft = 0; // Возврат в начало
+        scrollLeft = 0; 
       }
 
-      grid.scrollTo({
-        scrollLeft,
-      });
+      grid.scrollTo({ scrollLeft });
 
       requestId = requestAnimationFrame(scrollGrid);
-      
     };
 
     requestId = requestAnimationFrame(scrollGrid);
 
-    // Остановка при размонтировании компонента
     return () => cancelAnimationFrame(requestId);
   }, [scrollSpeed, isScrolling, data]);
+
 
   const openModal = (paintingId) => {
     getPaintingDetail((detail) => {
@@ -138,10 +131,10 @@ const Portfolio = ({ home, Category }) => {
     );
   };
 
-
   const getResponsiveGridSettings = () => {
     const width = window.innerWidth;
-  
+    const maxWidth = 1920;
+
     if (width <= 744) {
       return {
         columnWidth: () => 198,
@@ -150,27 +143,25 @@ const Portfolio = ({ home, Category }) => {
         width: 375,
       };
     }
-  
+
     if (width <= 1200) {
       return {
         columnWidth: () => 188,
         rowHeight: () => 235,
         height: 560,
-        width: 744, 
+        width: 744,
       };
     }
-  
+
     return {
       columnWidth: () => 330,
       rowHeight: () => 407,
       height: 994,
-      width: 1920, 
+      width: Math.min(width * 0.99, maxWidth),
     };
   };
 
   const [gridSettings, setGridSettings] = useState(getResponsiveGridSettings());
-
-  
 
   useEffect(() => {
     const handleResize = () => {
@@ -183,7 +174,8 @@ const Portfolio = ({ home, Category }) => {
     };
   }, []);
 
-  // Функция для склонений
+  
+
   const getDeclension = (number, singular, pluralFew, pluralMany) => {
     const lastDigit = number % 10;
     const lastTwoDigits = number % 100;
@@ -220,6 +212,33 @@ const Portfolio = ({ home, Category }) => {
     }
   };
 
+  // прокрутка мышкой
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - gridRef.current.offsetLeft);
+    setScrollLeft(gridRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - gridRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Скорость прокрутки
+    gridRef.current.scrollLeft = scrollLeft - walk;
+  };
+
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
       <div className="portfolio_content">
@@ -237,18 +256,21 @@ const Portfolio = ({ home, Category }) => {
           </div>
 
           <div className="masonry-wrapper">
-            <ul className="masonry" onWheel={(e) => e.preventDefault()}>
+            <ul className="masonry">
               <Grid
+              className="masonry-list"
+              onWheel={(e) => e.preventDefault()}
                 ref={gridRef}
+                onMouseDown={handleMouseDown}
+                onMouseLeave={handleMouseLeave}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove}
                 height={gridSettings.height}
                 columnCount={Math.ceil(data.length / 2)}
                 columnWidth={gridSettings.columnWidth}
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
                 width={gridSettings.width}
-          
-          
-                style={{ overflow: "hidden" }}
               >
                 {GridItem}
               </Grid>

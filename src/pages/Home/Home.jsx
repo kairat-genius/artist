@@ -13,9 +13,9 @@ const Home = () => {
     <div style={{ maxWidth: "1920px", margin: "0 auto", position: "relative" }}>
       <CreativeWorkshop />
       <About />
-      <Possibilities home={true} />
+      <Possibilities home={true} cat={1}/>
       <Services />
-      <Portfolio home={true} />
+      <Portfolio home={true}/>
       <Reviews />
       <Cooperate />
     </div>

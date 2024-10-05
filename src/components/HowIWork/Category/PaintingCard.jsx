@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 export const WallPaintingCard = () => {
   return (
@@ -19,8 +19,7 @@ export const WallPaintingCard = () => {
           <div className="title-card">Согласование сроков и бюджета</div>
         </div>
         <p>
-          Выполняем все в удобное для вас время и ваши сроки. Бюджет формируется
-          индивидуально под вас
+          Выполняем работы удобное для вас время. Формируем проект индивидуально под ваш бюджет
         </p>
       </li>
       <li className="work-card card3">
@@ -29,7 +28,7 @@ export const WallPaintingCard = () => {
           <div className="title-card">Заключение договора.</div>
         </div>
         <p>
-          Заключаем Контракт, который гарантирует вам качество исполнения работы
+          Заключаем контракт, который гарантирует вам качество исполнения работы
           на оговоренных условиях
         </p>
       </li>
@@ -63,8 +62,8 @@ export const OilPaintingCard = () => {
           <div className="title-card">Обсуждение заказа</div>
         </div>
         <p>
-          Понять пожелания клиента, тему, композицию, размеры и стиль. Уточнить
-          все детали, чтобы соответствовать ожиданиям
+          Уточняем все пожелания клиента: тему, композицию, размеры и стиль -
+          чтобы соответствовать вашим ожиданиям
         </p>
       </li>
       <li className="work-card card2">
@@ -73,8 +72,8 @@ export const OilPaintingCard = () => {
           <div className="title-card">Сбор референсов</div>
         </div>
         <p>
-          Найти примеры, которые помогут лучше понять, что ожидается. Это могут
-          быть фотографии, другие картины или отдельные элементы
+          Подбираем примеры, которые помогут уточнить пожелания клиента. Это
+          могут быть фотографии, другие картины или отдельные элементы
         </p>
       </li>
       <li className="work-card card3">
@@ -88,8 +87,10 @@ export const OilPaintingCard = () => {
         </p>
       </li>
       <li className="work-card card4">
-        <span className="count">4</span>
-        <div className="title-card">Создание эскиза</div>
+        <div className="title-container">
+          <span className="count">4</span>
+          <div className="title-card">Создание эскиза</div>
+        </div>
         <p>
           Эскиз выполняется на бумаге или в графическом формате. Он помогает
           заложить композиционную структуру
@@ -109,31 +110,29 @@ export const OilPaintingCard = () => {
       <li className="work-card card1">
         <div className="title-container">
           <span className="count">6</span>
-          <div className="title-card">Обсуждение заказа</div>
+          <div className="title-card">Полное высыхание</div>
         </div>
         <p>
-          Понять пожелания клиента, тему, композицию, размеры и стиль. Уточнить
-          все детали, чтобы соответствовать ожиданиям
+        Полное высыхание картины может занять от нескольких дней до нескольких недель
         </p>
       </li>
       <li className="work-card card2">
         <div className="title-container">
           <span className="count">7</span>
-          <div className="title-card">Сбор референсов</div>
+          <div className="title-card">Покрытие лаком</div>
         </div>
         <p>
-          Найти примеры, которые помогут лучше понять, что ожидается. Это могут
-          быть фотографии, другие картины или отдельные элементы
+        Нанесение защитного слоя лака для сохранения краски и улучшения внешнего вида
         </p>
       </li>
       <li className="work-card card3">
         <div className="title-container">
           <span className="count">8</span>
-          <div className="title-card">Подготовка холста</div>
+          <div className="title-card">Доставка заказчику</div>
         </div>
         <p>
-          Выбор нужного размера и типа холста. Натяжка на подрамник и грунтовка
-          (если требуется)
+        Упаковка картины и её доставка заказчику. Это может включать встречу лично или
+        отправку через курьерскую службу
         </p>
       </li>
     </ul>
@@ -159,7 +158,7 @@ export const DigitalIllustrationCard = () => {
           <div className="title-card">Перенос идеи на цифровую платформу</div>
         </div>
         <p>
-          Выбераю программу для работы (Photoshop, Illustrator, CorelDRAW,
+          Выбираю программу для работы (Photoshop, Illustrator, CorelDRAW,
           Procreate и т.д.). Создаю документ с подходящими размерами и
           разрешением
         </p>
@@ -170,7 +169,7 @@ export const DigitalIllustrationCard = () => {
           <div className="title-card">Сбор референсов</div>
         </div>
         <p>
-          Найти примеры, которые помогут лучше понять, что ожидается. Это могут
+        Подбираем примеры, которые помогут уточнить пожелания клиента. Это могут
           быть фотографии, другие картины или отдельные элементы
         </p>
       </li>
@@ -202,7 +201,7 @@ export const DigitalIllustrationCard = () => {
         </div>
         <p>
           Проверяем иллюстрацию в разных разрешениях для оценки качества.
-          Экспортируем конечную работу в нужных форматах (JPEG, PNG, PDF и т.д.)
+          Экспортируем конечную работу в нужный формат (JPEG, PNG, PDF и т.д.)
         </p>
       </li>
     </ul>
