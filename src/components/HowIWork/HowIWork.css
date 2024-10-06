@@ -137,6 +137,7 @@
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
+    
     line-height: normal;
 }
 
@@ -419,6 +420,7 @@
         flex-direction: row;
         margin: 0;
         gap: 0;
+        align-items: flex-start;
     }
 
     .how-i-work .count {
@@ -431,6 +433,7 @@
         width: 15px;
         padding-bottom: 0;
         padding-top: 0;
+       
     }
 
     .how-i-work .title-card {
@@ -438,11 +441,13 @@
         text-align: left;
         width: 100%;
         flex-grow: 1;
+      
     }
 
     .how-i-work p {
         font-size: 14px;
 
     }
+
 
 }

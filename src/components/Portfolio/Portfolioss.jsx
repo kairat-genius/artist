@@ -17,6 +17,14 @@ const Portfolio = ({ home, Category }) => {
   const gridRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [canScroll, setCanScroll] = useState(false);
+  const [isGrabbing, setIsGrabbing] = useState(false);
+  const [isgridRef, setIsgridRef] = useState(true);
+
   const fetchPaintings = async () => {
     if (loading) return;
 
@@ -34,36 +42,40 @@ const Portfolio = ({ home, Category }) => {
     fetchPaintings();
   }, [Category]);
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isIOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   const scrollSpeed = isIOS ? 2.0 : 1.5;
 
   useEffect(() => {
     const grid = gridRef.current;
 
-    if (!grid || !isScrolling) return;
+    if (!grid || !isScrolling || isDragging || dataDetail) return;
 
-    let scrollLeft = 0;
     let requestId = null;
+    let scrollLeft = scrollPosition;
 
     const scrollGrid = () => {
-      scrollLeft += scrollSpeed;
+      if (isDragging || dataDetail) return; // Останавливаем автоскролл при взаимодействии или открытии модального окна
 
-      if (scrollLeft >= grid._outerRef.scrollWidth - grid._outerRef.clientWidth) {
-        scrollLeft = 0; 
+      scrollLeft -= scrollSpeed;
+
+      if (scrollLeft <= 0) {
+        scrollLeft = grid._outerRef.scrollWidth - grid._outerRef.clientWidth;
       }
 
-      grid.scrollTo({ scrollLeft });
 
+      grid.scrollTo({ scrollLeft });
+      setScrollPosition(scrollLeft); 
       requestId = requestAnimationFrame(scrollGrid);
     };
 
     requestId = requestAnimationFrame(scrollGrid);
 
     return () => cancelAnimationFrame(requestId);
-  }, [scrollSpeed, isScrolling, data]);
-
+  }, [scrollSpeed, isScrolling, isDragging, scrollPosition, dataDetail]);
 
   const openModal = (paintingId) => {
+    // Получение деталей картины
     getPaintingDetail((detail) => {
       const galleryImages = [
         { image: detail.mainImage },
@@ -71,11 +83,18 @@ const Portfolio = ({ home, Category }) => {
       ];
 
       setDataDetail({ ...detail, galleryImages });
+      setCurrentImageIndex(0);
 
+      // Останавливаем автоскролл, когда открыто модальное окно
+      setIsScrolling(false);
+
+      // Открываем модальное окно
+      const modal = document.querySelector(".portfolio-modal");
+      modal.classList.add("modal-active");
+
+      // Блокируем прокрутку страницы
       document.body.classList.add("no-scroll");
       document.body.style.overflow = "hidden";
-      setIsScrolling(false);
-      setCurrentImageIndex(0);
     }, paintingId);
   };
 
@@ -85,6 +104,16 @@ const Portfolio = ({ home, Category }) => {
     document.body.style.overflow = "";
     setIsScrolling(true);
     setCurrentImageIndex(0);
+   
+
+    if (data.length < 14) {
+      setIsgridRef(false);
+  } else {
+      setIsgridRef(true);
+  }
+    setCanScroll(true);
+
+    
   };
 
   const showNextImage = () => {
@@ -110,15 +139,43 @@ const Portfolio = ({ home, Category }) => {
   };
 
   const GridItem = ({ columnIndex, rowIndex, style }) => {
-    const index = rowIndex * 2 + columnIndex;
+    const halfLength = Math.ceil(data.length / 2);
+    const index = rowIndex * halfLength + columnIndex;
+
     if (index >= data.length) return null;
 
     const item = data[index];
 
+    const handleMouseDown = (e) => {
+      setIsgridRef(false);
+      openModal(item.id);
+    };
+
+    let className = 'item';
+
+    //Первая строка
+    if (rowIndex === 0) {
+      className += index % 2 === 0 ? ' item-first-row-even' : '';
+    }
+    
+    //Вторая строка
+    else if (rowIndex === 1) {
+      const isFirstColumnEven = halfLength % 2 === 0;
+  
+      if (isFirstColumnEven) {
+        //второй строки четная
+        className += columnIndex % 2 === 0 ? ' item-second-row-even-start-even' : '';
+      } else {
+        // второй строки нечетная
+        className += columnIndex % 2 === 0 ? ' item-second-row-even-end-odd' : '';
+      }
+    }
+
+
     return (
       <li
-        className={`item ${index % 2 === 0 ? "item-1" : ""}`}
-        onClick={() => openModal(item.id)}
+      className={className}
+        onMouseDown={handleMouseDown}
         style={{
           ...style,
           cursor: "pointer",
@@ -127,6 +184,7 @@ const Portfolio = ({ home, Category }) => {
         }}
       >
         <img src={item.mainImage} alt={item.title} />
+      
       </li>
     );
   };
@@ -174,8 +232,6 @@ const Portfolio = ({ home, Category }) => {
     };
   }, []);
 
-  
-
   const getDeclension = (number, singular, pluralFew, pluralMany) => {
     const lastDigit = number % 10;
     const lastTwoDigits = number % 100;
@@ -212,32 +268,94 @@ const Portfolio = ({ home, Category }) => {
     }
   };
 
-  // прокрутка мышкой
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - gridRef.current.offsetLeft);
-    setScrollLeft(gridRef.current.scrollLeft);
-  };
+  //
 
   const handleMouseLeave = () => {
     setIsDragging(false);
+    setIsScrolling(true);
+  };
+
+  const handleMouseDown = (e) => {
+    const isGridItem = e.target.closest(".item"); // Assuming 'item' is the class for your card
+
+    if (isGridItem) {
+      setIsDragging(false); // Prevent dragging
+      return; // Don't proceed to set dragging state
+    }
+
+    if (dataDetail) return; // Проверяем, открыто ли модальное окно
+
+    const grid = gridRef.current;
+    setIsGrabbing(true);
+    setCanScroll(true);
+    setIsDragging(true);
+    setStartX(e.pageX - grid._outerRef.offsetLeft);
+    setScrollLeft(grid._outerRef.scrollLeft);
   };
 
   const handleMouseUp = () => {
+    setIsGrabbing(false); // Возвращаем курсор на grab
+    setCanScroll(false); // Останавливаем скроллинг при отпускании мыши
     setIsDragging(false);
+
+    const grid = gridRef.current;
+    setScrollPosition(grid._outerRef.scrollLeft); // Сохраняем текущее положение прокрутки
+    setIsScrolling(true); // Включаем авто-скролл после завершения перетаскивания
   };
 
   const handleMouseMove = (e) => {
-    if (!isDragging) return;
+    if (!isDragging || !canScroll) return;
+
     e.preventDefault();
-    const x = e.pageX - gridRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // Скорость прокрутки
-    gridRef.current.scrollLeft = scrollLeft - walk;
+
+    const grid = gridRef.current;
+    const x = e.pageX - grid._outerRef.offsetLeft;
+    const walk = (x - startX) * 2;
+
+    let newScrollLeft = scrollLeft - walk;
+
+    const maxScrollLeft =
+      grid._outerRef.scrollWidth - grid._outerRef.clientWidth;
+
+    // Бесшовный скролл для ручного перемещения
+    if (newScrollLeft <= 0) {
+      newScrollLeft = maxScrollLeft;
+    } else if (newScrollLeft >= maxScrollLeft) {
+      newScrollLeft = 1; // Чуть-чуть сдвигаем, чтобы избежать резкого прыжка
+    }
+
+    grid._outerRef.scrollLeft = newScrollLeft;
+    setScrollPosition(newScrollLeft);
   };
+
+
+  useEffect(() => {
+    const grid = gridRef.current;
+
+    if (!grid) return;
+
+    //обработчики для мыши
+    grid._outerRef.addEventListener("mousedown", handleMouseDown);
+    grid._outerRef.addEventListener("mouseleave", handleMouseLeave);
+    grid._outerRef.addEventListener("mouseup", handleMouseUp);
+    grid._outerRef.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      grid._outerRef.removeEventListener("mousedown", handleMouseDown);
+      grid._outerRef.removeEventListener("mouseleave", handleMouseLeave);
+      grid._outerRef.removeEventListener("mouseup", handleMouseUp);
+      grid._outerRef.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [isDragging, startX, scrollLeft]);
+
+
+  useEffect(() => {
+    if (data.length < 14) {
+      setIsgridRef(false);
+    } else {
+      setIsgridRef(true);
+    }
+  }, [data.length]);
 
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
@@ -258,19 +376,18 @@ const Portfolio = ({ home, Category }) => {
           <div className="masonry-wrapper">
             <ul className="masonry">
               <Grid
-              className="masonry-list"
-              onWheel={(e) => e.preventDefault()}
-                ref={gridRef}
-                onMouseDown={handleMouseDown}
-                onMouseLeave={handleMouseLeave}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
+                className="masonry-list"
+                ref={isgridRef ? gridRef : null}
                 height={gridSettings.height}
                 columnCount={Math.ceil(data.length / 2)}
                 columnWidth={gridSettings.columnWidth}
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
                 width={gridSettings.width}
+                style={{
+                  cursor: isGrabbing ? "grabbing" : "grab",
+                  "touch-action": "none",
+                }}
               >
                 {GridItem}
               </Grid>

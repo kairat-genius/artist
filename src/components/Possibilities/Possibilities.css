@@ -36,6 +36,9 @@
 
 }
 
+.text-width-1 {
+    white-space: nowrap; 
+  }
 
 .possibilities_content .card-container {
     display: flex;
@@ -403,8 +406,21 @@
    
     .possibilities_content .card h3 {
         font-size: 15.365px;
-        word-break: break-word;
+        word-break: break-word;   
     }
+
+    .possibilities_content .card .text-width {
+        width: 90px;
+        
+    }
+
+    .text-width-1 {
+        white-space: normal; 
+      }
+    
+      .break-word {
+        display: inline-block; 
+      }
 
     .possibilities_content .card p {
         font-size: 7.682px;

@@ -152,14 +152,13 @@ export const DigitalIllustrationCard = () => {
           концептов, которые помогут визуализировать идею
         </p>
       </li>
-      <li className="work-card-digitall card2">
+      <li className="work-card-digitall card2 card-digitall">
         <div className="title-container">
           <span className="count">2</span>
           <div className="title-card">Перенос идеи на цифровую платформу</div>
         </div>
         <p>
-          Выбираю программу для работы (Photoshop, Illustrator, CorelDRAW,
-          Procreate и т.д.). Создаю документ с подходящими размерами и
+          Выбираю программу для работы. Создаю документ с подходящими размерами и
           разрешением
         </p>
       </li>
