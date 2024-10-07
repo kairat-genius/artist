@@ -53,7 +53,7 @@ const Portfolio = ({ home, Category }) => {
 
     if (window.innerWidth < 744 && data.length < 7) {
       return; 
-    } else if (window.innerWidth < 744 && data.length < 14) {
+    } else if (window.innerWidth > 744 && data.length < 14) {
       return; 
     }
    
@@ -124,7 +124,7 @@ const Portfolio = ({ home, Category }) => {
 
     if (window.innerWidth < 744 && data.length < 7) {
       setIsScrolling(true);
-    } else if (window.innerWidth < 744 && data.length < 14) {
+    } else if (window.innerWidth > 744 && data.length < 14) {
       setIsScrolling(false);
     } else {
       setIsScrolling(true);
