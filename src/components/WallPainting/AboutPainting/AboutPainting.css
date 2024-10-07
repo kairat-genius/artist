@@ -264,17 +264,7 @@
         flex-shrink: 0;
     }
 
-    .painting-me-video {
-        position: absolute;
-        top: 0;
-        left: 98px;
-        flex-shrink: 0;
-        object-fit: none;
-        margin-top: 53px;
-        width: 175px;
-        height: 270px;
-      
-    }
+   
 
     .painting-me-image .img744 {
         z-index: 2;
