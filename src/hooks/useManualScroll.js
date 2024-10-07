@@ -48,23 +48,24 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition) =
         isDragging.current = true;
         startX.current = e.touches[0].pageX - grid.offsetLeft;
         scrollLeft.current = grid.scrollLeft;
-        setIsScrolling(false); // Останавливаем автоматический скролл
+        setIsScrolling(false);
       }
+      
     };
 
     const handleTouchMove = (e) => {
       if (!isDragging.current) return;
 
       const x = e.touches[0].pageX - grid.offsetLeft;
-      const walk = (x - startX.current) * 2; // Скорость прокрутки
-      grid.scrollLeft = scrollLeft.current - walk; // Обновляем положение скролла
+      const walk = (x - startX.current) * 4; 
+      grid.scrollLeft = scrollLeft.current - walk; 
     };
 
     const handleTouchEnd = () => {
       isDragging.current = false;
-      setIsScrolling(true); // Возвращаем автоматический скролл
+      setIsScrolling(true); 
 
-      // Сохраняем текущую позицию скролла
+
       scrollPosition.current = grid.scrollLeft;
     };
 

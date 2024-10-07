@@ -49,13 +49,11 @@ const Portfolio = ({ home, Category }) => {
   // Auto-scroll logic
   useEffect(() => {
     const grid = gridRef.current;
-
     if (!grid || !isScrolling || dataDetail !== null) return;
 
     let scrollOffset =
-      scrollPosition.current ||
-      grid._outerRef.scrollLeft ||
-      grid._outerRef.scrollWidth / 3;
+      scrollPosition.current || grid._outerRef.scrollLeft || grid._outerRef.scrollWidth / 3;
+
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const scrollSpeed = isIOS ? 2.0 : 1.5;
@@ -64,7 +62,6 @@ const Portfolio = ({ home, Category }) => {
       const maxScrollLeft = grid._outerRef.scrollWidth;
       const minScrollLeft = 0;
 
-      // Проверка достижения конца или начала
       if (scrollOffset >= maxScrollLeft) {
         scrollOffset = minScrollLeft;
       } else if (scrollOffset <= minScrollLeft) {
@@ -84,7 +81,7 @@ const Portfolio = ({ home, Category }) => {
 
     return () => {
       if (scrollRequestRef.current) {
-        cancelAnimationFrame(scrollRequestRef.current); // Останавливаем анимацию при выходе
+        cancelAnimationFrame(scrollRequestRef.current);
       }
     };
   }, [isScrolling, data, dataDetail, scrollPosition]);
@@ -108,7 +105,7 @@ const Portfolio = ({ home, Category }) => {
       document.body.style.overflow = "hidden";
     }, paintingId);
 
-    // Ensure scrolling stops when the modal is opened
+
     if (scrollRequestRef.current) {
       cancelAnimationFrame(scrollRequestRef.current);
     }
@@ -144,12 +141,10 @@ const Portfolio = ({ home, Category }) => {
 
   const GridItem = ({ columnIndex, rowIndex, style }) => {
     const halfLength = Math.ceil(data.length / 2);
-    const index = rowIndex * halfLength + columnIndex;
-
-    if (index >= data.length) return null;
-
-    // const item = data[index];
-    const item = infiniteData[index % data.length];
+    
+    const index = (rowIndex * halfLength + columnIndex) % data.length; 
+    
+    const item = infiniteData[index];
 
     const handleMouseDown = (e) => {
       setIsScrolling(false);
@@ -192,13 +187,7 @@ const Portfolio = ({ home, Category }) => {
     );
   };
 
-  useEffect(() => {
-    if (data.length < 14) {
-      setIsScrolling(false);
-    } else {
-      setIsScrolling(true);
-    }
-  }, [data.length]);
+
 
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
@@ -222,7 +211,7 @@ const Portfolio = ({ home, Category }) => {
                 ref={isScrolling ? gridRef : null}
                 className="masonry-list"
                 height={gridSettings.height}
-                columnCount={Math.ceil(data.length / 2)}
+                columnCount={Math.ceil(data.length / 2 * 100)}
                 columnWidth={gridSettings.columnWidth}
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
@@ -246,3 +235,5 @@ const Portfolio = ({ home, Category }) => {
 };
 
 export default Portfolio;
+
+
