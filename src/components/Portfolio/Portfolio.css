@@ -164,6 +164,7 @@ input:checked + .slider:before {
  .portfolio_content .masonry-list {
   -ms-overflow-style: none;  
   scrollbar-width: none;  
+  pointer-events: none;
 }
 
 
@@ -174,10 +175,6 @@ input:checked + .slider:before {
 .portfolio_content .masonry-list::-ms-overflow-style {
   display: none; 
 } 
-
-/* .portfolio_content .masonry-list {
-  scrollbar-width: none; 
-} */
 
 
 .portfolio_content .masonry {
