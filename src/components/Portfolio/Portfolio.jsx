@@ -51,6 +51,10 @@ const Portfolio = ({ home, Category }) => {
     const grid = gridRef.current;
     if (!grid || !isScrolling || dataDetail !== null) return;
 
+    if (data.length < 14) {
+      return;
+    }
+
     let scrollOffset =
       scrollPosition.current || grid._outerRef.scrollLeft || grid._outerRef.scrollWidth / 3;
 
@@ -187,8 +191,6 @@ const Portfolio = ({ home, Category }) => {
     );
   };
 
-
-
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
       <div className="portfolio_content">
@@ -211,7 +213,7 @@ const Portfolio = ({ home, Category }) => {
                 ref={isScrolling ? gridRef : null}
                 className="masonry-list"
                 height={gridSettings.height}
-                columnCount={Math.ceil(data.length / 2 * 100)}
+                columnCount={data.length >= 14 ? Math.ceil(data.length / 2) * 100 : Math.ceil(data.length / 2)}
                 columnWidth={gridSettings.columnWidth}
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
