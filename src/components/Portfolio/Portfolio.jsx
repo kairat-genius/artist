@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Portfolio.css";
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
 import { VariableSizeGrid as Grid } from "react-window";
-
+import { useSwipeable } from "react-swipeable"; 
 import adaptivePortfolio from "../../hooks/adaptive";
 import Modal from "./components/Modal";
 import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
@@ -51,12 +51,16 @@ const Portfolio = ({ home, Category }) => {
     const grid = gridRef.current;
     if (!grid || !isScrolling || dataDetail !== null) return;
 
-    if (data.length < 14) {
-      return;
+    if (window.innerWidth < 744 && data.length < 7) {
+      return; 
+    } else if (window.innerWidth < 744 && data.length < 14) {
+      return; 
     }
-
+   
     let scrollOffset =
-      scrollPosition.current || grid._outerRef.scrollLeft || grid._outerRef.scrollWidth / 3;
+      scrollPosition.current ||
+      grid._outerRef.scrollLeft ||
+      grid._outerRef.scrollWidth / 3;
 
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -109,7 +113,6 @@ const Portfolio = ({ home, Category }) => {
       document.body.style.overflow = "hidden";
     }, paintingId);
 
-
     if (scrollRequestRef.current) {
       cancelAnimationFrame(scrollRequestRef.current);
     }
@@ -119,8 +122,9 @@ const Portfolio = ({ home, Category }) => {
     setDataDetail(null);
     document.body.style.overflow = "";
 
-    setCurrentImageIndex(0);
-    if (data.length < 14) {
+    if (window.innerWidth < 744 && data.length < 7) {
+      setIsScrolling(true);
+    } else if (window.innerWidth < 744 && data.length < 14) {
       setIsScrolling(false);
     } else {
       setIsScrolling(true);
@@ -143,11 +147,20 @@ const Portfolio = ({ home, Category }) => {
     );
   };
 
+    // Обработчики свайпа
+    const handlers = useSwipeable({
+      onSwipedLeft: () => setIsScrolling(false), // Останавливаем авто-скролл при свайпе
+      onSwipedRight: () => setIsScrolling(false), // Останавливаем авто-скролл при свайпе
+      onSwipedUp: () => setIsScrolling(false),
+      onSwipedDown: () => setIsScrolling(false),
+      onTap: () => setIsScrolling(false), // Останавливаем авто-скролл при клике/тапе
+    });
+
   const GridItem = ({ columnIndex, rowIndex, style }) => {
     const halfLength = Math.ceil(data.length / 2);
-    
-    const index = (rowIndex * halfLength + columnIndex) % data.length; 
-    
+
+    const index = (rowIndex * halfLength + columnIndex) % data.length;
+
     const item = infiniteData[index];
 
     const handleMouseDown = (e) => {
@@ -191,6 +204,14 @@ const Portfolio = ({ home, Category }) => {
     );
   };
 
+  const columnCount = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 744 && data.length >= 7) {
+      return Math.ceil(data.length / 2) * 100; 
+    }
+    return data.length >= 14 ? Math.ceil(data.length / 2) * 100 : Math.ceil(data.length / 2);
+  };
+
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
       <div className="portfolio_content">
@@ -205,15 +226,17 @@ const Portfolio = ({ home, Category }) => {
               воплощаю в реальность. Для меня важно нести искусство в
               современный мир.
             </p>
+  
           </div>
-
+   
           <div className="masonry-wrapper">
+            
             <ul className="masonry">
               <Grid
                 ref={isScrolling ? gridRef : null}
                 className="masonry-list"
                 height={gridSettings.height}
-                columnCount={data.length >= 14 ? Math.ceil(data.length / 2) * 100 : Math.ceil(data.length / 2)}
+                columnCount={columnCount()} 
                 columnWidth={gridSettings.columnWidth}
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
@@ -237,5 +260,6 @@ const Portfolio = ({ home, Category }) => {
 };
 
 export default Portfolio;
+
 
 
