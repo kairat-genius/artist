@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Portfolio.css";
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
 import { VariableSizeGrid as Grid } from "react-window";
-import { useSwipeable } from "react-swipeable"; 
+
 import adaptivePortfolio from "../../hooks/adaptive";
 import Modal from "./components/Modal";
 import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
