@@ -41,43 +41,10 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition) =
       setIsScrolling(true);
     };
 
-    // телефоны
-
-    const handleTouchStart = (e) => {
-      if (e.target.classList.contains('masonry-list')) {
-        isDragging.current = true;
-        startX.current = e.touches[0].pageX - grid.offsetLeft;
-        scrollLeft.current = grid.scrollLeft;
-        setIsScrolling(false);
-      }
-      
-    };
-
-    const handleTouchMove = (e) => {
-      if (!isDragging.current) return;
-
-      const x = e.touches[0].pageX - grid.offsetLeft;
-      const walk = (x - startX.current) * 4; 
-      grid.scrollLeft = scrollLeft.current - walk; 
-    };
-
-    const handleTouchEnd = () => {
-      isDragging.current = false;
-      setIsScrolling(true); 
-
-
-      scrollPosition.current = grid.scrollLeft;
-    };
-
-
     grid.addEventListener("mousedown", handleMouseDown);
     grid.addEventListener("mousemove", handleMouseMove);
     grid.addEventListener("mouseup", handleMouseUp);
     grid.addEventListener("mouseleave", handleMouseLeave);
-
-    grid.addEventListener("touchstart", handleTouchStart);
-    grid.addEventListener("touchmove", handleTouchMove);
-    grid.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       grid.removeEventListener("mousedown", handleMouseDown);
@@ -85,9 +52,6 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition) =
       grid.removeEventListener("mouseup", handleMouseUp);
       grid.removeEventListener("mouseleave", handleMouseLeave);
 
-      grid.removeEventListener("touchstart", handleTouchStart);
-      grid.removeEventListener("touchmove", handleTouchMove);
-      grid.removeEventListener("touchend", handleTouchEnd);
     };
   }, [gridRef, setIsScrolling]);
 

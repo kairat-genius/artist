@@ -145,16 +145,8 @@ const Portfolio = ({ home, Category }) => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? dataDetail.galleryImages.length - 1 : prevIndex - 1
     );
-  };
+  };   
 
-    // Обработчики свайпа
-    const handlers = useSwipeable({
-      onSwipedLeft: () => setIsScrolling(false), // Останавливаем авто-скролл при свайпе
-      onSwipedRight: () => setIsScrolling(false), // Останавливаем авто-скролл при свайпе
-      onSwipedUp: () => setIsScrolling(false),
-      onSwipedDown: () => setIsScrolling(false),
-      onTap: () => setIsScrolling(false), // Останавливаем авто-скролл при клике/тапе
-    });
 
   const GridItem = ({ columnIndex, rowIndex, style }) => {
     const halfLength = Math.ceil(data.length / 2);
@@ -241,6 +233,7 @@ const Portfolio = ({ home, Category }) => {
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
                 width={gridSettings.width}
+                style={{overflow: 'hidden'}}
               >
                 {GridItem}
               </Grid>
