@@ -2,7 +2,7 @@ import React from "react";
 import Painting from "../../components/WallPainting/Painting/Painting";
 import AboutPainting from "../../components/WallPainting/AboutPainting/AboutPainting";
 import Possibilities from "../../components/Possibilities/Possibilities";
-import Portfolio from "../../components/Portfolio/Portfolioss";
+import Portfolio from "../../components/Portfolio/Portfolio";
 import HowIWork from "../../components/HowIWork/HowIWork";
 
 import img2 from "../../assets/painting/1-backgound-digital-illustration.png";

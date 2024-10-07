@@ -54,6 +54,7 @@ const Portfolio = ({ home, Category }) => {
     let requestId = null;
     let scrollLeft = scrollPosition;
 
+
     const scrollGrid = () => {
       if (isDragging || dataDetail) return; // Останавливаем автоскролл при взаимодействии или открытии модального окна
 
@@ -104,13 +105,7 @@ const Portfolio = ({ home, Category }) => {
     document.body.style.overflow = "";
     setIsScrolling(true);
     setCurrentImageIndex(0);
-   
 
-    if (data.length < 14) {
-      setIsgridRef(false);
-  } else {
-      setIsgridRef(true);
-  }
     setCanScroll(true);
 
     

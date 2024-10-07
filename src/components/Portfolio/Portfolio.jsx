@@ -1,74 +1,97 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Portfolio.css";
-import left from "../../assets/png/left.png";
-import right from "../../assets/png/right.png";
-import Button from "../button/button";
-import close from "../../assets/portfolio/close-modal.png"; 
-import closemobile from "../../assets/portfolio/close-mobile.png";
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
-import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
+import { VariableSizeGrid as Grid } from "react-window";
 
+import adaptivePortfolio from "../../hooks/adaptive";
+import Modal from "./components/Modal";
+import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
+import useManualScroll from "../../hooks/useManualScroll.js";
 const Portfolio = ({ home, Category }) => {
   const [data, setData] = useState([]);
-  const [countPages, setCountPages] = useState(0);
+  const gridRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const { gridSettings } = adaptivePortfolio();
   const [dataDetail, setDataDetail] = useState(null);
-  const masonryRef = useRef(null);
-  const [isScrolling, setIsScrolling] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const observer = useRef(null);
-  const [loading, setLoading] = useState(false); 
+  const [isScrolling, setIsScrolling] = useState(true);
+  const scrollRequestRef = useRef(null);
+  const scrollPosition = useRef(0);
+  const fetchPaintings = async () => {
+    if (loading) return;
 
-
-  const fetchPaintings = async (page) => {
-    if (loading) return; // Если запрос уже выполняется, выходим
-
-    setLoading(true); // Устанавливаем флаг загрузки
+    setLoading(true);
     try {
-      await getPaintings(setData, setCountPages, Category, page);
+      await getPaintings(setData, Category);
     } catch (error) {
       console.error("Error fetching paintings:", error);
     } finally {
-      setLoading(false); // Сбрасываем флаг загрузки
+      setLoading(false);
     }
   };
 
-
   useEffect(() => {
-    fetchPaintings(currentPage);
-  }, [Category, currentPage]);
+    fetchPaintings();
+  }, [Category]);
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const scrollSpeed = isIOS ? 2.5 : 1.5;
+  // дублирование данных
+  const infiniteData = [...data, ...data, ...data];
 
+  useManualScroll(gridRef, isScrolling, setIsScrolling, scrollPosition);
+
+  // Восстановление позиции прокрутки
   useEffect(() => {
-    const masonryContainer = masonryRef.current;
+    if (gridRef.current) {
+      gridRef.current._outerRef.scrollLeft = scrollPosition.current; // Восстанавливаем позицию
+    }
+  }, [data]);
 
-    if (!masonryContainer) return;
+  // Auto-scroll logic
+  useEffect(() => {
+    const grid = gridRef.current;
 
-    let animationFrameId;
+    if (!grid || !isScrolling || dataDetail !== null) return;
 
-    const autoScroll = () => {
-      if (!isScrolling || !masonryContainer) return;
+    let scrollOffset =
+      scrollPosition.current ||
+      grid._outerRef.scrollLeft ||
+      grid._outerRef.scrollWidth / 3;
+    const isIOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const scrollSpeed = isIOS ? 2.0 : 1.5;
 
-      if (
-        masonryContainer.scrollLeft >=
-        masonryContainer.scrollWidth - masonryContainer.clientWidth
-      ) {
-        masonryContainer.scrollLeft = 0; 
-      } else {
-        masonryContainer.scrollLeft += scrollSpeed;
+    const scrollGrid = () => {
+      const maxScrollLeft = grid._outerRef.scrollWidth;
+      const minScrollLeft = 0;
+
+      // Проверка достижения конца или начала
+      if (scrollOffset >= maxScrollLeft) {
+        scrollOffset = minScrollLeft;
+      } else if (scrollOffset <= minScrollLeft) {
+        scrollOffset = maxScrollLeft;
       }
 
-      animationFrameId = requestAnimationFrame(autoScroll);
+      scrollOffset += scrollSpeed;
+      scrollPosition.current = scrollOffset;
+      grid.scrollTo({ scrollLeft: scrollOffset });
+
+      if (isScrolling && dataDetail === null) {
+        scrollRequestRef.current = requestAnimationFrame(scrollGrid);
+      }
     };
 
-    autoScroll();
+    scrollRequestRef.current = requestAnimationFrame(scrollGrid);
 
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isScrolling, data]); 
+    return () => {
+      if (scrollRequestRef.current) {
+        cancelAnimationFrame(scrollRequestRef.current); // Останавливаем анимацию при выходе
+      }
+    };
+  }, [isScrolling, data, dataDetail, scrollPosition]);
 
+  // Modal logic
   const openModal = (paintingId) => {
+    setIsScrolling(false); // Stop auto-scroll when modal opens
     getPaintingDetail((detail) => {
       const galleryImages = [
         { image: detail.mainImage },
@@ -76,113 +99,106 @@ const Portfolio = ({ home, Category }) => {
       ];
 
       setDataDetail({ ...detail, galleryImages });
-      setIsScrolling(false); 
-      document.body.classList.add(".no-scroll");
-      document.body.style.overflow = 'hidden'; 
       setCurrentImageIndex(0);
+
+      const modal = document.querySelector(".portfolio-modal");
+      modal.classList.add("modal-active");
+
+      document.body.classList.add("no-scroll");
+      document.body.style.overflow = "hidden";
     }, paintingId);
+
+    // Ensure scrolling stops when the modal is opened
+    if (scrollRequestRef.current) {
+      cancelAnimationFrame(scrollRequestRef.current);
+    }
   };
 
   const closeModal = () => {
     setDataDetail(null);
-    setIsScrolling(true);
-    document.body.classList.remove(".no-scroll");
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
+
     setCurrentImageIndex(0);
+    if (data.length < 14) {
+      setIsScrolling(false);
+    } else {
+      setIsScrolling(true);
+    }
   };
 
   const showNextImage = () => {
     if (!dataDetail || !dataDetail.galleryImages) return;
 
-    setCurrentImageIndex((prevIndex) => {
-      if (prevIndex === dataDetail.galleryImages.length - 1) {
-        return 0;
-      }
-      return prevIndex + 1;
-    });
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === dataDetail.galleryImages.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   const showPrevImage = () => {
     if (!dataDetail || !dataDetail.galleryImages) return;
 
-    setCurrentImageIndex((prevIndex) => {
-      if (prevIndex === 0) {
-        return dataDetail.galleryImages.length - 1;
-      }
-      return prevIndex - 1;
-    });
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? dataDetail.galleryImages.length - 1 : prevIndex - 1
+    );
   };
 
-  const lastPaintingElementRef = useCallback(
-    (node) => {
-      if (observer.current) observer.current.disconnect();
+  const GridItem = ({ columnIndex, rowIndex, style }) => {
+    const halfLength = Math.ceil(data.length / 2);
+    const index = rowIndex * halfLength + columnIndex;
 
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && !loading) {
-            if (currentPage < countPages) {
-              setCurrentPage((prevPage) => prevPage + 1);
-            } else {
-              setCurrentPage(1); 
-            }
-          }
-        },
-        {
-          rootMargin: "100px",
-        }
-      );
+    if (index >= data.length) return null;
 
-      if (node) observer.current.observe(node);
-    },
-    [countPages, currentPage, loading] 
-  );
+    // const item = data[index];
+    const item = infiniteData[index % data.length];
+
+    const handleMouseDown = (e) => {
+      setIsScrolling(false);
+      openModal(item.id);
+    };
+
+    let className = "item";
+
+    // First row styling
+    if (rowIndex === 0) {
+      className += index % 2 === 0 ? " item-first-row-even" : "";
+    }
+
+    // Second row styling
+    else if (rowIndex === 1) {
+      const isFirstColumnEven = halfLength % 2 === 0;
+
+      if (isFirstColumnEven) {
+        className +=
+          columnIndex % 2 === 0 ? " item-second-row-even-start-even" : "";
+      } else {
+        className +=
+          columnIndex % 2 === 0 ? " item-second-row-even-end-odd" : "";
+      }
+    }
+
+    return (
+      <li
+        className={className}
+        onClick={handleMouseDown}
+        style={{
+          ...style,
+          cursor: "pointer",
+          backgroundColor: "transparent",
+          pointerEvents: "auto",
+        }}
+      >
+        <img src={item.mainImage} alt={item.title} />
+      </li>
+    );
+  };
 
   useEffect(() => {
-    if (data.length > 49) {
-      setData((prevData) => prevData.slice(0, 15));
+    if (data.length < 14) {
+      setIsScrolling(false);
+    } else {
+      setIsScrolling(true);
     }
-  }, [data]);
-
- 
-
-  // перевод дней
-
-  const getDeclension = (number, singular, pluralFew, pluralMany) => {
-    const lastDigit = number % 10;
-    const lastTwoDigits = number % 100;
-
-    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
-      return pluralMany;
-    }
-
-    if (lastDigit === 1) {
-      return singular;
-    }
-
-    if (lastDigit >= 2 && lastDigit <= 4) {
-      return pluralFew;
-    }
-
-    return pluralMany;
-  };
-
-  // Функция для определения правильного склонения в зависимости от единицы времени
-  const getTimeUnit = (value, unit) => {
-    switch (unit) {
-      case "days":
-        return getDeclension(value, "день", "дня", "дней");
-      case "weeks":
-        return getDeclension(value, "неделя", "недели", "недель");
-      case "months":
-        return getDeclension(value, "месяц", "месяца", "месяцев");
-      case "hours":
-        return getDeclension(value, "час", "часа", "часов");
-      case "minutes":
-        return getDeclension(value, "минута", "минуты", "минут");
-      default:
-        return unit;
-    }
-  };
+  }, [data.length]);
 
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
@@ -201,100 +217,30 @@ const Portfolio = ({ home, Category }) => {
           </div>
 
           <div className="masonry-wrapper">
-            <ul className="masonry" ref={masonryRef} style={{ overflow: "hidden" }} onWheel={(e) => e.preventDefault()}>
-              {data.map((item, i) => (
-                <li
-                  className={`item ${i % 4 === 0 ? "item-1" : ""} ${
-                    i % 2 === 0 ? "even-item" : ""
-                  }`}
-                  key={item.id}
-                  onClick={() => openModal(item.id)}
-                  style={{ cursor: "pointer" }}
-                  ref={i === data.length - 1 ? lastPaintingElementRef : null} 
-                >
-                  <img src={item.mainImage} alt={item.title} />
-                  
-                </li>
-              ))}
+            <ul className="masonry">
+              <Grid
+                ref={isScrolling ? gridRef : null}
+                className="masonry-list"
+                height={gridSettings.height}
+                columnCount={Math.ceil(data.length / 2)}
+                columnWidth={gridSettings.columnWidth}
+                rowCount={2}
+                rowHeight={gridSettings.rowHeight}
+                width={gridSettings.width}
+              >
+                {GridItem}
+              </Grid>
             </ul>
           </div>
         </div>
       </div>
-
-      {dataDetail && (
-        
-        <div className="portfolio-modal" onClick={closeModal}>
-          <img src={close} className="close-modall" onClick={closeModal}/>
-          <div
-            className="portfolio-modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-              <img src={closemobile} className="close-modile" onClick={closeModal}/>
-            <div className="portfolio-content-text">
-              <div className="portfolio-content-text-div">
-                <h3>{dataDetail.title}</h3>
-                <div className="portfolip-text-p">
-                  <p>{dataDetail.info}</p>
-                  <p>
-                    Площадь: {dataDetail.area} {dataDetail.areaUnit}
-                  </p>
-                  <p>
-                  Срок: {dataDetail.dueDate}{" "}
-                  {getTimeUnit(dataDetail.dueDate, dataDetail.dueDateUnit)}
-                  </p>
-                </div>
-              </div>
-              <Button onClick={closeModal}/>
-            </div>
-
-            {/* Галерея изображений */}
-            <div className="portfolio-modal-image-container">
-              <img
-                className="portfolio-left-arrow"
-                src={left}
-                alt="left arrow"
-                onClick={showPrevImage}
-              />
-              <img
-                className="portfolio-main-image"
-                src={dataDetail.galleryImages[currentImageIndex]?.image}
-                alt={`painting-detail-${dataDetail.id}`}
-              />
-              <img
-                className="portfolio-right-arrow"
-                src={right}
-                alt="right arrow"
-                onClick={showNextImage}
-              />
-              <div className="image-indicators">
-                {dataDetail.galleryImages.length > 4 ? (
-                  <>
-                    <span className="dot small" />
-                    {Array.from({ length: 4 }).map((_, i) => (
-                      <span
-                        key={i}
-                        className={`dot ${
-                          currentImageIndex === i + 1 ? "active" : ""
-                        }`}
-                      />
-                    ))}
-                    <span className="dot small" />
-                  </>
-                ) : (
-                  dataDetail.galleryImages.map((_, index) => (
-                    <span
-                      key={index}
-                      className={`dot ${
-                        currentImageIndex === index ? "active" : ""
-                      }`}
-                    />
-                  ))
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        dataDetail={dataDetail}
+        closeModal={closeModal}
+        currentImageIndex={currentImageIndex}
+        showNextImage={showNextImage}
+        showPrevImage={showPrevImage}
+      />
     </section>
   );
 };
