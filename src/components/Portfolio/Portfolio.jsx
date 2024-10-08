@@ -201,7 +201,7 @@ const Portfolio = ({ home, Category }) => {
     if (screenWidth < 744 && data.length >= 7) {
       return Math.ceil(data.length / 2) * 100; 
     }
-    return data.length >= 14 ? Math.ceil(data.length / 2) * 100 : Math.ceil(data.length / 2);
+    return data.length >= 14 ? Math.ceil(data.length / 2) : Math.ceil(data.length / 2);
   };
 
   return (
