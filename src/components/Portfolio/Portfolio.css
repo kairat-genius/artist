@@ -89,18 +89,8 @@
 
 }
 
-.portfolio_content .masonry::-webkit-scrollbar {
-  display: none;
-}
-
 .portfolio_content .masonry-list {
   cursor: grab;
-  overflow: scroll
-  
-}
-
- .portfolio_content .masonry-list {
-  -ms-overflow-style: none;  
   scrollbar-width: none;  
   pointer-events: auto;
 }
@@ -115,16 +105,11 @@
 } 
 
 
-.portfolio_content .masonry {
-  scrollbar-width: none;
-}
 
 .portfolio_content .item {
   display: inline-block;
   background: #fff;
   overflow: hidden;
-
-
 }
 
 .portfolio_content .item img {
