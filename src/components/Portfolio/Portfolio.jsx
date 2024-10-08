@@ -19,9 +19,9 @@ const Portfolio = ({ home, Category }) => {
   const scrollPosition = useRef(0);
 
   const checkWindowSize = () => {
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 1025) {
       setIsScrolling(false);
-    } else if (window.innerWidth >= 1024 && data.length < 14) {
+    } else if (window.innerWidth >= 1025 && data.length < 14) {
       setIsScrolling(false);
     } else {
       setIsScrolling(true);
@@ -30,14 +30,15 @@ const Portfolio = ({ home, Category }) => {
 
   useEffect(() => {
     checkWindowSize();
-
     window.addEventListener("resize", checkWindowSize);
-
     return () => {
       window.removeEventListener("resize", checkWindowSize);
     };
   }, [data.length]);
 
+
+  useManualScroll(gridRef, isScrolling, setIsScrolling, scrollPosition, data);
+    
   const fetchPaintings = async () => {
     if (loading) return;
 
@@ -55,7 +56,6 @@ const Portfolio = ({ home, Category }) => {
     fetchPaintings();
   }, [Category]);
 
-  useManualScroll(gridRef, isScrolling, setIsScrolling, scrollPosition, data);
 
   // Восстановление позиции прокрутки
   useEffect(() => {
@@ -78,7 +78,7 @@ const Portfolio = ({ home, Category }) => {
     const scrollSpeed = isIOS ? 2.0 : 1.5;
     const maxOffset = grid._outerRef.scrollWidth - grid._outerRef.clientWidth;
 
-    const resetThreshold = maxOffset / 2;
+    const resetThreshold = maxOffset ;
 
     const scrollGrid = () => {
       if (scrollOffset >= resetThreshold) {
@@ -182,6 +182,7 @@ const Portfolio = ({ home, Category }) => {
   
     const index = (rowIndex * halfLength + columnIndex) % infiniteLength;
   
+    console.log(index)
     const item = infiniteData[index];
   
     const handleMouseDown = (e) => {
