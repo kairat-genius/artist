@@ -5,9 +5,6 @@ export const getPaintings = (setData, Category) => {
   const url = Category
     ? `${PAINTINGS}?category=${Category}`
     : PAINTINGS;
-
-  console.log(`Fetching paintings from URL: ${url}`);
-
   return axios
     .get(url)
     .then((response) => {

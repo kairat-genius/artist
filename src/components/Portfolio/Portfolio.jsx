@@ -1,3 +1,6 @@
+
+
+
 import React, { useEffect, useRef, useState } from "react";
 import "./Portfolio.css";
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
@@ -17,6 +20,26 @@ const Portfolio = ({ home, Category }) => {
   const [isScrolling, setIsScrolling] = useState(true);
   const scrollRequestRef = useRef(null);
   const scrollPosition = useRef(0);
+
+  const checkWindowSize = () => {
+    if (window.innerWidth < 1024) {
+      setIsScrolling(false);
+    } else {
+      setIsScrolling(true);
+    }
+  };
+
+  useEffect(() => {
+    checkWindowSize(); 
+
+    window.addEventListener("resize", checkWindowSize);
+
+    return () => {
+      window.removeEventListener("resize", checkWindowSize);
+    };
+  }, []);
+
+
   const fetchPaintings = async () => {
     if (loading) return;
 
@@ -42,57 +65,55 @@ const Portfolio = ({ home, Category }) => {
   // Восстановление позиции прокрутки
   useEffect(() => {
     if (gridRef.current) {
-      gridRef.current._outerRef.scrollLeft = scrollPosition.current; // Восстанавливаем позицию
+      gridRef.current._outerRef.scrollLeft = scrollPosition.current; 
     }
   }, [data]);
 
-  // Auto-scroll logic
-  useEffect(() => {
+
+    useEffect(() => {
     const grid = gridRef.current;
     if (!grid || !isScrolling || dataDetail !== null) return;
-
-    if (window.innerWidth < 744 && data.length < 7) {
-      return; 
-    } else if (window.innerWidth > 744 && data.length < 14) {
-      return; 
-    }
-   
-    let scrollOffset =
-      scrollPosition.current ||
-      grid._outerRef.scrollLeft ||
-      grid._outerRef.scrollWidth / 3;
-
+  
+    let scrollOffset = scrollPosition.current || grid._outerRef.scrollLeft || grid._outerRef.scrollWidth / 3;
+  
     const isIOS =
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const scrollSpeed = isIOS ? 2.0 : 1.5;
-
+    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const scrollSpeed = isIOS ? 2.0 : 1.5;
+    const maxOffset = grid._outerRef.scrollWidth - grid._outerRef.clientWidth; 
+  
+    const resetThreshold = maxOffset / 2; 
+  
     const scrollGrid = () => {
-      const maxScrollLeft = grid._outerRef.scrollWidth;
-      const minScrollLeft = 0;
-
-      if (scrollOffset >= maxScrollLeft) {
-        scrollOffset = minScrollLeft;
-      } else if (scrollOffset <= minScrollLeft) {
-        scrollOffset = maxScrollLeft;
+      if (scrollOffset >= resetThreshold) {
+        grid.scrollTo({
+          scrollLeft: scrollOffset - resetThreshold, 
+          behavior: "auto"
+        });
+        scrollOffset -= resetThreshold;
+      } else {
+        scrollOffset += scrollSpeed;
       }
-
-      scrollOffset += scrollSpeed;
+  
       scrollPosition.current = scrollOffset;
-      grid.scrollTo({ scrollLeft: scrollOffset });
-
+      grid.scrollTo({
+        scrollLeft: scrollOffset,
+        behavior: "smooth", 
+      });
+  
       if (isScrolling && dataDetail === null) {
         scrollRequestRef.current = requestAnimationFrame(scrollGrid);
       }
     };
-
+  
     scrollRequestRef.current = requestAnimationFrame(scrollGrid);
-
+  
     return () => {
       if (scrollRequestRef.current) {
         cancelAnimationFrame(scrollRequestRef.current);
       }
     };
   }, [isScrolling, data, dataDetail, scrollPosition]);
+
 
   // Modal logic
   const openModal = (paintingId) => {
@@ -122,9 +143,7 @@ const Portfolio = ({ home, Category }) => {
     setDataDetail(null);
     document.body.style.overflow = "";
 
-    if (window.innerWidth < 744 && data.length < 7) {
-      setIsScrolling(true);
-    } else if (window.innerWidth > 744 && data.length < 14) {
+    if (window.innerWidth < 1024) {
       setIsScrolling(false);
     } else {
       setIsScrolling(true);
@@ -162,12 +181,10 @@ const Portfolio = ({ home, Category }) => {
 
     let className = "item";
 
-    // First row styling
     if (rowIndex === 0) {
       className += index % 2 === 0 ? " item-first-row-even" : "";
     }
 
-    // Second row styling
     else if (rowIndex === 1) {
       const isFirstColumnEven = halfLength % 2 === 0;
 
@@ -198,10 +215,19 @@ const Portfolio = ({ home, Category }) => {
 
   const columnCount = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth < 744 && data.length >= 7) {
-      return Math.ceil(data.length / 2) * 100; 
+    const length = data.length;
+  
+    if (screenWidth < 744 && length >= 7) {
+      return Math.ceil(length / 2) * 100; 
     }
-    return data.length >= 14 ? Math.ceil(data.length / 2) : Math.ceil(data.length / 2);
+  
+    if (length > 14 && length < 50) {
+      return Math.ceil(length / 2) * 20; 
+    } else if (length >= 50 && length <= 100) {
+      return Math.ceil(length / 2) * 10; 
+    }
+  
+    return Math.ceil(length / 2); 
   };
 
   return (
@@ -233,7 +259,6 @@ const Portfolio = ({ home, Category }) => {
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
                 width={gridSettings.width}
-                style={{overflow: 'hidden'}}
               >
                 {GridItem}
               </Grid>
@@ -253,6 +278,5 @@ const Portfolio = ({ home, Category }) => {
 };
 
 export default Portfolio;
-
 
 

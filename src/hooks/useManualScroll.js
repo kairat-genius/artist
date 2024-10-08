@@ -10,6 +10,10 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition) =
 
     if (!grid) return;
 
+    if (window.innerWidth < 1024) {
+      return;
+    }
+
     const handleMouseDown = (e) => {
   
       if (e.target.classList.contains('masonry-list')) {

@@ -8,7 +8,7 @@ import {
 import 'normalize.css';
 
 import { useURL } from "../src/hooks/useURL";
-const Home = lazy(() => import("./pages/Home/Home"));
+const Home = lazy(() => import("../src/pages/Home/Home"));
 const WallPainting = lazy(() => import("../src/pages/WallPainting/WallPainting"));
 const OilPainting = lazy(() => import("../src/pages/OilPainting/OilPainting"));
 const DigitalIllustration = lazy(() => import("../src/pages/DigitalIllustration/DigitalIllustration"));
