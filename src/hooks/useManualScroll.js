@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 
-const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition) => {
+const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, data) => {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
@@ -10,9 +10,12 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition) =
 
     if (!grid) return;
 
+
     if (window.innerWidth < 1024) {
       return;
-    }
+    } else if (window.innerWidth >= 1024 && data.length < 14) {
+      return;
+    } 
 
     const handleMouseDown = (e) => {
   

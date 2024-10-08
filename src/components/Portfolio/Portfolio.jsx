@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useRef, useState } from "react";
 import "./Portfolio.css";
 import { getPaintings } from "../../api/Paintings/getPaintingsList";
@@ -24,21 +21,22 @@ const Portfolio = ({ home, Category }) => {
   const checkWindowSize = () => {
     if (window.innerWidth < 1024) {
       setIsScrolling(false);
+    } else if (window.innerWidth >= 1024 && data.length < 14) {
+      setIsScrolling(false);
     } else {
       setIsScrolling(true);
     }
   };
 
   useEffect(() => {
-    checkWindowSize(); 
+    checkWindowSize();
 
     window.addEventListener("resize", checkWindowSize);
 
     return () => {
       window.removeEventListener("resize", checkWindowSize);
     };
-  }, []);
-
+  }, [data.length]);
 
   const fetchPaintings = async () => {
     if (loading) return;
@@ -60,60 +58,61 @@ const Portfolio = ({ home, Category }) => {
   // дублирование данных
   const infiniteData = [...data, ...data, ...data];
 
-  useManualScroll(gridRef, isScrolling, setIsScrolling, scrollPosition);
+  useManualScroll(gridRef, isScrolling, setIsScrolling, scrollPosition, data);
 
   // Восстановление позиции прокрутки
   useEffect(() => {
     if (gridRef.current) {
-      gridRef.current._outerRef.scrollLeft = scrollPosition.current; 
+      gridRef.current._outerRef.scrollLeft = scrollPosition.current;
     }
   }, [data]);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const grid = gridRef.current;
     if (!grid || !isScrolling || dataDetail !== null) return;
-  
-    let scrollOffset = scrollPosition.current || grid._outerRef.scrollLeft || grid._outerRef.scrollWidth / 3;
-  
+
+    let scrollOffset =
+      scrollPosition.current ||
+      grid._outerRef.scrollLeft ||
+      grid._outerRef.scrollWidth / 3;
+
     const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const scrollSpeed = isIOS ? 2.0 : 1.5;
-    const maxOffset = grid._outerRef.scrollWidth - grid._outerRef.clientWidth; 
-  
-    const resetThreshold = maxOffset / 2; 
-  
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const scrollSpeed = isIOS ? 2.0 : 1.5;
+    const maxOffset = grid._outerRef.scrollWidth - grid._outerRef.clientWidth;
+
+    const resetThreshold = maxOffset / 2;
+
     const scrollGrid = () => {
       if (scrollOffset >= resetThreshold) {
         grid.scrollTo({
-          scrollLeft: scrollOffset - resetThreshold, 
-          behavior: "auto"
+          scrollLeft: scrollOffset - resetThreshold,
+          behavior: "auto",
         });
         scrollOffset -= resetThreshold;
       } else {
         scrollOffset += scrollSpeed;
       }
-  
+
       scrollPosition.current = scrollOffset;
       grid.scrollTo({
         scrollLeft: scrollOffset,
-        behavior: "smooth", 
+        behavior: "smooth",
       });
-  
+
       if (isScrolling && dataDetail === null) {
         scrollRequestRef.current = requestAnimationFrame(scrollGrid);
       }
     };
-  
+
     scrollRequestRef.current = requestAnimationFrame(scrollGrid);
-  
+
     return () => {
       if (scrollRequestRef.current) {
         cancelAnimationFrame(scrollRequestRef.current);
       }
     };
   }, [isScrolling, data, dataDetail, scrollPosition]);
-
 
   // Modal logic
   const openModal = (paintingId) => {
@@ -145,6 +144,8 @@ const Portfolio = ({ home, Category }) => {
 
     if (window.innerWidth < 1024) {
       setIsScrolling(false);
+    } else if (window.innerWidth >= 1024 && data.length < 14) {
+      setIsScrolling(false);
     } else {
       setIsScrolling(true);
     }
@@ -164,8 +165,7 @@ const Portfolio = ({ home, Category }) => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? dataDetail.galleryImages.length - 1 : prevIndex - 1
     );
-  };   
-
+  };
 
   const GridItem = ({ columnIndex, rowIndex, style }) => {
     const halfLength = Math.ceil(data.length / 2);
@@ -175,7 +175,6 @@ const Portfolio = ({ home, Category }) => {
     const item = infiniteData[index];
 
     const handleMouseDown = (e) => {
-      setIsScrolling(false);
       openModal(item.id);
     };
 
@@ -183,9 +182,7 @@ const Portfolio = ({ home, Category }) => {
 
     if (rowIndex === 0) {
       className += index % 2 === 0 ? " item-first-row-even" : "";
-    }
-
-    else if (rowIndex === 1) {
+    } else if (rowIndex === 1) {
       const isFirstColumnEven = halfLength % 2 === 0;
 
       if (isFirstColumnEven) {
@@ -216,18 +213,18 @@ const Portfolio = ({ home, Category }) => {
   const columnCount = () => {
     const screenWidth = window.innerWidth;
     const length = data.length;
-  
+
     if (screenWidth < 744 && length >= 7) {
-      return Math.ceil(length / 2) * 100; 
+      return Math.ceil(length / 2) * 100;
     }
-  
+
     if (length > 14 && length < 50) {
-      return Math.ceil(length / 2) * 20; 
+      return Math.ceil(length / 2) * 20;
     } else if (length >= 50 && length <= 100) {
-      return Math.ceil(length / 2) * 10; 
+      return Math.ceil(length / 2) * 10;
     }
-  
-    return Math.ceil(length / 2); 
+
+    return Math.ceil(length / 2);
   };
 
   return (
@@ -244,17 +241,15 @@ const Portfolio = ({ home, Category }) => {
               воплощаю в реальность. Для меня важно нести искусство в
               современный мир.
             </p>
-  
           </div>
-   
+
           <div className="masonry-wrapper">
-            
             <ul className="masonry">
               <Grid
                 ref={isScrolling ? gridRef : null}
                 className="masonry-list"
                 height={gridSettings.height}
-                columnCount={columnCount()} 
+                columnCount={columnCount()}
                 columnWidth={gridSettings.columnWidth}
                 rowCount={2}
                 rowHeight={gridSettings.rowHeight}
@@ -278,5 +273,3 @@ const Portfolio = ({ home, Category }) => {
 };
 
 export default Portfolio;
-
-
