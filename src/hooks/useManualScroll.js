@@ -11,7 +11,12 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     if (!grid) return;
 
     const handleMouseDown = (e) => {
-      if (window.innerWidth < 1025) return;
+      if (window.innerWidth < 1025) {
+        return;
+      } else if (window.innerWidth >= 1025 && data.length < 14) {
+        return;
+      };
+
       if (e.target.classList.contains('masonry-list')) {
         isDragging.current = true;
         startX.current = e.pageX - grid.offsetLeft;
@@ -21,7 +26,12 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     };
 
     const handleMouseMove = (e) => {
-      if (window.innerWidth < 1025) return;
+      if (window.innerWidth < 1025) {
+        return;
+      } else if (window.innerWidth >= 1025 && data.length < 14) {
+        return;
+      };
+
       if (!isDragging.current) return;
 
       const x = e.pageX - grid.offsetLeft;
@@ -30,7 +40,12 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     };
 
     const handleMouseUp = () => {
-      if (window.innerWidth < 1025) return;
+      if (window.innerWidth < 1025) {
+        return;
+      } else if (window.innerWidth >= 1025 && data.length < 14) {
+        return;
+      };
+
       isDragging.current = false;
       setIsScrolling(true); 
 
@@ -39,7 +54,12 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     };
 
     const handleMouseLeave = () => {
-      if (window.innerWidth < 1025) return;
+      if (window.innerWidth < 1025) {
+        return;
+      } else if (window.innerWidth >= 1025 && data.length < 14) {
+        return;
+      };
+
       isDragging.current = false;
       setIsScrolling(true);
     };
