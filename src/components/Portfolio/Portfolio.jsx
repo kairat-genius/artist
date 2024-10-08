@@ -55,9 +55,6 @@ const Portfolio = ({ home, Category }) => {
     fetchPaintings();
   }, [Category]);
 
-  // дублирование данных
-  const infiniteData = [...data, ...data, ...data];
-
   useManualScroll(gridRef, isScrolling, setIsScrolling, scrollPosition, data);
 
   // Восстановление позиции прокрутки
@@ -167,33 +164,44 @@ const Portfolio = ({ home, Category }) => {
     );
   };
 
+  const duplicateDataUntilLength = (data, targetLength) => {
+    let infiniteData = [...data]; 
+    while (infiniteData.length < targetLength) {
+      infiniteData = [...infiniteData, ...data];
+    }
+    return infiniteData;
+  };
+  
   const GridItem = ({ columnIndex, rowIndex, style }) => {
     const halfLength = Math.ceil(data.length / 2);
-
-    const index = (rowIndex * halfLength + columnIndex) % data.length;
-
+    
+    const columnCountValue = columnCount();
+    const infiniteData = duplicateDataUntilLength(data, columnCountValue);
+  
+    const infiniteLength = infiniteData.length;
+  
+    const index = (rowIndex * halfLength + columnIndex) % infiniteLength;
+  
     const item = infiniteData[index];
-
+  
     const handleMouseDown = (e) => {
       openModal(item.id);
     };
-
+  
     let className = "item";
-
+  
     if (rowIndex === 0) {
       className += index % 2 === 0 ? " item-first-row-even" : "";
     } else if (rowIndex === 1) {
       const isFirstColumnEven = halfLength % 2 === 0;
-
+  
       if (isFirstColumnEven) {
-        className +=
-          columnIndex % 2 === 0 ? " item-second-row-even-start-even" : "";
+        className += columnIndex % 2 === 0 ? " item-second-row-even-start-even" : "";
       } else {
-        className +=
-          columnIndex % 2 === 0 ? " item-second-row-even-end-odd" : "";
+        className += columnIndex % 2 === 0 ? " item-second-row-even-end-odd" : "";
       }
     }
-
+  
     return (
       <li
         className={className}
@@ -206,26 +214,29 @@ const Portfolio = ({ home, Category }) => {
         }}
       >
         <img src={item.mainImage} alt={item.title} />
+        <h1>{index}</h1>
       </li>
     );
   };
+  
 
   const columnCount = () => {
     const screenWidth = window.innerWidth;
     const length = data.length;
-
+  
     if (screenWidth < 744 && length >= 7) {
-      return Math.ceil(length / 2) * 100;
+      return Math.floor(length / 2) * 100;
     }
-
+  
     if (length > 14 && length < 50) {
-      return Math.ceil(length / 2) * 20;
+      return Math.floor(length / 2) * 20;
     } else if (length >= 50 && length <= 100) {
-      return Math.ceil(length / 2) * 10;
+      return Math.floor(length / 2) * 10;
     }
-
-    return Math.ceil(length / 2);
+  
+    return Math.floor(length / 2);
   };
+
 
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">
