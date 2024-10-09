@@ -287,7 +287,6 @@ const Portfolio = ({ home, Category }) => {
         }}
       >
         <img src={item.mainImage} alt={item.title} />
-        <h1 style={{ color: "#fff" }}>{index}</h1>
       </li>
     );
   };
