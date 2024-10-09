@@ -210,9 +210,9 @@ const Portfolio = ({ home, Category }) => {
     setDataDetail(null);
     document.body.style.overflow = "";
 
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 1025) {
       setIsScrolling(false);
-    } else if (window.innerWidth >= 1024 && data.length < 14) {
+    } else if (window.innerWidth >= 1025 && data.length < 14) {
       setIsScrolling(false);
     } else {
       setIsScrolling(true);
@@ -294,17 +294,17 @@ const Portfolio = ({ home, Category }) => {
   const columnCount = () => {
     const screenWidth = window.innerWidth;
     const length = data.length;
-
-    if (screenWidth < 744 && length >= 7) {
-      return Math.floor(length / 2) * 100;
+  
+    if (screenWidth < 1025) {
+      return Math.floor(length / 2); 
     }
-
+  
     if (length >= 14 && length < 50) {
       return Math.floor(length / 2) * 20;
     } else if (length >= 50 && length <= 100) {
       return Math.floor(length / 2) * 10;
     }
-
+  
     return Math.floor(length / 2);
   };
 
