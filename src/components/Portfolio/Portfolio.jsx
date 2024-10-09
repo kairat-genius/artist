@@ -6,7 +6,6 @@ import { VariableSizeGrid as Grid } from "react-window";
 import adaptivePortfolio from "../../hooks/adaptive";
 import Modal from "./components/Modal";
 import { getPaintingDetail } from "../../api/Paintings/getPaintingDetail";
-import useManualScroll from "../../hooks/useManualScroll.js";
 const Portfolio = ({ home, Category }) => {
   const [data, setData] = useState([]);
   const gridRef = useRef(null);
@@ -21,7 +20,7 @@ const Portfolio = ({ home, Category }) => {
   const checkWindowSize = () => {
     if (window.innerWidth < 1025) {
       setIsScrolling(false);
-    } else if (window.innerWidth >= 1025 && data.length < 14) {
+    } else if (window.innerWidth >= 1025 && data.length <= 14) {
       setIsScrolling(false);
     } else {
       setIsScrolling(true);
@@ -29,22 +28,93 @@ const Portfolio = ({ home, Category }) => {
   };
 
   useEffect(() => {
-    checkWindowSize();
+    if (data.length > 0) {
+      checkWindowSize();
+    }
+
     window.addEventListener("resize", checkWindowSize);
     return () => {
       window.removeEventListener("resize", checkWindowSize);
     };
-  }, [data.length]);
+  }, [data]);
 
+  // мышка
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
-  useManualScroll(gridRef, isScrolling, setIsScrolling, scrollPosition, data);
-    
-  const fetchPaintings = async () => {
+  useEffect(() => {
+    const grid = gridRef.current?._outerRef;
+
+    if (!grid) return;
+
+    const handleMouseDown = (e) => {
+      if (window.innerWidth >= 1025 && data.length <= 14) return;
+      if (window.innerWidth < 1025) return;
+
+      if (e.target.classList.contains("masonry-list")) {
+        isDragging.current = true;
+        startX.current = e.pageX - grid.offsetLeft;
+        scrollLeft.current = grid.scrollLeft;
+        setIsScrolling(false);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (window.innerWidth < 1025) return;
+      if (window.innerWidth >= 1025 && data.length <= 14) return;
+      if (!isDragging.current) return;
+
+      const x = e.pageX - grid.offsetLeft;
+      const walk = (x - startX.current) * 2;
+      grid.scrollLeft = scrollLeft.current - walk;
+    };
+
+    const handleMouseUp = () => {
+      if (window.innerWidth < 1025) return;
+      if (window.innerWidth >= 1025 && data.length <= 14) return;
+
+      isDragging.current = false;
+      setIsScrolling(true);
+
+      scrollPosition.current = grid.scrollLeft;
+    };
+
+    const handleMouseLeave = () => {
+      if (window.innerWidth < 1025) return;
+      if (window.innerWidth >= 1025 && data.length <= 14) return;
+
+      isDragging.current = false;
+      setIsScrolling(true);
+    };
+
+    grid.addEventListener("mousedown", handleMouseDown);
+    grid.addEventListener("mousemove", handleMouseMove);
+    grid.addEventListener("mouseup", handleMouseUp);
+    grid.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      grid.removeEventListener("mousedown", handleMouseDown);
+      grid.removeEventListener("mousemove", handleMouseMove);
+      grid.removeEventListener("mouseup", handleMouseUp);
+      grid.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [gridRef, setIsScrolling, data]);
+
+  useEffect(() => {
+    const grid = gridRef.current?._outerRef;
+    if (grid && isScrolling) {
+      grid.scrollLeft = scrollPosition.current;
+    }
+  }, [isScrolling, gridRef, scrollPosition]);
+  // конец мышки
+
+  const fetchPaintings = () => {
     if (loading) return;
 
     setLoading(true);
     try {
-      await getPaintings(setData, Category);
+      getPaintings(setData, Category);
     } catch (error) {
       console.error("Error fetching paintings:", error);
     } finally {
@@ -55,7 +125,6 @@ const Portfolio = ({ home, Category }) => {
   useEffect(() => {
     fetchPaintings();
   }, [Category]);
-
 
   // Восстановление позиции прокрутки
   useEffect(() => {
@@ -68,6 +137,10 @@ const Portfolio = ({ home, Category }) => {
     const grid = gridRef.current;
     if (!grid || !isScrolling || dataDetail !== null) return;
 
+    const columnWidth = gridSettings.columnWidth();
+    const countData = columnCount();
+    const totalWidth = countData * columnWidth;
+
     let scrollOffset =
       scrollPosition.current ||
       grid._outerRef.scrollLeft ||
@@ -76,26 +149,24 @@ const Portfolio = ({ home, Category }) => {
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const scrollSpeed = isIOS ? 2.0 : 1.5;
-    const maxOffset = grid._outerRef.scrollWidth - grid._outerRef.clientWidth;
-
-    const resetThreshold = maxOffset ;
+    const resetThreshold = totalWidth - grid._outerRef.clientWidth;
 
     const scrollGrid = () => {
       if (scrollOffset >= resetThreshold) {
+        scrollOffset = 0;
         grid.scrollTo({
-          scrollLeft: scrollOffset - resetThreshold,
-          behavior: "auto",
+          scrollLeft: scrollOffset,
+          behavior: "smooth",
         });
-        scrollOffset -= resetThreshold;
       } else {
         scrollOffset += scrollSpeed;
+        grid.scrollTo({
+          scrollLeft: scrollOffset,
+          behavior: "smooth",
+        });
       }
 
       scrollPosition.current = scrollOffset;
-      grid.scrollTo({
-        scrollLeft: scrollOffset,
-        behavior: "smooth",
-      });
 
       if (isScrolling && dataDetail === null) {
         scrollRequestRef.current = requestAnimationFrame(scrollGrid);
@@ -165,44 +236,45 @@ const Portfolio = ({ home, Category }) => {
   };
 
   const duplicateDataUntilLength = (data, targetLength) => {
-    let infiniteData = [...data]; 
+    let infiniteData = [...data];
     while (infiniteData.length < targetLength) {
       infiniteData = [...infiniteData, ...data];
     }
     return infiniteData;
   };
-  
+
   const GridItem = ({ columnIndex, rowIndex, style }) => {
     const halfLength = Math.ceil(data.length / 2);
-    
+
     const columnCountValue = columnCount();
     const infiniteData = duplicateDataUntilLength(data, columnCountValue);
-  
+
     const infiniteLength = infiniteData.length;
-  
+
     const index = (rowIndex * halfLength + columnIndex) % infiniteLength;
-  
-    console.log(index)
+
     const item = infiniteData[index];
-  
+
     const handleMouseDown = (e) => {
       openModal(item.id);
     };
-  
+
     let className = "item";
-  
+
     if (rowIndex === 0) {
       className += index % 2 === 0 ? " item-first-row-even" : "";
     } else if (rowIndex === 1) {
       const isFirstColumnEven = halfLength % 2 === 0;
-  
+
       if (isFirstColumnEven) {
-        className += columnIndex % 2 === 0 ? " item-second-row-even-start-even" : "";
+        className +=
+          columnIndex % 2 === 0 ? " item-second-row-even-start-even" : "";
       } else {
-        className += columnIndex % 2 === 0 ? " item-second-row-even-end-odd" : "";
+        className +=
+          columnIndex % 2 === 0 ? " item-second-row-even-end-odd" : "";
       }
     }
-  
+
     return (
       <li
         className={className}
@@ -215,29 +287,27 @@ const Portfolio = ({ home, Category }) => {
         }}
       >
         <img src={item.mainImage} alt={item.title} />
-      
+        <h1 style={{ color: "#fff" }}>{index}</h1>
       </li>
     );
   };
-  
 
   const columnCount = () => {
     const screenWidth = window.innerWidth;
     const length = data.length;
-  
+
     if (screenWidth < 744 && length >= 7) {
       return Math.floor(length / 2) * 100;
     }
-  
-    if (length > 14 && length < 50) {
+
+    if (length >= 14 && length < 50) {
       return Math.floor(length / 2) * 20;
     } else if (length >= 50 && length <= 100) {
       return Math.floor(length / 2) * 10;
     }
-  
+
     return Math.floor(length / 2);
   };
-
 
   return (
     <section className={home ? "portfolio" : "portfolio-cat"} id="gallery">

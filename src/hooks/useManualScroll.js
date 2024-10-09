@@ -1,6 +1,6 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
-const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, data) => {
+const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition) => {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
@@ -11,12 +11,9 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     if (!grid) return;
 
     const handleMouseDown = (e) => {
-      if (window.innerWidth < 1025) {
-        return;
-      } else if (window.innerWidth >= 1025 && data.length < 14) {
-        return;
-      };
-
+      if (window.innerWidth >= 1025 && savedDataLength <= 14) return;
+      if (window.innerWidth < 1025) return;
+      
       if (e.target.classList.contains('masonry-list')) {
         isDragging.current = true;
         startX.current = e.pageX - grid.offsetLeft;
@@ -26,12 +23,8 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     };
 
     const handleMouseMove = (e) => {
-      if (window.innerWidth < 1025) {
-        return;
-      } else if (window.innerWidth >= 1025 && data.length < 14) {
-        return;
-      };
-
+      if (window.innerWidth < 1025) return;
+      if (window.innerWidth >= 1025 && savedDataLength <= 14) return;
       if (!isDragging.current) return;
 
       const x = e.pageX - grid.offsetLeft;
@@ -40,12 +33,9 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     };
 
     const handleMouseUp = () => {
-      if (window.innerWidth < 1025) {
-        return;
-      } else if (window.innerWidth >= 1025 && data.length < 14) {
-        return;
-      };
-
+      if (window.innerWidth < 1025) return;
+      if (window.innerWidth >= 1025 && savedDataLength <= 14) return;
+      
       isDragging.current = false;
       setIsScrolling(true); 
 
@@ -54,11 +44,8 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
     };
 
     const handleMouseLeave = () => {
-      if (window.innerWidth < 1025) {
-        return;
-      } else if (window.innerWidth >= 1025 && data.length < 14) {
-        return;
-      };
+      if (window.innerWidth < 1025) return;
+      if (window.innerWidth >= 1025 && savedDataLength <= 14) return;
 
       isDragging.current = false;
       setIsScrolling(true);
@@ -76,7 +63,7 @@ const useManualScroll = (gridRef, isScrolling, setIsScrolling, scrollPosition, d
       grid.removeEventListener("mouseleave", handleMouseLeave);
 
     };
-  }, [gridRef, setIsScrolling]);
+  }, [gridRef, setIsScrolling, savedDataLength]);
 
   useEffect(() => {
     const grid = gridRef.current?._outerRef;
